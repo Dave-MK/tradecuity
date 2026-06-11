@@ -59,7 +59,7 @@ export default function LessonPage({ params }: { params: Promise<{ slug: string;
       {/* Top bar */}
       <header className="flex items-center justify-between px-4 py-2.5 border-b border-steel bg-slate flex-shrink-0">
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/logo-colour.webp" width={20} height={20} alt="tradecuity" style={{ width: 20, height: 20 }} />
+          <Image src="/logo-colour.webp" width={28} height={28} alt="tradecuity" style={{ width: 28, height: 28 }} />
           <span className="font-display font-bold tracking-[-0.03em] text-base">
             <span className="text-chalk">trade</span><span className="text-acuity-blue">cuity</span>
           </span>

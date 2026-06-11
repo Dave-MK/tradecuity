@@ -20,7 +20,7 @@ export async function Navbar() {
   return (
     <nav className="flex items-center justify-between px-6 py-3 border-b border-steel bg-slate sticky top-0 z-50">
       <Link href="/" className="flex items-center gap-2.5">
-        <Image src="/logo-colour.webp" width={24} height={24} alt="tradecuity" style={{ width: 24, height: 24 }} />
+        <Image src="/logo-colour.webp" width={36} height={36} alt="tradecuity" style={{ width: 36, height: 36 }} />
         <span className="font-display font-bold tracking-[-0.03em] text-2xl">
           <span className="text-chalk">trade</span><span className="text-acuity-blue">cuity</span>
         </span>

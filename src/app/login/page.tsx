@@ -8,7 +8,7 @@ export default function LoginPage() {
     <div className="min-h-screen bg-obsidian flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <Link href="/" className="flex items-center justify-center gap-2.5 mb-10">
-          <Image src="/logo-colour.webp" width={28} height={28} alt="tradecuity" style={{ width: 28, height: 28 }} />
+          <Image src="/logo-colour.webp" width={44} height={44} alt="tradecuity" style={{ width: 44, height: 44 }} />
           <span className="font-display font-bold tracking-[-0.03em] text-2xl">
             <span className="text-chalk">trade</span><span className="text-acuity-blue">cuity</span>
           </span>
