@@ -1,5 +1,11 @@
 export type LessonType = 'video' | 'reading' | 'canvas_exercise'
 
+export type ActivityType =
+  | 'draw_trendline'
+  | 'draw_horizontal'
+  | 'multi_choice'
+  | 'calculation'
+
 export interface Lesson {
   id: string
   course_id: string
@@ -12,10 +18,28 @@ export interface Lesson {
 }
 
 export interface LessonContent {
+  // Teaching phase — shown before the interactive activity
+  intro_text?: string      // paragraphs separated by \n\n
+  key_points?: string[]    // 3–6 takeaway bullets
+  activity_type?: ActivityType
+  // canvas drawing fields
   ticker?: string
   timeframe?: string
   exercise_prompt?: string
   reference_line?: ReferenceLine
+  // multiple-choice fields
+  question?: string
+  options?: string[]
+  correct_index?: number
+  explanation?: string
+  // calculation fields
+  problem?: string
+  correct_answer?: string
+  tolerance?: number
+  unit?: string
+  hint?: string
+  solution_steps?: string[]
+  // common
   steps?: LessonStep[]
 }
 

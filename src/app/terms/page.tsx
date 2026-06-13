@@ -1,8 +1,8 @@
-import { Navbar } from '@/components/nav/Navbar'
+﻿import { Navbar } from '@/components/nav/Navbar'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Terms of Service — tradecuity',
+  title: 'Terms of Service — Trenduoso',
 }
 
 export default function TermsPage() {
@@ -19,9 +19,9 @@ export default function TermsPage() {
         <div className="prose-custom space-y-8 font-body text-ghost text-sm leading-relaxed">
 
           <section>
-            <h2 className="font-display font-semibold text-chalk text-base mb-3">1. About tradecuity</h2>
-            <p>tradecuity (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is an online educational platform that provides structured trading education, interactive chart exercises, and learning resources. By accessing or using tradecuity, you agree to be bound by these Terms of Service.</p>
-            <p className="mt-3">tradecuity is not authorised or regulated by the Financial Conduct Authority (FCA). Nothing on this platform constitutes financial advice, investment advice, or a personal recommendation to buy or sell any financial instrument.</p>
+            <h2 className="font-display font-semibold text-chalk text-base mb-3">1. About Trenduoso</h2>
+            <p>Trenduoso (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is an online educational platform that provides structured trading education, interactive chart exercises, and learning resources. By accessing or using Trenduoso, you agree to be bound by these Terms of Service.</p>
+            <p className="mt-3">Trenduoso is not authorised or regulated by the Financial Conduct Authority (FCA). Nothing on this platform constitutes financial advice, investment advice, or a personal recommendation to buy or sell any financial instrument.</p>
           </section>
 
           <section>
@@ -31,7 +31,7 @@ export default function TermsPage() {
 
           <section>
             <h2 className="font-display font-semibold text-chalk text-base mb-3">3. Educational purpose only</h2>
-            <p>All content on tradecuity — including courses, lessons, exercises, commentary, and examples — is provided solely for educational and informational purposes. It does not constitute:</p>
+            <p>All content on Trenduoso — including courses, lessons, exercises, commentary, and examples — is provided solely for educational and informational purposes. It does not constitute:</p>
             <ul className="list-disc list-inside mt-2 space-y-1 ml-2">
               <li>Financial or investment advice</li>
               <li>A recommendation to buy, sell, or hold any financial instrument</li>
@@ -55,7 +55,7 @@ export default function TermsPage() {
 
           <section>
             <h2 className="font-display font-semibold text-chalk text-base mb-3">5. Subscriptions and billing</h2>
-            <p>tradecuity offers a free tier and paid subscription plans (&quot;Pro&quot; and &quot;Team&quot;). Paid plans are billed in advance on a monthly or annual basis via Stripe.</p>
+            <p>Trenduoso offers a free tier and paid subscription plans (&quot;Pro&quot; and &quot;Team&quot;). Paid plans are billed in advance on a monthly or annual basis via Stripe.</p>
             <ul className="list-disc list-inside mt-2 space-y-1 ml-2">
               <li>Subscriptions renew automatically unless cancelled before the renewal date</li>
               <li>You may cancel at any time; access continues until the end of the current billing period</li>
@@ -79,12 +79,12 @@ export default function TermsPage() {
 
           <section>
             <h2 className="font-display font-semibold text-chalk text-base mb-3">7. Intellectual property</h2>
-            <p>All content on tradecuity — including course text, exercises, graphics, and software — is owned by or licensed to us and is protected by copyright. You are granted a limited, non-transferable licence to access the content for personal educational use only.</p>
+            <p>All content on Trenduoso — including course text, exercises, graphics, and software — is owned by or licensed to us and is protected by copyright. You are granted a limited, non-transferable licence to access the content for personal educational use only.</p>
           </section>
 
           <section>
             <h2 className="font-display font-semibold text-chalk text-base mb-3">8. Limitation of liability</h2>
-            <p>To the maximum extent permitted by law, tradecuity shall not be liable for any direct, indirect, incidental, or consequential loss arising from:</p>
+            <p>To the maximum extent permitted by law, Trenduoso shall not be liable for any direct, indirect, incidental, or consequential loss arising from:</p>
             <ul className="list-disc list-inside mt-2 space-y-1 ml-2">
               <li>Reliance on any content, exercise, or example on the platform</li>
               <li>Any trading or investment decisions made after using the platform</li>
@@ -100,12 +100,12 @@ export default function TermsPage() {
 
           <section>
             <h2 className="font-display font-semibold text-chalk text-base mb-3">10. Changes to these terms</h2>
-            <p>We may update these terms from time to time. We will notify you of material changes by email or by a prominent notice on the platform. Continued use of tradecuity after changes take effect constitutes acceptance of the updated terms.</p>
+            <p>We may update these terms from time to time. We will notify you of material changes by email or by a prominent notice on the platform. Continued use of Trenduoso after changes take effect constitutes acceptance of the updated terms.</p>
           </section>
 
           <section>
             <h2 className="font-display font-semibold text-chalk text-base mb-3">11. Contact</h2>
-            <p>For questions about these terms, please contact us at <span className="text-acuity-blue">legal@tradecuity.com</span>.</p>
+            <p>For questions about these terms, please contact us at <span className="text-acuity-blue">legal@trenduoso.com</span>.</p>
           </section>
 
         </div>

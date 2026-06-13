@@ -1,17 +1,18 @@
 import Link from 'next/link'
+import { TrenduosoWordmark } from '@/components/TrenduosoWordmark'
 import Image from 'next/image'
 import { ResetForm } from './ResetForm'
 
-export const metadata = { title: 'Set new password — tradecuity' }
+export const metadata = { title: 'Set new password — Trenduoso' }
 
 export default function ResetPasswordPage() {
   return (
     <div className="min-h-screen bg-obsidian flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <Link href="/" className="flex items-center justify-center gap-2.5 mb-10">
-          <Image src="/logo-colour.webp" width={44} height={44} alt="tradecuity" style={{ width: 44, height: 44 }} />
+          <Image src="/logo-colour.webp" width={44} height={44} alt="Trenduoso" style={{ width: 44, height: 44 }} />
           <span className="font-display font-bold tracking-[-0.03em] text-2xl">
-            <span className="text-chalk">trade</span><span className="text-acuity-blue">cuity</span>
+            <TrenduosoWordmark />
           </span>
         </Link>
 
@@ -24,3 +25,4 @@ export default function ResetPasswordPage() {
     </div>
   )
 }
+

@@ -1,4 +1,5 @@
-import Image from 'next/image'
+﻿import Image from 'next/image'
+import { TrenduosoWordmark } from '@/components/TrenduosoWordmark'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { signOut } from '@/app/actions/auth'
@@ -22,18 +23,18 @@ export async function Navbar() {
     <nav className="relative flex items-center justify-between px-4 md:px-6 py-3 border-b border-steel bg-slate sticky top-0 z-50">
       {/* Logo */}
       <Link href="/" className="flex items-center gap-2">
-        <Image src="/logo-colour.webp" width={32} height={32} alt="tradecuity" style={{ width: 32, height: 32 }} />
-        <span className="font-display font-bold tracking-[-0.03em] text-xl md:text-2xl">
-          <span className="text-chalk">trade</span><span className="text-acuity-blue">cuity</span>
+        <Image src="/logo-colour.webp" width={44} height={44} alt="Trenduoso" style={{ width: 44, height: 44, display: 'block', marginTop: '-3px' }} />
+        <span className="font-display font-bold tracking-[-0.03em] text-xl md:text-2xl leading-none">
+          <TrenduosoWordmark />
         </span>
       </Link>
 
       {/* Desktop nav links */}
       <div className="hidden md:flex gap-6 text-ghost text-sm font-body">
-        <Link href="/courses" className="hover:text-chalk transition-colors">Courses</Link>
-        <Link href="#" className="hover:text-chalk transition-colors">Practice</Link>
-        <Link href="#" className="hover:text-chalk transition-colors">Community</Link>
-        <Link href="/pricing" className="hover:text-chalk transition-colors">Pricing</Link>
+        <Link href="/courses"   className="hover:text-chalk transition-colors">Courses</Link>
+        <Link href="/practice"  className="hover:text-chalk transition-colors">Practice</Link>
+        <Link href="/community" className="hover:text-chalk transition-colors">Community</Link>
+        <Link href="/pricing"   className="hover:text-chalk transition-colors">Pricing</Link>
       </div>
 
       {/* Right: user actions + mobile menu */}
@@ -76,3 +77,4 @@ export async function Navbar() {
     </nav>
   )
 }
+

@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { LessonClient } from './LessonClient'
 import type { LessonContent, LessonStep } from '@/types/lesson'
+import { LESSON_ACTIVITIES } from '@/data/lessonActivities'
 
 export default async function LessonPage({
   params,
@@ -51,8 +52,14 @@ export default async function LessonPage({
   const currentIndex = (allLessons ?? []).findIndex((l) => l.slug === lessonSlug)
   const nextLesson = currentIndex >= 0 ? (allLessons ?? [])[currentIndex + 1] : null
 
+  // Merge DB content with static activity map — DB wins if activity_type is already set,
+  // otherwise the static map provides topic-specific content for every lesson.
+  const dbContent = lesson?.content as LessonContent | null
+  const staticContent = LESSON_ACTIVITIES[slug]?.[lessonSlug] ?? null
+  const content: LessonContent | null =
+    dbContent?.activity_type ? dbContent : (staticContent ?? dbContent)
+
   // Build steps from lesson content, or default
-  const content = lesson?.content as LessonContent | null
   const steps: LessonStep[] = content?.steps ?? [
     { id: '1', label: 'Watch intro video',   completed: false },
     { id: '2', label: 'Draw your trendline', completed: false },
@@ -69,6 +76,7 @@ export default async function LessonPage({
       lessonOrder={lesson?.order_index ?? 1}
       lessonCount={course?.lesson_count ?? 0}
       xpValue={lesson?.xp_value ?? 50}
+      lessonType={lesson?.type ?? 'canvas_exercise'}
       content={content}
       steps={steps}
       nextLessonSlug={nextLesson?.slug ?? null}

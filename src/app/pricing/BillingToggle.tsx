@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
@@ -44,7 +44,7 @@ const PLANS = [
     price: { monthly: 49, annual: 39 },
     planKey: null,
     cta: 'Contact us',
-    ctaHref: 'mailto:team@tradecuity.com',
+    ctaHref: 'mailto:team@trenduoso.com',
     ctaVariant: 'secondary',
     popular: false,
     features: [

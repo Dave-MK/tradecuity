@@ -1,12 +1,12 @@
 'use server'
 import { createClient } from '@/lib/supabase/server'
-import { xpForScore } from '@/lib/xp'
+import { xpForScore, levelFromXp } from '@/lib/xp'
 
 export async function completeLesson(
   courseSlug: string,
   lessonSlug: string,
   score: number
-): Promise<{ earned: number; newStreak: number } | { error: string }> {
+): Promise<{ earned: number; newStreak: number; leveledUp: boolean; newLevel: number } | { error: string }> {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { error: 'Not authenticated' }
@@ -61,10 +61,11 @@ export async function completeLesson(
   if (!isFirstCompletion) {
     const { data: profile } = await supabase
       .from('profiles')
-      .select('streak')
+      .select('streak, xp')
       .eq('id', user.id)
       .single()
-    return { earned: 0, newStreak: profile?.streak ?? 0 }
+    const { level } = levelFromXp(profile?.xp ?? 0)
+    return { earned: 0, newStreak: profile?.streak ?? 0, leveledUp: false, newLevel: level }
   }
 
   // Update profile: XP + streak
@@ -91,14 +92,19 @@ export async function completeLesson(
     newStreak = 1
   }
 
+  const oldXp = profile?.xp ?? 0
+  const newXp = oldXp + earned
+  const { level: oldLevel } = levelFromXp(oldXp)
+  const { level: newLevel } = levelFromXp(newXp)
+
   await supabase
     .from('profiles')
     .update({
-      xp: (profile?.xp ?? 0) + earned,
+      xp: newXp,
       streak: newStreak,
       last_active: today,
     })
     .eq('id', user.id)
 
-  return { earned, newStreak }
+  return { earned, newStreak, leveledUp: newLevel > oldLevel, newLevel }
 }

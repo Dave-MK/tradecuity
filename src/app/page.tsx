@@ -1,4 +1,7 @@
-import { Navbar } from '@/components/nav/Navbar'
+﻿import { Navbar } from '@/components/nav/Navbar'
+import { TrenduosoWordmark } from '@/components/TrenduosoWordmark'
+import { BadgeCarousel } from '@/components/BadgeCarousel'
+import { createClient } from '@/lib/supabase/server'
 
 const POPULAR_COURSES = [
   { track: 'FOUNDATIONS', title: 'Reading price structure', lessons: 18, hours: '4.2', progress: 100, color: 'acuity-teal' },
@@ -48,40 +51,96 @@ const TESTIMONIALS = [
   },
 ]
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  let firstLessonHref = '/courses'
+  try {
+    const supabase = await createClient()
+    const { data } = await supabase
+      .from('lessons')
+      .select('slug, courses!inner(slug)')
+      .order('order_index')
+      .limit(1)
+      .single()
+    if (data) {
+      const courseSlug = (data.courses as unknown as { slug: string }).slug
+      firstLessonHref = `/courses/${courseSlug}/${data.slug}`
+    }
+  } catch { /* no DB or no lessons — fall back to /courses */ }
+
   return (
     <>
       <Navbar />
 
-      {/* Hero */}
-      <section className="px-6 md:px-16 pt-20 pb-24 max-w-4xl">
-        <div className="inline-flex items-center gap-2 bg-acuity-teal/10 border border-acuity-teal/20 rounded-full px-3 py-1 mb-8">
-          <span className="w-1.5 h-1.5 rounded-full bg-acuity-teal" />
-          <span className="text-[11px] font-display font-medium tracking-widest text-acuity-teal uppercase">Now in early access</span>
+      {/* Hero — background-attachment:fixed keeps the photo stationary while page scrolls */}
+      <section className="relative overflow-hidden px-6 md:px-16 pt-20 pb-24">
+        {/* B&W photo layer — filter applied to the div so background-image inherits it */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: 'url(/hero-bg.jpg)',
+            backgroundAttachment: 'fixed',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            filter: 'grayscale(1) brightness(0.3)',
+          }}
+        />
+        {/* Obsidian overlay for depth */}
+        <div className="absolute inset-0 bg-obsidian/55 pointer-events-none" />
+
+        {/* Decorative logo-black — large, right half off viewport, vertically centred in hero */}
+        <div
+          className="absolute top-1/2 -translate-y-1/2 translate-x-1/2 pointer-events-none select-none"
+          style={{ right: 0, zIndex: 1 }}
+          aria-hidden="true"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo-black.webp" alt="" style={{ width: 920, height: 920, opacity: 0.45 }} />
         </div>
 
-        <h1 className="font-display font-bold text-5xl md:text-6xl leading-[1.1] text-chalk mb-6">
-          Develop real<br />
-          <span className="text-acuity-blue">trading acuity.</span><br />
-          Not luck.
-        </h1>
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
 
-        <p className="font-body text-ghost text-base md:text-lg max-w-md leading-relaxed mb-10">
-          Interactive lessons and graded chart exercises that build the analytical edge most platforms skip. Draw trendlines, get scored, learn to read markets.
-        </p>
+          {/* Left: copy + CTA */}
+          <div>
+            <div className="inline-flex items-center gap-2 bg-acuity-teal/10 border border-acuity-teal/20 rounded-full px-3 py-1 mb-8">
+              <span className="w-1.5 h-1.5 rounded-full bg-acuity-teal" />
+              <span className="text-[11px] font-display font-medium tracking-widest text-acuity-teal uppercase">Now in early access</span>
+            </div>
 
-        <div className="flex items-center gap-4 flex-wrap">
-          <a
-            href="/signup"
-            className="bg-acuity-blue text-white font-display font-medium text-sm px-6 py-3 rounded-lg hover:bg-acuity-blue/90 transition-colors"
-          >
-            Start learning — it&apos;s free
-          </a>
-          <button className="flex items-center gap-2 text-ghost text-sm font-body hover:text-chalk transition-colors">
-            <span className="text-acuity-blue">▶</span> Watch a lesson
-          </button>
+            <h1 className="font-display font-bold text-5xl md:text-6xl leading-[1.1] text-chalk mb-6">
+              Develop real<br />
+              <span className="text-acuity-blue">trading acuity.</span><br />
+              Not luck.
+            </h1>
+
+            <p className="font-body text-ghost text-base md:text-lg max-w-md leading-relaxed mb-10">
+              Interactive lessons and graded chart exercises that build the analytical edge most platforms skip. Draw trendlines, get scored, learn to read markets.
+            </p>
+
+            <div className="flex items-center gap-4 flex-wrap">
+              <a
+                href="/signup"
+                className="bg-acuity-blue text-white font-display font-medium text-sm px-6 py-3 rounded-lg hover:bg-acuity-blue/90 transition-colors"
+              >
+                Start learning — it&apos;s free
+              </a>
+              <a
+                href={firstLessonHref}
+                className="flex items-center gap-2 text-ghost text-sm font-body hover:text-chalk transition-colors"
+              >
+                <span className="text-acuity-blue">▶</span> Watch a lesson
+              </a>
+            </div>
+          </div>
+
+          {/* Right: badge carousel — desktop only */}
+          <div className="hidden md:flex justify-center">
+            <BadgeCarousel />
+          </div>
+
         </div>
       </section>
+
+      <div className="bg-obsidian">
 
       {/* Stats bar */}
       <section className="border-y border-steel bg-slate">
@@ -182,22 +241,23 @@ export default function LandingPage() {
       <footer className="border-t border-steel px-6 md:px-16 py-8">
         <div className="flex items-center justify-between flex-wrap gap-4 mb-6">
           <span className="font-display font-bold tracking-[-0.03em] text-xl">
-            <span className="text-chalk">trade</span><span className="text-acuity-blue">cuity</span>
+            <TrenduosoWordmark />
           </span>
           <div className="flex items-center gap-6 text-ghost text-xs font-body">
             <a href="/terms" className="hover:text-chalk transition-colors">Terms of Service</a>
             <a href="/privacy" className="hover:text-chalk transition-colors">Privacy Policy</a>
-            <a href="mailto:hello@tradecuity.com" className="hover:text-chalk transition-colors">Contact</a>
+            <a href="mailto:hello@trenduoso.com" className="hover:text-chalk transition-colors">Contact</a>
           </div>
-          <span className="text-ghost text-xs font-body">© 2026 tradecuity.</span>
+          <span className="text-ghost text-xs font-body">© 2026 Trenduoso.</span>
         </div>
         {/* Legal disclaimer */}
         <div className="border-t border-steel/50 pt-5">
           <p className="text-[11px] text-muted font-body leading-relaxed max-w-4xl">
-            <strong className="text-ghost font-medium">Important:</strong> tradecuity is an educational platform only. All content is provided for learning purposes and does not constitute financial advice, investment advice, or a recommendation to buy or sell any financial instrument. Trading financial markets involves a significant risk of loss and is not suitable for all investors. Past performance shown in examples is not indicative of future results. You should not invest money you cannot afford to lose. Always seek independent financial advice before making investment decisions. tradecuity is not authorised or regulated by the Financial Conduct Authority (FCA). If you are unsure about any aspect of trading, please consult a qualified financial adviser. Users must be 18 or over to register.
+            <strong className="text-ghost font-medium">Important:</strong> Trenduoso is an educational platform only. All content is provided for learning purposes and does not constitute financial advice, investment advice, or a recommendation to buy or sell any financial instrument. Trading financial markets involves a significant risk of loss and is not suitable for all investors. Past performance shown in examples is not indicative of future results. You should not invest money you cannot afford to lose. Always seek independent financial advice before making investment decisions. Trenduoso is not authorised or regulated by the Financial Conduct Authority (FCA). If you are unsure about any aspect of trading, please consult a qualified financial adviser. Users must be 18 or over to register.
           </p>
         </div>
       </footer>
+      </div> {/* /bg-obsidian */}
     </>
   )
 }

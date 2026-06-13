@@ -1,0 +1,1930 @@
+import type { LessonContent } from '@/types/lesson'
+
+// Static lesson activity content — keyed by courseSlug / lessonSlug.
+// The page merges this with DB content: DB wins if activity_type is set,
+// otherwise this map is used as the authoritative source.
+export const LESSON_ACTIVITIES: Record<string, Record<string, LessonContent>> = {
+
+  // ════════════════════════════════════════════════════════
+  // LEVEL 1 — THE APPRENTICE
+  // ════════════════════════════════════════════════════════
+
+  'how-markets-work': {
+    'lesson-1': {
+      intro_text: 'A financial market is any system that allows buyers and sellers to exchange assets — stocks, currencies, commodities, and derivative contracts. Markets do not require a physical location: the foreign exchange market moves over $7 trillion per day across a global network of banks and electronic systems with no central floor.\n\nMarkets exist for two fundamental economic reasons. First, they channel capital from those who have it to those who need it — a business that needs £50 million to build a factory can raise it by issuing shares rather than saving internally for decades. Second, markets allow risk transfer: a wheat farmer can lock in today\'s price for a harvest three months away, passing price risk to a speculator willing to take the other side.\n\nPrice is the central output of every market. When more buyers compete for an asset than there are sellers willing to supply it, the price rises until enough sellers appear. When sellers flood the market, prices fall until buyers step in. This mechanism — price as the equilibrating signal between supply and demand — is the foundation that everything else in trading sits on.',
+      key_points: [
+        'Markets are systems for exchanging assets — they don\'t need a physical building',
+        'Primary function: move capital from savers to those who can deploy it productively',
+        'Secondary function: allow risk transfer between parties with different exposures',
+        'Price rises when buyers outnumber sellers; falls when sellers outnumber buyers',
+        'Forex is the world\'s largest market at over $7 trillion traded daily',
+      ],
+      activity_type: 'multi_choice',
+      question: 'A wheat farmer locks in a selling price for their harvest three months in advance using a futures contract. A speculator takes the other side of the trade. Which core function of financial markets does this illustrate?',
+      options: [
+        'Capital allocation — moving money from savers to productive uses',
+        'Price discovery — establishing fair value for the wheat',
+        'Risk transfer — the farmer passes price risk to a willing counterparty',
+        'Liquidity provision — ensuring the farmer can sell their crop quickly',
+      ],
+      correct_index: 2,
+      explanation: 'This is risk transfer. The farmer has natural exposure to falling wheat prices and wants certainty; the speculator has no natural exposure and is willing to accept that risk in exchange for potential profit. Risk transfer is one of the two core economic functions of financial markets — the other is capital allocation (moving money from savers to businesses that need it).',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-2': {
+      intro_text: 'Financial markets are divided into five major asset classes, each with its own characteristics, participants, and risk profile. Understanding each class is essential before you can compare them and choose where to focus.\n\nStocks (equities) represent ownership stakes in companies — buy a share of Apple and you own a fraction of the business. Bonds are debt instruments: a company or government borrows money and promises to pay interest over time. Forex (foreign exchange) is the market for currencies: EUR/USD represents how many US dollars one euro buys. Commodities include physical goods traded on exchanges: oil, gold, wheat, natural gas. Indices track baskets of stocks (the FTSE 100 tracks the 100 largest UK-listed companies) and let you trade the broad market rather than individual names.\n\nCrypto sits as a sixth class that has grown large enough to warrant its own category: digital assets like Bitcoin and Ethereum that trade 24/7 on centralised and decentralised exchanges with no closing bell. Each class has different liquidity, volatility, trading hours, and regulatory environment — no single one is "best", but each suits different strategies and risk appetites.',
+      key_points: [
+        'Stocks = ownership in companies; bonds = loans to companies or governments',
+        'Forex trades currency pairs (EUR/USD, GBP/JPY) — the largest asset class by volume',
+        'Commodities = physical goods: oil, gold, silver, agricultural products',
+        'Indices track baskets of stocks (S&P 500, FTSE 100, NAS100)',
+        'Each asset class has different hours, volatility, and liquidity profiles',
+      ],
+      activity_type: 'multi_choice',
+      question: 'You believe the UK\'s top 100 companies will collectively outperform over the next six months, but you don\'t want to pick individual stocks. Which instrument gives you broad exposure to this view with a single trade?',
+      options: [
+        'A GBP/USD forex pair — the pound strengthens when UK companies do well',
+        'A FTSE 100 index CFD or futures contract',
+        'A selection of 5 individual FTSE 100 stocks chosen by market cap',
+        'A UK government bond (gilt) that matures in six months',
+      ],
+      correct_index: 1,
+      explanation: 'An index instrument (CFD, ETF, or futures on the FTSE 100) tracks all 100 companies simultaneously, giving you diversified exposure to your view without stock-picking risk. GBP/USD is driven by many factors beyond UK equity performance. Individual stocks concentrate risk. Gilts are debt instruments that reflect interest rates, not equity values.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-3': {
+      intro_text: 'When you place a buy order on a stock exchange, you don\'t buy directly from the company — you buy from another market participant who wants to sell. The exchange\'s core job is matching these buyers and sellers through an order book: a real-time list of all outstanding buy orders (bids) and sell orders (asks) at every price level.\n\nA market order executes immediately at the best available price. A limit order sits in the order book waiting for the market to reach your specified price. The difference between the highest bid and the lowest ask is called the spread — and it\'s the friction cost of every trade. Market makers earn the spread by continuously quoting both sides, ensuring there is always someone willing to buy or sell even in quiet markets.\n\nLiquidity — how easily you can buy or sell without moving the price — varies enormously across assets. A large-cap stock like BP processes millions of shares daily; a small-cap AIM stock might trade a few thousand. In illiquid markets, a single large order can move the price significantly. This is called market impact, and it\'s why institutions split large orders into smaller pieces executed over time.',
+      key_points: [
+        'The order book lists all pending buy (bid) and sell (ask) orders at every price',
+        'Market orders execute immediately; limit orders wait for your specified price',
+        'Spread = difference between best bid and best ask — the friction cost of trading',
+        'Market makers quote both sides continuously, providing liquidity for other participants',
+        'Liquidity describes how easily you can trade without moving the price against yourself',
+      ],
+      activity_type: 'multi_choice',
+      question: 'You want to buy 10,000 shares of a small-cap stock. The order book shows only 2,000 shares available at the current ask price. What is the most likely outcome if you place a single market order for 10,000 shares?',
+      options: [
+        'The order executes at the current ask price for all 10,000 shares immediately',
+        'The order is rejected — exchanges don\'t allow orders larger than available liquidity',
+        'The order fills in tranches at progressively higher ask prices, pushing your average cost above the initial ask',
+        'The order is held in a queue until 10,000 shares become available at the current price',
+      ],
+      correct_index: 2,
+      explanation: 'This is market impact. Your large order will consume the available 2,000 shares at the best ask, then move to the next ask level for more shares, then the next — each tranche filled at a higher price. Your average execution price will be worse than the original ask. This is why institutional traders split large orders algorithmically and why liquidity matters.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-4': {
+      intro_text: 'Forex is the global market for exchanging currencies. Unlike stocks, there is no central exchange — trades happen directly between banks, brokers, and traders across a 24-hour, five-day-a-week electronic network. Daily volume exceeds $7 trillion, making it the most liquid market on Earth.\n\nForex always involves a pair: EUR/USD tells you how many US dollars one euro costs. The first currency (EUR) is the base; the second (USD) is the quote. If EUR/USD is 1.0850, one euro buys $1.0850. If it rises to 1.1000, the euro has strengthened (or the dollar has weakened). A pip is the smallest standard price increment — for most pairs, the fourth decimal place: 1.0850 to 1.0851 is one pip. On a standard lot (100,000 units), one pip is worth approximately $10.\n\nForex sessions follow the globe: Sydney and Tokyo open first (Asian session), followed by London (the highest-volume session), then New York. The London-New York overlap (1pm–5pm London time) produces the day\'s sharpest moves and tightest spreads. Major pairs (EUR/USD, GBP/USD, USD/JPY) have the most liquidity and lowest transaction costs; exotic pairs (USD/TRY, EUR/ZAR) carry far wider spreads.',
+      key_points: [
+        'Forex has no central exchange — it\'s a global electronic network of banks and brokers',
+        'Currency pairs: the base currency / quote currency (EUR/USD = euros priced in dollars)',
+        'A pip is the fourth decimal place — on standard lots, roughly $10 per pip for major pairs',
+        'Three overlapping sessions: Asian, London (highest volume), New York',
+        'Major pairs (EUR/USD, GBP/USD) have the tightest spreads and deepest liquidity',
+      ],
+      activity_type: 'calculation',
+      problem: 'You buy EUR/USD at 1.0800 and sell at 1.0865. You traded one standard lot (100,000 units). One pip = $10 on a standard EUR/USD lot.\n\nHow many pips did you gain, and what is your profit in dollars?',
+      correct_answer: '650',
+      tolerance: 1,
+      unit: 'USD',
+      hint: 'Step 1: find the pip difference between entry and exit. Step 2: multiply by pip value per lot.',
+      solution_steps: [
+        'Exit price − Entry price = 1.0865 − 1.0800 = 0.0065',
+        '0.0065 ÷ 0.0001 = 65 pips',
+        '65 pips × $10/pip = $650 profit',
+      ],
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Calculate the profit', completed: false }, { id: '3', label: 'Review solution steps', completed: false }],
+    },
+    'lesson-5': {
+      intro_text: 'Crypto markets differ from traditional finance in fundamental ways. Bitcoin, Ethereum, and thousands of other digital assets trade 24 hours a day, 7 days a week — there is no closing bell, no circuit breaker, and no central authority that can pause trading. This creates opportunities and risks that don\'t exist in equity or forex markets.\n\nThe most important distinction to understand is spot vs perpetual futures. Spot trading means buying the actual asset — you own the Bitcoin. Perpetual futures (or "perps") are contracts that track the price of Bitcoin without expiry, settled in cash, often with leverage up to 100x. Perps are the dominant trading vehicle in crypto by volume, and their funding rate mechanism (periodic payments between longs and shorts) keeps their price anchored to the spot market.\n\nExchanges come in two flavours. Centralised exchanges (CEX) like Binance and Coinbase operate like traditional brokers: they hold your funds, maintain an order book, and are regulated to varying degrees. Decentralised exchanges (DEX) like Uniswap run on smart contracts — no company controls them, you trade directly from your wallet. CEX offers speed and liquidity; DEX offers self-custody and access to newer tokens. Most active traders use both.',
+      key_points: [
+        'Crypto markets are 24/7 with no closing bell or circuit breakers',
+        'Spot = buying the actual asset; perpetual futures = leveraged price exposure without owning the token',
+        'Funding rate on perps keeps futures price close to spot — paid between longs and shorts',
+        'CEX (Binance, Coinbase): custodied, regulated, faster and more liquid',
+        'DEX (Uniswap): non-custodial, smart contract-based, access to long-tail tokens',
+      ],
+      activity_type: 'multi_choice',
+      question: 'A trader wants to bet that Bitcoin will fall 20% over the next week without selling any Bitcoin they actually own. Which instrument is designed for this, and what is the primary risk they take on by using leverage?',
+      options: [
+        'Spot Bitcoin on a DEX — sell it now and buy back lower, risking a gap up overnight',
+        'A perpetual futures short on a CEX with 10x leverage — the primary risk is liquidation if Bitcoin rises sharply',
+        'A Bitcoin ETF — go short via options on the ETF, primary risk is time decay on the option premium',
+        'A Bitcoin bond — earn yield while the price falls, primary risk is the issuer defaulting',
+      ],
+      correct_index: 1,
+      explanation: 'Perpetual futures are the standard instrument for leveraged directional bets in crypto. Going short with 10x leverage means a 10% adverse move wipes the entire position (liquidation). This is the primary risk — not the direction being wrong per se, but the forced closure before the view plays out. Funding rates also cost money to hold a short position when longs dominate the market.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-6': {
+      intro_text: 'The price you see on your screen is the result of competing forces from vastly different types of participants. Understanding who is on the other side of your trade — and what their objectives are — is one of the most underrated edges in retail trading.\n\nRetail traders are individuals like you: they trade their own capital, typically with small account sizes and shorter time horizons. Institutions include hedge funds, asset managers, and proprietary trading firms — they manage billions, move in and out of positions over days or weeks, and employ quantitative analysts and risk teams. Central banks (the Bank of England, the Fed) participate in forex markets to manage their currencies, and their interventions can override all technical signals. Market makers sit at the top of the liquidity chain: firms like Citadel or Virtu continuously quote both buy and sell prices, profiting from the bid-ask spread while hedging their inventory.\n\nThe key insight is that different participants operate on different timeframes with different objectives. A pension fund buying equities doesn\'t care about a 10-pip move on a 5-minute chart. A central bank defending a currency floor doesn\'t care about RSI levels. Understanding the primary driver behind a price move — retail flow, institutional positioning, or macro policy — determines whether a technical signal will hold or be overwhelmed.',
+      key_points: [
+        'Retail traders: small capital, shorter timeframes, make up a fraction of total volume',
+        'Institutions (hedge funds, asset managers): large capital, drive sustained directional moves',
+        'Central banks: intervene in forex to manage currency policy — can override all technicals',
+        'Market makers: quote both sides, earn the spread, hedge inventory — not directional traders',
+        'Understanding who is moving price helps you assess whether a signal is likely to hold',
+      ],
+      activity_type: 'multi_choice',
+      question: 'EUR/USD has been in a clean uptrend for 3 weeks. Overnight, the ECB announces an emergency rate cut. EUR/USD drops 400 pips in 30 minutes, breaking through every support level on your chart. Which participant most likely drove this move, and what does this tell you about relying purely on technical analysis?',
+      options: [
+        'A coordinated group of retail traders — proof that retail sentiment drives the biggest moves',
+        'A single large hedge fund reversing its long position — institutions can always override technicals',
+        'Central bank-driven policy shock and institutional repositioning — macro events can override all technical levels, making pure TA dangerous without awareness of scheduled risk events',
+        'Market makers widening spreads to profit from the volatility — spread manipulation caused the move',
+      ],
+      correct_index: 2,
+      explanation: 'Central bank announcements and macro shocks are the highest-tier market forces. When the ECB cuts rates unexpectedly, every institution with EUR longs reassesses immediately — their combined selling overwhelms all technical support. This is why professional traders always check the economic calendar before trading and treat technical analysis as a secondary tool during high-impact news windows.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-7': {
+      intro_text: 'Price is determined by supply and demand — this statement is simple, but its practical implications are deep. In financial markets, supply is the number of sellers willing to offer an asset at any given price; demand is the number of buyers willing to pay for it. Where these two forces balance is the current market price.\n\nA "bull market" is a sustained period of rising prices driven by excess demand over supply — buyers are more aggressive than sellers, willing to pay ever-higher prices. A "bear market" is the opposite: sustained falling prices as supply overwhelms demand. Within any trend, counter-moves occur as the balance temporarily shifts. A sharp rally in a downtrend is a "bear market rally" — sellers temporarily exhausted, buyers step in, but the underlying imbalance resumes.\n\nWhat makes financial markets different from, say, a fruit market is that expectations drive supply and demand as much as fundamentals do. If traders believe a stock will rise, they buy now — which itself causes the price to rise. This self-referential nature creates momentum: rising prices attract more buyers, which drives prices higher. It also creates reversals: when the last buyer has bought, there is no new demand to push prices further, and any selling creates a waterfall. Understanding this cycle — accumulation, markup, distribution, markdown — is the macro context behind every chart pattern.',
+      key_points: [
+        'Bull markets = demand > supply (buyers more aggressive); bear markets = supply > demand',
+        'Price movements reflect expectations as much as fundamental value — markets are forward-looking',
+        'Momentum: rising prices attract buyers, which drives prices higher — until the last buyer buys',
+        'Accumulation → markup → distribution → markdown is the macro cycle behind most price action',
+        'Counter-trend moves (bear rallies, bull pullbacks) are temporary imbalance corrections within the larger trend',
+      ],
+      activity_type: 'multi_choice',
+      question: 'A stock has been rising for months. News breaks that the company will beat earnings estimates by 30%. The stock barely moves up on the day of the announcement, then starts falling. Why does this happen despite the positive news?',
+      options: [
+        'Market makers are suppressing the price to buy cheaply before the real move up',
+        'The earnings beat was already priced in — buyers who expected this news bought months ago; the announcement was "sell the news"',
+        'The stock market is irrational and frequently ignores fundamental data',
+        'Technical resistance at the current level is stronger than the fundamental catalyst',
+      ],
+      correct_index: 1,
+      explanation: '"Buy the rumour, sell the news" is one of the most reliable patterns in markets. Institutional buyers accumulate positions months before an expected positive event. By announcement day, everyone who wanted to buy already has — demand is exhausted. The positive news becomes an opportunity for those holders to sell into the crowd who bought on the headline. Price then falls because supply (sellers exiting) exceeds the remaining demand.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-8': {
+      intro_text: 'You have now been introduced to four distinct types of market participant: retail traders, institutions (hedge funds and asset managers), central banks, and market makers. Each operates with a completely different objective, capital base, time horizon, and market impact.\n\nRetail traders are the smallest by capital but the largest by number — millions of individuals trading their personal savings. They are price-takers: they accept the price the market offers. Institutions manage billions and are price-influencers — their large orders move markets. Central banks are price-targeters — they intervene specifically to achieve a policy price level. Market makers are price-quoters — they set the bid and ask, profit from the spread, and are indifferent to direction.\n\nUnderstanding which participant is behind a given move changes how you interpret it. A sudden 3% gap up on a low-volume stock might be a retail squeeze. A slow, persistent drift higher in EUR/USD over three weeks with minimal pullbacks is likely institutional accumulation. A violent 500-pip reversal that ignores every technical level is usually central bank intervention or a macro-policy shock.',
+      key_points: [
+        'Retail traders: price-takers, small capital, high numbers — most vulnerable to market dynamics',
+        'Institutions: price-influencers, billions under management, drive sustained trends',
+        'Central banks: price-targeters, unlimited domestic currency, override technical levels',
+        'Market makers: price-quoters, earn bid-ask spread, hedge their books — direction-neutral',
+        'Identifying the participant behind a move tells you how likely it is to continue',
+      ],
+      activity_type: 'multi_choice',
+      question: 'Which market participant continuously quotes both a buy price and a sell price, profits from the bid-ask spread, and takes no directional view on where the market is heading?',
+      options: [
+        'A hedge fund running a global long/short equity book',
+        'A market maker or liquidity provider',
+        'A retail swing trader using technical analysis',
+        'A pension fund making long-term allocations to global equities',
+      ],
+      correct_index: 1,
+      explanation: 'Market makers provide liquidity by continuously quoting bid and ask prices. They earn the spread and hedge their inventory rather than speculating on direction. Without them, finding a counterparty for your trade would be significantly harder and more expensive.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'reading-price-charts': {
+    'lesson-1': {
+      intro_text: 'Before you can read a chart, you need to understand what kind of chart you are looking at. The three main chart types — line, bar (OHLC), and candlestick — all display the same underlying price data, but with very different levels of information.\n\nA line chart plots only the closing price for each period, connected with a continuous line. It is clean and easy to read for spotting broad trends, but it discards three-quarters of the available information: the open, the high, and the low. A bar (OHLC) chart plots all four data points as a vertical bar with a left tick (open) and right tick (close). It gives you full information but can be visually cluttered on shorter timeframes.\n\nCandlestick charts originated in 18th-century Japan and are now the global standard for price analysis. Like bars, they show OHLC data — but the visual encoding is far superior. A thick "body" spans the open and close; thin "wicks" extend to the high and low. The body is coloured (typically green/white for bullish, red/black for bearish), instantly communicating whether buyers or sellers won the session. This visual richness makes patterns far easier to spot than on a bar chart.',
+      key_points: [
+        'Line charts: closing price only — good for trend overview, poor for detailed analysis',
+        'Bar (OHLC) charts: open, high, low, close shown — complete but visually noisy',
+        'Candlestick charts: same OHLC data, but body colour instantly shows bull or bear winner',
+        'Body = range between open and close; wicks = extremes hit during the session',
+        'Candlesticks are the professional standard — learn to read them fluently',
+      ],
+      activity_type: 'multi_choice',
+      question: 'A trader is analysing whether buyers or sellers dominated each session over the past month. Which chart type provides this information most instantly and intuitively?',
+      options: [
+        'A line chart — the slope of the line shows whether buyers or sellers are winning',
+        'An OHLC bar chart — the tick positions show the open and close for each session',
+        'A candlestick chart — the coloured body instantly shows whether close was above or below open for every session',
+        'A point-and-figure chart — it filters out time and shows only significant price moves',
+      ],
+      correct_index: 2,
+      explanation: 'Candlestick charts encode bull/bear information visually through colour. A green body means the close was above the open (buyers won); a red body means close was below the open (sellers won). At a glance across 20 candles, you can see the distribution of buying and selling pressure, momentum shifts, and clustering of reversals. This visual density is why candlesticks are the universal standard for price analysis.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-2': {
+      intro_text: 'A candlestick is a compressed story of one complete trading session. The four data points it encodes — open, high, low, close — reveal not just where price ended up, but how much struggle occurred along the way.\n\nThe open is where price started the session; the close is where it finished. The body spans this range and is coloured to show who won: green (or white) if close > open (buyers); red (or black) if close < open (sellers). The high is the furthest point bulls pushed price during the session; the low is the furthest bears pushed it. The thin lines extending beyond the body are called wicks or shadows — they represent price territory explored but rejected before the close.\n\nThe relationship between body size and wick length tells you the conviction behind the move. A large body with tiny wicks means one side dominated from start to finish — strong conviction. A small body with long wicks in both directions is a "spinning top" — indecision, neither side in control. A candle with almost no body but a very long lower wick (a hammer) shows sellers pushed price down hard, but buyers overwhelmed them before the close — a powerful rejection signal at the right location.',
+      key_points: [
+        'Open = session start price; Close = session end price; body spans both',
+        'Green/white body: close > open (bulls won); Red/black body: close < open (bears won)',
+        'High = furthest bull push; Low = furthest bear push — shown as wicks',
+        'Large body + small wicks = strong conviction; small body + large wicks = indecision',
+        'Wick length reveals how far the losing side pushed price before being rejected',
+      ],
+      activity_type: 'multi_choice',
+      question: 'EUR/USD opens at 1.0850 and closes at 1.0920. During the session price dips to 1.0760 and reaches 1.0935. Which statement correctly describes this candlestick?',
+      options: [
+        'A bearish candle — the close at 1.0920 is near the high, signalling exhausted buyers',
+        'A bullish candle — close (1.0920) is above open (1.0850). The long lower wick to 1.0760 shows sellers briefly overwhelmed buyers before bulls recovered',
+        'The wick to 1.0760 confirms bears won the session despite the higher close',
+        'The body spans from 1.0760 to 1.0935, covering the full high-to-low range',
+      ],
+      correct_index: 1,
+      explanation: 'This is bullish because close > open. The body spans open to close; wicks extend beyond them to the session high and low. The long lower wick (90-pip rejection) tells us sellers pushed price down hard intrabar, but buyers overwhelmed them and drove it back up — a decisive rejection of lower prices.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-3': {
+      intro_text: 'Every candlestick represents a fixed period of time — and choosing the right period for your trading style is one of the most important decisions you will make. A 1-minute chart shows 390 candles in a single US equity trading day. A daily chart shows one candle. Same price action, completely different perspective.\n\nScalpers operate on 1-minute and 5-minute charts, entering and exiting within minutes, targeting 5–20 pips on forex. Day traders work on 15-minute and 1-hour charts, holding no positions overnight. Swing traders use the 4-hour and daily charts, holding positions for 3–7 days and targeting larger moves of 150–500 pips. Position traders and investors use the daily and weekly charts for multi-week or multi-month holds.\n\nThe key principle is top-down analysis: always establish your directional bias on the higher timeframe before looking for entries on the lower timeframe. A bullish signal on a 15-minute chart that conflicts with a bearish daily trend is far less reliable than one that aligns with it. The daily chart is the dominant timeframe — most professional swing and position traders start here regardless of where they eventually execute.',
+      key_points: [
+        'Scalpers: 1m–5m charts, seconds to minutes, tiny targets per trade',
+        'Day traders: 15m–1H charts, minutes to hours, closed before market close',
+        'Swing traders: 4H–Daily charts, 3–7 days, 150–500 pip targets on forex',
+        'Position traders: Daily–Weekly charts, weeks to months',
+        'Always analyse top-down: higher timeframe bias first, lower timeframe entry second',
+      ],
+      activity_type: 'multi_choice',
+      question: 'A swing trader holds positions for 3–7 days and targets moves of 150–400 pips on forex. Which primary analysis timeframe is most appropriate for establishing directional bias and key levels?',
+      options: [
+        '1-minute and 5-minute — tight entries reduce risk',
+        '15-minute and 1-hour — captures intraday momentum with precision',
+        '4-hour and Daily — filters intraday noise while showing the structure a multi-day trade needs',
+        'Weekly and Monthly — longer timeframes mean bigger targets',
+      ],
+      correct_index: 2,
+      explanation: 'The 4-hour chart defines context for a swing trade — it smooths intraday noise while showing enough structure for a 3–7 day position. The daily establishes directional bias and key S&R. Together they are the swing sweet spot: enough signal to act, enough filter to avoid false moves.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-4': {
+      intro_text: 'The Y-axis of a price chart is the price scale — how it is calibrated determines what patterns look significant and what looks trivial. There are two main options: linear (arithmetic) and logarithmic.\n\nA linear scale has equal vertical distance for equal absolute price moves. If each grid square = £10, then a move from £10 to £20 looks the same size as a move from £100 to £110. For short-term traders looking at price action over days or weeks, linear is standard and appropriate — the absolute move size is what matters.\n\nA logarithmic scale has equal vertical distance for equal percentage moves. A move from £10 to £20 (100%) takes up the same space as a move from £100 to £200 (also 100%). This becomes important when comparing long-term charts: on a linear scale, Bitcoin\'s move from $100 to $1,000 looks tiny compared to its move from $50,000 to $60,000, but both are 10x and 20% respectively. For weekly or monthly charts spanning years, log scale is essential — it shows whether a trend is accelerating or decelerating in proportional terms. For intraday or daily charts spanning weeks, linear is the standard choice.',
+      key_points: [
+        'Linear scale: equal space = equal absolute price move (e.g. £10 intervals)',
+        'Log scale: equal space = equal percentage move (e.g. every doubling)',
+        'Linear is standard for short-term traders (intraday, daily, weekly charts)',
+        'Log is essential for long-term charts spanning years — shows proportional acceleration',
+        'Most platforms default to linear — always check before interpreting long-term trendlines',
+      ],
+      activity_type: 'multi_choice',
+      question: 'You are charting Bitcoin\'s price history from 2015 to today on a weekly chart, looking for a long-term trendline. Which price scale should you use and why?',
+      options: [
+        'Linear scale — consistent with all other chart analysis and universally applicable',
+        'Logarithmic scale — price moved from $200 to $70,000, making linear scale compress early moves into a flat line, distorting trendlines',
+        'Either scale — for weekly charts the difference is immaterial',
+        'Linear scale for support identification, log scale for resistance identification',
+      ],
+      correct_index: 1,
+      explanation: 'When price has moved by orders of magnitude (200 to 70,000 = 350x), a linear scale compresses all early data into a flat line at the bottom. A 5,000% move in 2017 looks trivial versus a 40% move in 2023. Log scale normalises this: each decade (10x) takes equal vertical space, making trendlines across the full history meaningful. Always use log scale for assets with large long-term price range.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-5': {
+      intro_text: 'You have learned that a candlestick body spans the open and close, while wicks extend to the high and low. Now you will apply this directly to a live chart — identifying these components by sight is the first practical skill every chart trader develops.\n\nThe exercise focuses on three things: correctly identifying the body of a candle (the thick, coloured rectangle), correctly identifying each wick (the thin lines above and below the body), and determining which candle shows the strongest buying pressure by reading the relationship between body size, wick position, and close location.\n\nA candle showing strong buying pressure will have a large bullish body (close well above open), a short or absent upper wick (buyers held the high), and ideally a lower wick showing sellers tried and failed. A candle with a tiny body and long wicks in both directions shows indecision — no buying pressure conviction.',
+      key_points: [
+        'Body = thick coloured rectangle between open and close',
+        'Upper wick = thin line from top of body to session high',
+        'Lower wick = thin line from bottom of body to session low',
+        'Strong buying pressure: large green body, minimal upper wick, close near the high',
+        'Indecision: small body, long equal wicks both directions — no side in control',
+      ],
+      activity_type: 'multi_choice',
+      question: 'EUR/USD opens at 1.0850 and closes at 1.0920. During the session price dips to 1.0760 and reaches 1.0935. Which statement correctly describes this candlestick?',
+      options: [
+        'A bearish candle — the close at 1.0920 is near the high, signalling exhausted buyers',
+        'A bullish candle — close (1.0920) is above open (1.0850). The long lower wick to 1.0760 shows sellers briefly overwhelmed buyers before bulls recovered',
+        'The wick to 1.0760 confirms bears won the session despite the higher close',
+        'The body spans from 1.0760 to 1.0935, covering the full high-to-low range',
+      ],
+      correct_index: 1,
+      explanation: 'Close (1.0920) > open (1.0850) — this is bullish. The body spans 70 pips. The wicks show range: upper wick 15 pips (high 1.0935 − close 1.0920), lower wick 90 pips (open 1.0850 − low 1.0760). The 90-pip lower wick is the key signal: sellers pushed price 90 pips below the open but buyers overwhelmed them. The body is the verdict; the wick is the battle.',
+      steps: [{ id: '1', label: 'Study the candle anatomy', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-6': {
+      intro_text: 'The colour and size of a candlestick body is the starting point — but context determines whether a bullish candle is a buy signal or a warning. A candle does not exist in isolation: the candles before it, the trend it appears in, and the price level it appears at are what give it meaning.\n\nA large bullish body (strong close above open) is meaningful when it appears after a pullback in an uptrend — buyers absorbed the dip and resumed control. The same candle in the middle of nowhere, with no prior context, is just a random green bar. A large bearish body at a key resistance level where price has reversed three times before is significant; the same candle in the middle of a support zone tells a different story.\n\nWick length and position is equally important context. A small body with a long upper wick (a "shooting star") at resistance tells you buyers tried to break higher and were violently rejected — sellers overwhelmed them before the close. The same pattern at a new all-time high with huge volume carries far more weight than the same pattern in a sideways channel with thin trading.',
+      key_points: [
+        'A large bullish body means buyers dominated — but context determines if it is meaningful',
+        'Candles at key levels (support, resistance, prior swing points) carry far more weight',
+        'Long wicks show rejection of extreme prices — the "loser" tried and failed',
+        'Volume amplifies candlestick signals — a large candle on above-average volume is more reliable',
+        'Same candle, different location = completely different signal strength',
+      ],
+      activity_type: 'multi_choice',
+      question: 'GBP/USD forms a shooting star candle (small body, very long upper wick, closes near the low of the session) after a 300-pip rally. Which interpretation is most correct?',
+      options: [
+        'Bullish — the long upper wick shows buyers pushed price to new highs during the session',
+        'Neutral — the small body means neither side won, so no directional signal is present',
+        'Bearish — after a rally, buyers pushed price to a new high but sellers overwhelmed them before close, closing near the low; this is a rejection signal at elevated prices',
+        'Bullish — a close above the prior candle\'s open confirms ongoing buying pressure',
+      ],
+      correct_index: 2,
+      explanation: 'A shooting star after a rally is a bearish reversal signal. The long upper wick shows buyers pushed price higher intrabar — but sellers overwhelmed them and drove it back down to close near the low. The "story": bulls made a final push (upper wick), bears took control (drove price back to body low), bears won the session (close near low). After a 300-pip rally, this suggests the buyers are exhausted.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-7': {
+      intro_text: 'Volume is the number of units traded during a candle\'s time period. On stock markets this is shares traded; on forex it is tick volume (the number of price changes, used as a proxy since retail forex has no centralised volume data); on crypto it is tokens or contracts traded. Volume is the one indicator that confirms or refutes what price is doing.\n\nThe core principle: volume should expand in the direction of the trend and contract during counter-trend moves. In an uptrend, rising candles should have above-average volume and falling candles should have below-average volume. When this pattern reverses — when the trend is making new highs but each subsequent rally candle has lower volume than the last — it signals that the trend is running out of buyers. This divergence between price highs and volume is one of the earliest signs of an impending reversal.\n\nThe single most important volume event is a high-volume reversal candle: a large bearish candle with the highest volume of the recent move, appearing at a prior high or resistance level. This is distribution — institutions selling into the retail buying frenzy. Conversely, a high-volume bullish candle at a prior low signals accumulation. Volume doesn\'t lie about conviction the way price alone can.',
+      key_points: [
+        'Volume = units traded per candle — confirms or contradicts what price is doing',
+        'Trend should show expanding volume on impulse candles, contracting on pullbacks',
+        'Volume divergence (new price highs, falling volume) = weakening trend, possible reversal',
+        'High-volume reversal candle at key level = institutional distribution or accumulation',
+        'Forex uses tick volume as a proxy — less precise than equities but still useful',
+      ],
+      activity_type: 'multi_choice',
+      question: 'A stock is making new all-time highs over three weeks. Week 1: high on 50M shares. Week 2: high on 38M shares. Week 3: new all-time high on 22M shares. What does this volume pattern suggest?',
+      options: [
+        'The trend is strengthening — each new high requires less effort, showing efficient buying',
+        'Volume is irrelevant to the validity of the new highs; price is the only signal that matters',
+        'Bearish divergence — each new price high is being made with less and less buying conviction; the trend is likely losing momentum and a reversal risk is increasing',
+        'The stock is running out of sellers, which is why volume is falling — bullish continuation',
+      ],
+      correct_index: 2,
+      explanation: 'Declining volume on successive new highs is bearish divergence. It means fewer and fewer participants are willing to buy at ever-higher prices. The initial buyers are still holding (not selling enough to reverse the trend yet), but new demand is drying up. When the last remaining buyers are exhausted, any increase in selling creates a sharp reversal. This is the footprint of a distribution top.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-8': {
+      intro_text: 'You have now studied chart types, candlestick anatomy, timeframes, price scale, volume, and bullish/bearish context. This exercise brings it together: matching a trading style to the correct timeframe — a decision that shapes every aspect of how you analyse and trade.\n\nThe timeframe you choose determines your noise level: a 1-minute chart shows every micro-fluctuation; a daily chart filters all of it. It determines your required screen time: scalpers need to watch the market continuously; swing traders check their charts once or twice a day. It determines your typical stop loss size and target: tighter timeframes mean tighter stops and smaller targets; higher timeframes mean wider stops and larger targets.\n\nThe right match between trader profile and timeframe is one of the most neglected decisions beginners make. Most retail traders pick timeframes that are too short — they see more action, but they also see more noise. The temptation to scalp is strong, but scalping requires extremely fast execution, minimal slippage, and emotional discipline that takes years to develop. Starting on the 4H or daily chart teaches the structural patterns that underpin everything on shorter timeframes.',
+      key_points: [
+        'Timeframe determines noise level, required screen time, stop size, and typical hold duration',
+        'Shorter timeframes = more signals, more noise, smaller moves, requires faster decisions',
+        'Longer timeframes = fewer signals, cleaner structure, larger moves, allows more deliberation',
+        'Always match timeframe to your actual available time and lifestyle',
+        'Start learning on 4H/Daily — the structural patterns are clearest and most reliable there',
+      ],
+      activity_type: 'multi_choice',
+      question: 'A swing trader holds positions for 3–7 days and targets moves of 150–400 pips on forex. Which primary analysis timeframe is most appropriate for establishing directional bias and key levels?',
+      options: [
+        '1-minute and 5-minute — tight entries reduce risk',
+        '15-minute and 1-hour — captures intraday momentum with precision',
+        '4-hour and Daily — filters intraday noise while showing the structure a multi-day trade needs',
+        'Weekly and Monthly — longer timeframes mean bigger targets',
+      ],
+      correct_index: 2,
+      explanation: 'The 4-hour chart defines context for a swing trade — it smooths intraday noise while showing enough structure for a 3–7 day position. The daily establishes directional bias and key S&R. Together they are the swing sweet spot: enough signal to act, enough filter to avoid false moves.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'basic-price-action': {
+    'lesson-1': {
+      intro_text: 'A trend is not simply "price is going up" or "price is going down." The professional definition is precise: an uptrend is a sequence of higher highs (HH) and higher lows (HL) — each rally reaches a higher peak than the last, and each pullback holds above the previous pullback\'s low. A downtrend is a sequence of lower highs (LH) and lower lows (LL). This structural definition is objective: you can identify it on any chart, in any market, on any timeframe without a single indicator.\n\nWhy does this matter? Because the structure tells you who is in control. In an uptrend, even the sellers (pullbacks) are losing ground — each time price dips, buyers step in earlier and at higher prices than before. This is the footprint of dominant buying pressure. In a downtrend, even the buyers (rallies) are losing ground — each time price bounces, sellers overwhelm it at lower and lower highs.\n\nA trend ends when the structure breaks. In an uptrend, a break of structure (BOS) occurs when price closes below the most recent higher low — buyers failed to hold their previous defence point. This is the earliest structural signal of a potential reversal. Not every BOS leads to a full trend reversal (it can become a range), but no trend reversal occurs without a BOS first. Learning to count structure before looking at indicators is the single most important habit you can build as a chart reader.',
+      key_points: [
+        'Uptrend = sequence of higher highs AND higher lows — both conditions must be present',
+        'Downtrend = sequence of lower highs AND lower lows',
+        'Structure reveals who controls the market: HH/HL = buyers in control; LH/LL = sellers in control',
+        'A trend ends with a break of structure — price closes beyond the last HL (uptrend) or LH (downtrend)',
+        'Count structure before adding any indicator — structure is the foundation everything else is built on',
+      ],
+      activity_type: 'multi_choice',
+      question: 'EUR/USD makes these successive swing points: Low 1.0800 → High 1.0950 → Low 1.0860 → High 1.1020 → Low 1.0910 → High 1.0980. What is the market structure and what has just changed?',
+      options: [
+        'Uptrend throughout — five points of higher highs and higher lows confirm strong bullish momentum',
+        'Uptrend for the first four swings, then a break of structure — the final high (1.0980) is lower than the prior high (1.1020), signalling a potential change of character',
+        'Downtrend — price is making lower highs from the 1.1020 peak, which is the dominant pattern',
+        'Ranging market — the swings are too small to define a meaningful trend in either direction',
+      ],
+      correct_index: 1,
+      explanation: 'The first four swings show a valid uptrend: HL (1.0860 > 1.0800) and HH (1.1020 > 1.0950). But the fifth high at 1.0980 is lower than the prior high at 1.1020 — this is the first lower high after a sequence of higher highs. The structure has changed character (CHoCH). The uptrend is not confirmed broken until price also breaks below the last higher low (1.0910), but the lower high is the first warning signal.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-2': {
+      intro_text: 'A ranging market is the opposite of a trend. Instead of making successive higher highs and higher lows, price oscillates between a defined ceiling (resistance) and a defined floor (support) without establishing directional bias. On a chart, a range looks like a horizontal channel — price tags the top, reverses, falls to the bottom, and bounces, repeating until enough new information arrives to tip the balance.\n\nRanges form for a specific reason: temporary equilibrium between buyers and sellers. Neither side has sufficient conviction to overwhelm the other. This often happens after a strong trend move when participants wait for fresh catalysts — an economic release, an earnings report, or a shift in central bank rhetoric. The range is the market\'s way of saying "we don\'t know yet." Periods of high uncertainty compress price, building potential energy. The longer and tighter the range, the more significant the eventual breakout tends to be.\n\nTraders approach ranges in two ways. The first is to trade the range itself: buy when price tests the support floor (with a stop below it) and sell when price tests the resistance ceiling (with a stop above it). This is fading the edges. The second approach is to wait for the breakout: do nothing while price is inside the range, then trade aggressively in the direction of the first confirmed close outside the range. Both are valid. The key is never to enter a trade in the middle of a range — that gives you maximum risk and minimum reward in both directions.',
+      key_points: [
+        'A range is price oscillating between a support floor and resistance ceiling — no HH/HL or LH/LL structure',
+        'Ranges form when buying and selling pressure are in temporary equilibrium',
+        'The longer and tighter the range, the more powerful the eventual breakout tends to be',
+        'Fade the edges: buy at support, sell at resistance — always with stops beyond the zone',
+        'Never enter in the middle of a range — you take on max risk with no structural edge',
+        'A breakout from a range often produces a measured move roughly equal to the range\'s height',
+      ],
+      activity_type: 'multi_choice',
+      question: 'EUR/USD has been ranging between 1.0800 (support) and 1.0950 (resistance) for six weeks — three bounces from support, two reversals from resistance. Price is currently at 1.0825, 25 pips above the support zone. What is the highest-probability action aligned with the range structure?',
+      options: [
+        'Go long immediately at 1.0825 — support is holding and the upside to resistance is 125 pips',
+        'Wait for price to pull back to the 1.0800 support zone, then buy with a stop below 1.0800',
+        'Go short at 1.0825 — the number of support retests suggests the level is weakening',
+        'Avoid the pair entirely — ranging markets offer no tradeable edge for price action traders',
+      ],
+      correct_index: 1,
+      explanation: 'Entering at 1.0825 with a stop below 1.0800 gives you 25 pips of wasted risk before your stop is even in a logical position. Waiting for price to return to the support zone (1.0800) gives you an entry with a tight, structural stop (just below the zone) and 150 pips to the resistance at 1.0950 — a 3:1 reward:risk ratio or better. Range edges are the entry triggers; the middle of the range is where you wait, not where you act.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-3': {
+      intro_text: 'Support and resistance are the two most fundamental concepts in technical analysis, and they work because of a simple psychological reality: market participants remember prices. A level where buyers overwhelmed sellers in the past (support) is a price where buyers stepped in with conviction. When price returns to that level, those same buyers — or new ones who studied the chart — are likely to bid again. The level therefore becomes self-reinforcing, at least until something changes the underlying supply/demand balance.\n\nResistance is the mirror image: a price level where sellers previously overwhelmed buyers. It acts as a ceiling because traders who bought at the top and are sitting on losses are waiting for price to return so they can exit at breakeven. The accumulation of these "trapped longs" creates selling pressure every time price approaches the level. This is why round numbers (1.3000 in GBP/USD, 20,000 in the Dow) so often act as resistance — countless traders have placed limit sell orders just above those psychologically significant prices.\n\nThe most important property of support and resistance is role reversal. When a support level is broken convincingly — price closes below it and stays below — the former floor becomes a new ceiling. The buyers who defended that level are now trapped underwater; they become sellers when price recovers to their entry. The more times a level has been tested and held, the more significant the break when it eventually fails, and the more powerful the role reversal when it flips. This flip is one of the highest-probability re-entry triggers in all of technical analysis.',
+      key_points: [
+        'Support = price level where buyers previously stepped in with enough force to stop a decline',
+        'Resistance = price level where sellers previously overwhelmed buyers, capping any advance',
+        'Both work because market participants remember prices and act on them repeatedly',
+        'Round numbers attract orders because traders cluster limit orders at psychologically significant levels',
+        'Role reversal: broken support becomes resistance; broken resistance becomes support',
+        'The more times a level has been tested and held, the more significant the eventual break',
+      ],
+      activity_type: 'multi_choice',
+      question: 'GBP/USD held 1.2500 as support four times over three months. On the fifth test, price closes below 1.2500 and the next candle opens below it. Two weeks later, price rallies back to 1.2500 from below. What do you expect at that level, and why?',
+      options: [
+        'Strong support — the level has been tested many times so buyers will step in again',
+        'Resistance — former buyers trapped below 1.2500 will sell at breakeven when price recovers to their entry',
+        'No significance — once a level breaks it becomes irrelevant for future price action',
+        'Strong resistance only if price spent more than 30 days below the level',
+      ],
+      correct_index: 1,
+      explanation: 'This is role reversal in action. When 1.2500 broke, everyone who bought at support is now holding a losing position. As price recovers back to 1.2500, those trapped buyers exit at breakeven — creating a wave of selling at exactly that level. The former support becomes resistance. This is one of the highest-conviction setups in price action: clean break of a well-tested level, followed by a retest from the other side.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-4': {
+      intro_text: 'You have now learned the structural definition of a trend — higher highs and higher lows in an uptrend, lower highs and lower lows in a downtrend. In this exercise you will apply that knowledge directly to a live EUR/USD daily chart. Your task is to classify the current trend direction by drawing the most significant trendline connecting the structural swing lows (for an uptrend) or swing highs (for a downtrend).\n\nA valid trendline must connect at least two confirmed swing points without cutting through any candle body. The angle of the trendline reflects the strength of the trend: a very steep angle (>60 degrees) often signals an unsustainable move, while a shallow angle (<20 degrees) suggests weak momentum. The optimal zone is 30–45 degrees.\n\nBefore drawing, scan the chart from left to right. Identify the swing lows (in an uptrend) — the points where price pulled back before resuming higher. Connect the two most significant ones. The system will score your angle and how accurately your line passes through the structural points.',
+      key_points: [
+        'A trendline needs at least 2 swing points to draw — 3 or more confirms it is significant',
+        'For an uptrend: connect swing lows. For a downtrend: connect swing highs',
+        'The line must not cut through candle bodies — it anchors to wick lows (or highs)',
+        'Ideal trendline angle: 30–45 degrees. Steeper = unsustainable; shallower = weak momentum',
+        'Scan left to right first — identify all swings before picking which two to connect',
+      ],
+      activity_type: 'draw_trendline',
+      ticker: 'EURUSD',
+      timeframe: 'D1',
+      exercise_prompt: 'EUR/USD Daily is in a clear uptrend. Using the trendline tool, draw an ascending trendline connecting the two most significant swing lows on the chart. Your line must not cut through any candle body — it sits beneath the lows. The system scores your angle and how accurately you connect the structural swing lows.',
+      reference_line: { x1: 0, y1: 78, x2: 100, y2: 28 },
+      steps: [{ id: '1', label: 'Scan chart and identify swing lows', completed: false }, { id: '2', label: 'Draw your ascending trendline', completed: false }, { id: '3', label: 'Review score and feedback', completed: false }],
+    },
+    'lesson-5': {
+      intro_text: 'Role reversal is one of the most reliable and repeatable phenomena in technical analysis. The principle is simple: a support level that is convincingly broken does not disappear — it flips into resistance. The same price that once attracted buyers now repels them.\n\nWhy does this happen mechanically? When 1.2500 acts as support and buyers push price up from that level, those buyers are now long from 1.2500. If the level later breaks and price falls below it, those same traders are sitting on losses. When price eventually recovers back toward 1.2500 from below, the trapped longs see a chance to exit at breakeven. This wave of sellers at exactly 1.2500 creates resistance where support once existed. The more times the original support was tested and held, the larger the pool of trapped traders — and the stronger the subsequent resistance when price returns.\n\nThe reverse is equally powerful: resistance that is broken becomes support. Sellers who shorted at a resistance level and watched price break above them are now short and underwater. When price returns to that former resistance from above, shorts cover at breakeven — creating buying pressure at the flip level. Identifying these role-reversal levels and trading them on the retest is one of the highest-conviction setups available to a price action trader.',
+      key_points: [
+        'Broken support becomes resistance; broken resistance becomes support',
+        'The flip happens because trapped traders exit at breakeven when price revisits their entry',
+        'The more often a level held before breaking, the more trapped traders — and the stronger the flip',
+        'A clean role-reversal setup: clear break, retest from the other side, confirmation candle',
+        'The retest is where the trade is — not the initial break, which often attracts chasing',
+      ],
+      activity_type: 'multi_choice',
+      question: 'USD/JPY rallied strongly and held 150.00 as support three times over two months. On the fourth test, a bearish candle closes below 150.00 with high volume. Price drops to 148.50, then rallies back up toward 150.00. As price approaches 150.00 from below, what is the highest-probability expectation?',
+      options: [
+        '150.00 will act as strong support again — it has been tested multiple times and buyers are well-established there',
+        '150.00 will act as resistance — trapped longs from three previous bounces will sell at breakeven when price returns',
+        'The level has no significance after a break — treat this as a random area of the chart',
+        'A break below 150.00 is always a fake-out; price will immediately recover and the uptrend resumes',
+      ],
+      correct_index: 1,
+      explanation: 'When 150.00 held three times, a large pool of buyers was created at that level. The break with high volume invalidated their position — they are now losing money. As price recovers to 150.00 from below, those trapped buyers exit at breakeven, generating selling pressure. The former support has flipped to resistance. This is textbook role reversal: confirmed break + volume + retest from the other side = high-probability resistance setup.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-6': {
+      intro_text: 'A swing high is a candle (or series of candles) that has a higher high than the candles immediately to its left and right — price moved up, peaked, then pulled back. A swing low is the mirror: lower than the candles on either side. These are the building blocks of market structure, and identifying them manually — before adding any indicator — is the most fundamental skill in chart reading.\n\nTo qualify as a swing point, a candle typically needs at least one or two lower highs on each side (for a swing high) or higher lows on each side (for a swing low). A single spike followed immediately by a reversal can qualify if it is significant in magnitude. The key is that the price genuinely reversed direction at that point, not just paused briefly. On higher timeframes (daily, weekly), swing points are more significant and carry more analytical weight than on lower timeframes.\n\nWhy count swings manually? Because swing points define the HH/HL/LH/LL structure that tells you who is in control. If you can count: Low → High → Higher Low → Higher High → Lower High, you have just identified an uptrend followed by a change of character. That sequence is invisible to an indicator — it only becomes visible when you train your eye to read swing structure directly from the candles. Every major institutional strategy, whether discretionary or algorithmic, begins with structural swing identification.',
+      key_points: [
+        'Swing high = peak candle with lower highs on both sides; swing low = trough with higher lows on both sides',
+        'Need at least 1–2 candles on each side to confirm a swing point is significant',
+        'Higher timeframe swings carry more weight than the same pattern on lower timeframes',
+        'Manual swing counting builds the HH/HL/LH/LL chain that defines market structure',
+        'Every structural analysis — trend, S&R, trendlines — begins from correctly identified swings',
+      ],
+      activity_type: 'multi_choice',
+      question: 'Examining a GBP/USD H4 chart left to right, you see the following sequence: price rises to 1.2800 (candles on each side are lower), drops to 1.2620 (candles on each side are higher), rises to 1.2750 (lower than 1.2800, with lower candles on each side), drops to 1.2580 (lower than 1.2620, with higher candles on each side). How should this sequence be classified?',
+      options: [
+        'Uptrend — price made two highs and two lows, with overall movement remaining positive',
+        'Downtrend — the second high (1.2750) is lower than the first (1.2800), and the second low (1.2580) is lower than the first (1.2620). LH and LL = downtrend',
+        'Range — the two highs and two lows are too close together to define a clear trend',
+        'Change of character — the market was in an uptrend but is now breaking down with only two data points',
+      ],
+      correct_index: 1,
+      explanation: 'The sequence produces: High 1.2800 → Low 1.2620 → Lower High 1.2750 → Lower Low 1.2580. A lower high followed by a lower low is the definition of a downtrend. Even with only two swing highs and two swing lows, the pattern is clear: sellers are producing lower peaks and pushing price to lower troughs. This is bearish structure.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-7': {
+      intro_text: 'You now understand support and resistance conceptually. In this exercise you will identify and draw the key levels on a clean GBP/USD Daily chart with no indicators — just raw price. The task is to mark the levels that the market has demonstrably respected: places where price reversed, bounced, or consolidated on multiple separate occasions.\n\nA key level is not just any price the chart touched. It must be a zone where price reacted clearly at least twice, ideally at different times and from different directions. The strongest levels are those where both buyers and sellers have interacted — a price that once acted as support, was broken, then acted as resistance. Look for clusters of wick tips, candle bodies that stall at the same price, and rejections with long wicks.\n\nWhen drawing horizontal lines, aim to capture the body cluster of the reaction candles, not just the wick extremes. A zone drawn at the wrong price by 20–30 pips is still a useful level; a perfectly precise line at a price no candle body touched is not. The system will compare your levels to the reference solution and score based on proximity to the three most significant historical price zones.',
+      key_points: [
+        'Draw levels where price reacted clearly on multiple occasions — not every touch qualifies',
+        'The strongest levels have acted as both support and resistance at different times (role reversal)',
+        'Anchor to candle body clusters, not just wick tips — bodies show where price was accepted',
+        'Look for rejections: long wicks at a level indicate strong participation in both directions',
+        'Three well-placed levels are more useful than ten arbitrary ones',
+      ],
+      activity_type: 'draw_horizontal',
+      ticker: 'GBPUSD',
+      timeframe: 'D1',
+      exercise_prompt: 'GBP/USD Daily is shown with no indicators. There is one price level that has been tested from above (as support) and from below (as resistance) on multiple separate occasions — a classic role-reversal level. Using the horizontal tool, draw a line at this key level.',
+      reference_line: { x1: 0, y1: 45, x2: 100, y2: 45 },
+      steps: [{ id: '1', label: 'Identify the role-reversal level', completed: false }, { id: '2', label: 'Draw your horizontal line', completed: false }, { id: '3', label: 'Review feedback', completed: false }],
+    },
+    'lesson-8': {
+      intro_text: 'If you study retail trading data, a consistent pattern emerges: retail participants tend to buy near the top of moves and sell near the bottom. This is not random. It is the predictable result of two cognitive biases — recency bias and loss aversion — operating simultaneously on every chart.\n\nRecency bias is the tendency to weight recent events more heavily than historical context. After a prolonged uptrend, price has been going up for weeks or months. The recent experience feels normal; the expectation becomes "price will keep going up." This is precisely when the smart money is distributing (selling into strength). The retail buyer enters on the breakout to new highs — just as the trend is exhausting — and finds themselves holding a losing position as price reverses. The same process works in reverse at bottoms: after a long decline, the recent experience feels like falling prices are normal, so retail sells into panic lows just as smart money is accumulating.\n\nThe structural antidote to this pattern is learning to read market structure before acting on price movement. A HH/HL trend that is making higher highs on declining volume, or that has already produced a lower high on the most recent swing, is structurally weakening. Buying the most recent new high without checking whether the structure remains intact is how retail traders consistently buy the top. Structure gives you a framework that is independent of how you feel about recent price action.',
+      key_points: [
+        'Recency bias causes traders to extrapolate recent trends — buying tops and selling bottoms',
+        'Smart money distributes (sells) into retail buying at new highs; accumulates into retail selling at new lows',
+        'Check volume: new highs on declining volume = weakening trend, not confirmation',
+        'Check structure: a lower high after a sequence of higher highs = early warning of reversal',
+        'Never chase — if you missed the move, wait for the next structural pullback to a key level',
+      ],
+      activity_type: 'multi_choice',
+      question: 'Gold has been in a strong uptrend for 8 weeks. This morning it broke to an all-time high with strong price action. Social media and financial news are overwhelmingly bullish. A retail trader decides to buy at the breakout. Which structural check should they have done first?',
+      options: [
+        'None — an all-time high with strong price action and positive sentiment is a high-conviction buy signal',
+        'Compare volume on this breakout vs the prior breakout — declining volume at a new high often signals distribution, not strength',
+        'Check how many people on social media are bullish — consensus sentiment of 80%+ confirms the trade',
+        'Look at the last 3 days of price action only — longer-term structure is less relevant for a breakout entry',
+      ],
+      correct_index: 1,
+      explanation: 'Buying a new all-time high is not inherently wrong, but doing it without checking volume is a common retail mistake. Strong breakouts should be accompanied by expanding volume — this confirms real demand. If volume is declining while price makes new highs, large participants are selling into the retail buying frenzy — a classic distribution signal. Consensus bullish sentiment at highs is a contrarian warning, not confirmation. Structure and volume must be checked before price and sentiment.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'intro-to-technical-tools': {
+    'lesson-1': {
+      intro_text: 'Trendlines are one of the most used tools in technical analysis — and one of the most commonly drawn incorrectly. The most important rule: a valid trendline must have at least three touch points. Two points define a line, but three confirm it is significant. A line connecting only two swing lows could be drawn in dozens of ways through the same chart; once a third low touches that exact line and holds, the trendline has genuine analytical meaning.\n\nFor an ascending trendline, you connect swing lows — the points where price pulled back before resuming higher. The line sits beneath the lows and must not pass through any candle body. Wicks can touch it, but if a candle body closes below the line, that trendline has been structurally violated and should be redrawn or discarded. The same rule applies to descending trendlines: connect swing highs, sit above the candles, no body should close above the line.\n\nThe most common trendline mistakes are: drawing the line through candle bodies (technically invalid), connecting only two points and acting on the result, using too short a timeframe (trendlines on 1-minute charts are noise), and drawing lines at arbitrary angles to justify a bias. A trendline should emerge from the chart organically — if you have to stretch it to fit, it does not exist.',
+      key_points: [
+        'Three touch points minimum to confirm a trendline is significant — two points is a guess',
+        'Ascending trendline: connect swing lows, line must not pass through candle bodies',
+        'Descending trendline: connect swing highs, line must not pass through candle bodies',
+        'Wicks can touch the line; a candle body closing through it signals a structural break',
+        'Trendlines should emerge naturally from the chart — if you are forcing it, it is not valid',
+      ],
+      activity_type: 'multi_choice',
+      question: 'You draw an ascending trendline on EUR/USD Daily connecting swing lows from the past 3 months. The line has two confirmed touch points. On the third test, a candle wick touches the line but the body closes 15 pips below it. What is the correct interpretation?',
+      options: [
+        'Valid trendline — the wick touched the line so support held; continue treating it as a trendline',
+        'The trendline is structurally violated — a candle body closing below the line means the level failed to hold; redraw or discard',
+        'Inconclusive — wait for the next session to see if price recovers above the line before deciding',
+        'Switch to a lower timeframe trendline — the daily trendline is clearly too rigid',
+      ],
+      correct_index: 1,
+      explanation: 'When a candle body closes below an ascending trendline, the trendline has been breached. Bodies represent where price was accepted (opened and closed at those levels); a body below the line means sellers controlled that price area for the duration of the candle — not just a momentary spike. The trendline is no longer structurally intact. You can redraw it connecting the new lower low, or wait for a confirmed break of structure before reassessing direction.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-2': {
+      intro_text: 'Amateur traders draw support and resistance as single precise lines. Professional traders draw them as zones. The reason is simple: markets are not precise to the pip. Price does not reverse at exactly 1.2500 every time — it reverses in the area of 1.2480 to 1.2520. The traders who drew a line at 1.2500 and expected price to reject at that exact pip will be stopped out by normal noise. The traders who drew a zone from 1.2480 to 1.2520 will ride through the noise and still be in the trade.\n\nTo draw a zone rather than a line, you identify the cluster of candle bodies around the reaction. The high of the zone is typically the high of the candle bodies that stalled (not the wick tip), and the low of the zone is the low of the bodies in that cluster. Wicks can extend beyond the zone — they represent price that was briefly tested but not accepted. The zone itself is where price was genuinely accepted (opened and closed within the zone).\n\nThe width of the zone matters. A zone 5 pips wide is effectively a line. A zone 80 pips wide might encompass too much price action to be useful. Aim for zones that are 15–40 pips wide on major pairs on the H4 or Daily chart — wide enough to absorb noise, tight enough to be a useful reference.',
+      key_points: [
+        'Zones are more accurate than lines because markets reverse in areas, not at exact pips',
+        'Draw the zone using candle body clusters — high of stalling bodies to low of stalling bodies',
+        'Wicks can extend outside the zone; what matters is where bodies open and close',
+        'Aim for zones 15–40 pips wide on major pairs (H4/Daily) — tight enough to be useful',
+        'A price tested from above and below at the same zone is a confirmed role-reversal zone',
+      ],
+      activity_type: 'multi_choice',
+      question: 'You are drawing a resistance zone on GBP/USD Daily. Price approached 1.3000 three times. On the first approach, candles stalled between 1.2985 and 1.3010, with wicks reaching 1.3025. On the second, bodies stalled between 1.2990 and 1.3015. On the third, bodies between 1.2980 and 1.3005. Where should the resistance zone boundaries be drawn?',
+      options: [
+        '1.2980 to 1.3025 — use the widest range including all wick extremes',
+        '1.3000 to 1.3000 — a single line at the round number is sufficient',
+        '1.2980 to 1.3015 — capture the range where candle bodies consistently stalled across all three tests',
+        '1.3005 to 1.3025 — focus only on the upper wick area where selling pressure was strongest',
+      ],
+      correct_index: 2,
+      explanation: 'The zone should capture the body cluster across all three tests: 1.2980 (lowest body low) to 1.3015 (highest body high). Wicks at 1.3025 represent momentary spikes that were immediately rejected — they show where sellers stepped in, but price was never truly accepted there. Extending the zone to 1.3025 would make it too wide. A single line at 1.3000 ignores the natural noise around round numbers. The 1.2980–1.3015 zone is wide enough to be robust, tight enough to be useful.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-3': {
+      intro_text: 'A moving average (MA) is the average closing price of an asset over a defined number of past periods, recalculated on every bar. On a daily chart, a 20-period SMA is the average of the past 20 daily closes; as each new day closes, the oldest price drops off and the new close is added. The result is a smoothed line that filters out the noise of individual candles and shows the general direction of price over the chosen period.\n\nThere are two main types. A Simple Moving Average (SMA) weights every period equally. An Exponential Moving Average (EMA) applies more weight to recent prices, making it more responsive to recent moves. For short-term trend reading, traders use EMAs — particularly the 20 EMA — because it reacts faster to price changes. For long-term structural analysis, the 200 SMA is the most widely watched level by institutional traders: price above the 200 SMA = long-term uptrend; price below = long-term downtrend. Because so many participants act on this level, it becomes a self-fulfilling reference point.\n\nMoving averages do not predict the future — they describe the recent past. They are trend-following tools, which means they lag price. During trending markets, MAs provide useful bias and dynamic support/resistance. During ranging markets, price chops back and forth across the MA and it provides no signal at all. Understanding when MAs are useful (trends) and when they are not (ranges) is what separates disciplined use from indicator dependency.',
+      key_points: [
+        'An SMA weights all periods equally; an EMA weights recent prices more heavily',
+        '20 EMA = short-term momentum gauge; 200 SMA = long-term institutional trend reference',
+        'Price above 200 SMA = broad uptrend; price below = broad downtrend',
+        'MAs lag price — they follow, not predict',
+        'MAs are useful in trending markets; in ranges they produce whipsaws and false signals',
+      ],
+      activity_type: 'multi_choice',
+      question: 'EUR/USD is trading at 1.0850, which is below the 200 SMA (1.1020). The price crosses above the 20 EMA (1.0840) on the H4 chart. A trader calls this a "golden cross" and goes long for a long-term trend reversal. What is the most accurate critique of this analysis?',
+      options: [
+        'The analysis is correct — a cross above the 20 EMA is a strong buy signal on any timeframe',
+        'The 20 EMA cross is a short-term signal only; the broader trend (defined by the 200 SMA at 1.1020) remains bearish — this is at best a short-term counter-trend bounce, not a trend reversal',
+        'The golden cross only applies when the 50 SMA crosses the 200 SMA — a 20 EMA cross is irrelevant',
+        'Moving averages are useless in forex — only price action matters',
+      ],
+      correct_index: 1,
+      explanation: 'A golden cross is technically defined as the 50 SMA crossing above the 200 SMA — not the 20 EMA crossing anything. But more importantly: with price 170 pips below the 200 SMA, the long-term trend is bearish. The 20 EMA cross on H4 is a short-term momentum signal within a longer bearish structure. Going long for a "trend reversal" ignores the dominant directional bias. Short-term tools confirm short-term moves; long-term structure must be assessed with long-term tools.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-4': {
+      intro_text: 'You have learned the rules for drawing valid trendlines — three touch points, connecting swing lows for ascending trends, no candle body should close through the line. In this exercise you will apply those rules to a real GBP/USD Daily chart that is in a clear ascending trend.\n\nThe process: first, scan the chart from left to right and identify all the swing lows — points where price pulled back before resuming higher. Then select the two most significant ones (the earliest and the most recent clear swing low that defines the current trend). Draw your trendline through those points. If the line passes through candle bodies between your two anchor points, your swing identification may be off — try connecting different swing points.\n\nThe system will score your angle relative to the reference trendline and your proximity to the structural swing lows. Aim for a clean line that a second trader looking at the same chart would independently draw in the same place.',
+      key_points: [
+        'Scan left to right before drawing — identify all swing lows first',
+        'Connect the most significant earliest swing low to the most recent one',
+        'Check between your two points: the line should not pass through candle bodies',
+        'If the line cuts through bodies, your anchor points may need adjustment',
+      ],
+      activity_type: 'draw_trendline',
+      ticker: 'GBPUSD',
+      timeframe: 'D1',
+      exercise_prompt: 'GBP/USD Daily shows a clear ascending trend. Using the trendline tool, draw an ascending trendline from the earliest visible swing low to the most recent swing low. Your line must respect all candle bodies — no body should close below it.',
+      reference_line: { x1: 0, y1: 80, x2: 100, y2: 30 },
+      steps: [{ id: '1', label: 'Identify the swing lows', completed: false }, { id: '2', label: 'Draw your trendline', completed: false }, { id: '3', label: 'Review score and feedback', completed: false }],
+    },
+    'lesson-5': {
+      intro_text: 'A price channel is formed by drawing a trendline along the trend\'s swing points — lows for an ascending trend, highs for a descending trend — and then drawing a parallel line on the opposite side of price. This parallel line, called the channel line or return line, connects the swing highs in an uptrend (or swing lows in a downtrend). The result is a band within which price oscillates as the trend progresses.\n\nChannels are useful for two reasons. First, they give you reference levels for entries: in an ascending channel, price approaching the lower trendline (pullback to support) is a potential long entry; price approaching the upper channel line (overbought within the channel) is where profit-taking is appropriate. Second, a breakout from the channel — especially a close outside the channel with expanding volume — signals a potential acceleration or reversal of the trend.\n\nTo draw a channel correctly: draw the main trendline first (connecting at least two swing lows in an uptrend). Then copy it exactly — same angle, same slope — and drag the parallel copy to anchor it on the highest swing high within the trend. Do not adjust the angle of the copy to make it "fit" the highs better; channels require parallel lines by definition. If the parallel line connects two or three swing highs accurately, you have a genuine channel. If the highs vary significantly in distance from the trendline, the asset is trending in an uneven structure rather than a clean channel.',
+      key_points: [
+        'A channel = trendline + parallel return line on the opposite side of price',
+        'Ascending channel: trendline connects swing lows, return line connects swing highs — both perfectly parallel',
+        'Buy at the lower trendline (pullback to support); take profit near the upper channel line',
+        'A breakout from a channel — especially on volume — signals acceleration or reversal',
+        'Copy the trendline exactly when creating the return line — do not adjust the angle to fit',
+      ],
+      activity_type: 'multi_choice',
+      question: 'USD/CAD is in a clear descending channel. Price is currently at the lower boundary of the channel — the trendline connecting the swing highs is above, and the parallel return line (connecting swing lows) sits directly under current price. What is the most logical trade aligned with the channel?',
+      options: [
+        'Short — price is in a downtrend so selling at any point in the channel is correct',
+        'Long from the lower channel boundary — price has reached the return line where buyers have previously stepped in, target the upper trendline',
+        'Buy the breakout only — channels should not be faded, only traded on breakout',
+        'No trade — descending channels always break to the downside so waiting is the only safe approach',
+      ],
+      correct_index: 1,
+      explanation: 'In a descending channel, the return line (lower boundary) is where buyers have repeatedly pushed price back toward the upper trendline. Price at the lower boundary represents the best risk:reward for a counter-trend bounce with target at the upper trendline. This is fading the channel edge — a valid strategy with a clear stop (below the return line) and a clear target (upper trendline). The overall trend is still down, so this is a short-term bounce trade rather than a reversal play.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-6': {
+      intro_text: 'Every indicator you will ever see — RSI, MACD, Bollinger Bands, Stochastics — is calculated from price. That is the fundamental truth that shapes how you should use them: indicators are derivatives of price. They cannot tell you anything that is not already in the price itself; they simply reformat it into a different visual presentation. This creates an inherent lag: by the time an indicator signals a move, price has already begun making that move.\n\nPrice action, by contrast, reads the raw data. A candle closing with a long wick rejection at a resistance level is the signal itself — it requires no indicator to confirm. The advantage is zero lag; the disadvantage is that it requires interpretation skill. Indicators provide structure that helps newer traders identify conditions systematically — RSI above 70 as "overbought" is simpler than reading overbought conditions from raw candle patterns. That structured simplicity comes at the cost of being one step removed from reality.\n\nThe most dangerous pattern in retail trading is "indicator stacking" — adding more and more indicators in search of confirmation until every signal appears confirmed on multiple dimensions, but all the indicators are derived from the same price data. Five indicators derived from the same price are not five independent confirmations; they are five versions of the same thing. The correct approach: understand what each indicator measures mathematically, use it for the specific insight it provides, and keep price action as the primary input. Indicators work best as filters for setups already identified from price structure — not as the origin of trade ideas.',
+      key_points: [
+        'All indicators are calculated from price — they lag by definition and add no new information',
+        'Price action reads raw data with zero lag; requires interpretation but has no delay',
+        'Indicator stacking: multiple indicators derived from the same price are not independent confirmations',
+        'RSI is most useful for spotting divergence — when price makes a new high but RSI does not',
+        'Use indicators to filter setups found from price structure, not to generate trade ideas independently',
+      ],
+      activity_type: 'multi_choice',
+      question: 'The RSI on EUR/USD H4 has been below 30 (oversold) for four consecutive candles. Price has been falling steadily and just made a new 3-month low. A trader sees the oversold RSI and goes long, expecting a bounce. What is the critical flaw in this analysis?',
+      options: [
+        'RSI below 30 is never a valid buy signal — oversold readings should always be ignored',
+        'RSI can remain oversold for extended periods during strong downtrends; oversold does not mean price will reverse — it means selling momentum has been strong',
+        'The RSI period setting is wrong — a 14-period RSI is too short for H4 analysis',
+        'No flaw — RSI below 30 is one of the highest-probability buy setups in technical analysis',
+      ],
+      correct_index: 1,
+      explanation: 'RSI below 30 means selling has been strong recently, not that a reversal is imminent. In a strong downtrend, RSI can remain below 30 for many candles — sometimes for weeks. The RSI was "oversold" at every step of the decline, but price kept falling. Entering long based solely on an oversold indicator without a price action trigger (like a bullish candle pattern at a structural support level) is one of the most common retail mistakes. RSI is useful for spotting divergence and filtering entries, not as a standalone reversal signal.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-7': {
+      intro_text: 'You have now covered the three core technical tools: trendlines, horizontal support and resistance zones, and moving averages. The final skill in this course is combining them into a single, clean chart setup that gives you directional bias, key price levels, and a framework for entries — all from three elements that do not duplicate each other.\n\nA clean chart setup has: one directional tool (a trendline, or a moving average cross that confirms trend bias), one or two support zones below current price, and one or two resistance zones above current price. That is it. Everything else is noise. When price approaches a zone AND confirms with a candle signal AND the trendline or MA bias aligns with the trade direction — that is your setup. Three independent inputs confirming the same trade is confluence.\n\nThe exercise below asks you to build this setup from scratch on a blank EUR/USD H4 chart. Approach it methodically: identify trend direction first, then mark the nearest support and resistance zones, then assess where the current price sits relative to those elements. The question asks which combination represents the correct starting point — practice reading it as a whole picture, not a collection of individual elements.',
+      key_points: [
+        'A clean setup needs three elements: directional tool + support zone + resistance zone',
+        'Trendline establishes direction; S&R zones establish where to act',
+        'Confluence = directional bias + price at a key level + candle confirmation',
+        'Adding more indicators beyond these three duplicates information without adding edge',
+        'The chart should answer two questions: which direction? And where to enter?',
+      ],
+      activity_type: 'multi_choice',
+      question: 'You just opened a blank EUR/USD H4 chart. To build a clean, actionable price action setup, which combination of tools is the correct starting point?',
+      options: [
+        '20 indicators: five EMAs, RSI, MACD, Stochastic, ATR, and Bollinger Bands',
+        'One ascending trendline connecting recent swing lows, one horizontal resistance zone, one horizontal support zone',
+        'Nothing — pure price action means zero tools at all times',
+        'A 200 EMA, 50 EMA, 20 EMA, and RSI to confirm every entry independently',
+      ],
+      correct_index: 1,
+      explanation: 'Clean chart analysis starts with structure. A trendline defines directional bias. Support and resistance zones identify where price has reacted before. Three elements answer the two most important questions: which direction, and where? Adding more indicators creates noise and delays your eye from seeing what price is actually doing.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'risk-fundamentals': {
+    'lesson-1': {
+      intro_text: 'The FCA (Financial Conduct Authority) in the UK requires every CFD and spread-bet provider to display the percentage of retail clients who lost money in the previous year. Across major UK brokers, that figure consistently sits between 70% and 82%. This is not a statistical fluke — it is a structural reality that this course will help you understand and escape.\n\nThe reasons for these losses cluster around a small set of identifiable failures. The first is position sizing: trading too large relative to account size so that normal market fluctuations trigger stop losses or force emotional decisions. The second is the absence of a stop loss: holding losing positions without a predefined exit until losses become catastrophic — the "it will come back" fallacy. The third is the disposition effect: cutting winners early (taking profits at small gains) while holding losers long (refusing to accept a loss). Fourth is overtrading: taking too many trades, paying the spread on each one, and making impulsive decisions to generate action.\n\nThe 20–30% of retail traders who make money consistently share a different profile: they risk a defined small percentage per trade, have a non-negotiable stop loss on every position, execute a tested strategy repeatedly rather than improvising, and review their trades to improve over time. Risk management is not the boring part of trading — it is the part that determines whether you survive long enough to develop an edge.',
+      key_points: [
+        'FCA data: 70–82% of retail CFD clients consistently lose money',
+        'Primary causes: oversized positions, no stop losses, cutting winners and holding losers',
+        'Overtrading amplifies the spread cost — every unnecessary trade erodes capital',
+        'Winning traders risk defined small percentages, have stops on every trade, and follow a tested plan',
+        'Risk management determines whether you survive long enough to develop real edge',
+      ],
+      activity_type: 'multi_choice',
+      question: 'FCA disclosures show 76% of retail CFD clients lose money. According to behavioral finance research, which single factor is the most significant driver of this outcome?',
+      options: [
+        'Bad luck — retail traders simply have less access to market-moving information than institutions',
+        'The disposition effect: systematically cutting winners early and holding losers until they become large losses, producing a negative average trade outcome',
+        'High spreads charged by brokers, which mathematically guarantee retail losses over time',
+        'Insufficient leverage — retail traders cannot access enough size to generate meaningful returns',
+      ],
+      correct_index: 1,
+      explanation: 'The disposition effect — the tendency to sell winners early and hold losers long — is the most well-documented behavioral driver of retail losses. Studies by Odean (1998) and Barber & Odean (2000) analysed thousands of brokerage accounts and confirmed this pattern consistently. The result is a distribution where the average winning trade is smaller than the average losing trade, producing net negative expected value even with a coin-flip win rate. Information asymmetry and spreads are secondary factors.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-2': {
+      intro_text: 'A stop loss is a pre-specified price at which your trade is automatically closed if price moves against you. It is non-negotiable. Every trade should have a stop loss set before the position is opened. Not after. Not "I\'ll set it if price moves against me." Before. The psychological trap of trading without a stop — "I\'ll know when to exit" — has destroyed more accounts than any other single bad habit.\n\nWhere should the stop actually go? There are three evidence-based methods. The first is the swing low method: in a long trade, place the stop below the most recent significant swing low — the structural level where the trade idea is invalidated. If price breaks below that low, the bullish case is structurally wrong, not just temporarily uncomfortable. The second is the structure method: identify the key level or zone that price must hold for the trade to remain valid (a support zone, the neckline of a pattern), and place the stop just beyond it. The third is ATR-based: use the Average True Range (a measure of the asset\'s average daily movement) and place the stop at 1.5×ATR below entry — this accounts for normal volatility without being triggered by noise.\n\nWhat stops should never be: arbitrary pips ("I always use a 30-pip stop"), round numbers with no structural significance, or stops so tight that normal noise triggers them before the trade has a chance to develop. A stop at the right structural level, even if it is 60 or 80 pips away, is correct. A stop at 15 pips because you want a smaller loss is incorrect — it just guarantees you get stopped out more frequently.',
+      key_points: [
+        'Set the stop loss before entering the trade — never after or "if it goes wrong"',
+        'Swing low method: stop below the most recent structural swing low (trade is invalidated if broken)',
+        'Structure method: stop beyond the key level or zone that must hold for the thesis to be valid',
+        'ATR method: stop at 1.5× average true range below entry to absorb normal volatility',
+        'Never use arbitrary pips as a stop — stops must be at structurally meaningful prices',
+      ],
+      activity_type: 'multi_choice',
+      question: 'You go long GBP/USD at 1.2650 after a bullish bounce from the 1.2600 support zone. The most recent swing low before the support zone is 1.2570. You want a 20-pip stop to limit your risk. Where should the stop actually go?',
+      options: [
+        '1.2630 — 20 pips below entry is tight enough to know quickly if the trade is wrong',
+        '1.2600 — at the top of the support zone so you know the moment support is tested',
+        '1.2565 — just below the most recent swing low at 1.2570, where the bullish thesis is structurally invalidated',
+        '1.2500 — round number 150 pips away to give the trade maximum room to work',
+      ],
+      correct_index: 2,
+      explanation: 'The structurally correct stop is below the swing low at 1.2570. If price breaks below 1.2570, the HH/HL structure is broken — buyers failed to defend the last higher low, and the long thesis is invalidated. A 20-pip stop at 1.2630 sits inside normal noise and will be hit by routine fluctuations before the trade has a chance to develop. A stop at 1.2600 (top of the support zone) means price touching support immediately stops you out. Structure, not desired loss size, determines stop placement.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-3': {
+      intro_text: 'The 1% and 2% rules are the most widely taught position-sizing guidelines in trading, and for good reason: they work mathematically. The rule is simple — risk no more than 1% (conservative) or 2% (moderate) of your total account value on any single trade. This is not the amount you invest; it is the maximum amount you will lose if your stop loss is hit.\n\nWhy does this matter? Consider an account of £10,000. If you risk 2% per trade, your maximum loss per trade is £200. To lose 50% of your account through stop losses alone, you would need to have 25 consecutive losing trades — an extraordinarily unlikely run. If you risk 10% per trade, 5 consecutive losers (a common enough losing streak) wipes 40% of your account, putting you under severe psychological and mathematical pressure.\n\nThe percentage method automatically adjusts with your account. If you grow from £10,000 to £15,000, your 1% risk grows to £150 — position sizes scale up with success. If you suffer a drawdown to £8,000, your 1% risk drops to £80 — position sizes scale down automatically, protecting your remaining capital. Fixed lot size trading does neither: it stays the same regardless of account condition, magnifying losses during drawdowns and failing to capitalise during growth. The calculation is always the same: account size × risk % = max £ risk → ÷ stop distance in pips → ÷ pip value = lot size.',
+      key_points: [
+        '1% rule: risk maximum 1% of account per trade. 2% is the moderate upper limit',
+        '25 consecutive losses at 2% risk = 40% account loss — survivable. At 10% risk = 5 losses = bankrupt',
+        'Percentage risk auto-scales: bigger account = bigger position, smaller account = smaller position',
+        'Fixed lot size fails to protect during drawdown and fails to scale during growth',
+        'Formula: (Account × Risk%) ÷ (Stop pips × Pip value) = lot size',
+      ],
+      activity_type: 'multi_choice',
+      question: 'Trader A has a £20,000 account and risks a fixed 0.5 lot on every trade. Trader B has a £20,000 account and risks 1% per trade. After a 10-trade losing streak, Trader A\'s stops averaged 50 pips. Pip value = £10 per standard lot. Which trader is in a safer position, and why?',
+      options: [
+        'Trader A — fixed lot size is simpler and removes the need to recalculate risk before every trade',
+        'Trader B — each loss reduces account size, which reduces the next position size, slowing the rate of account depletion during drawdown',
+        'Both are equal — the total loss depends only on the stop distance, not the sizing method',
+        'Trader A — a fixed 0.5 lots is inherently conservative regardless of account size',
+      ],
+      correct_index: 1,
+      explanation: 'Trader A loses 0.5 × 50 pips × £10 = £250 per trade, every trade. After 10 losses: £2,500 gone, account at £17,500. The position size does not adapt. Trader B loses 1% of £20,000 = £200 on trade 1. After trade 1, account is £19,800, next trade risks £198. The losses compound downward more slowly because each new risk is 1% of a smaller account. After 10 losses, Trader B has lost approximately £1,904 (not £2,000) due to the compounding effect. The percentage method automatically reduces position size as the account shrinks — this is its critical advantage during losing streaks.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-4': {
+      intro_text: 'Position sizing is where risk theory becomes concrete calculation. You have learned the 1% rule conceptually — now you will calculate the exact lot size for a live trade. The formula has three steps and never changes, regardless of the market, currency pair, or account size.\n\nStep 1: Maximum risk in £. Multiply your account balance by your risk percentage. A £10,000 account at 1% risk = £100 maximum loss per trade.\n\nStep 2: Risk per standard lot if stopped out. Multiply the stop distance in pips by the pip value per standard lot. For GBP/USD with a 50-pip stop and £10 pip value: 50 × £10 = £500 risk per lot.\n\nStep 3: Lot size. Divide maximum risk by risk per lot: £100 ÷ £500 = 0.20 lots. This is the position size that risks exactly 1% of the account if the stop is hit.\n\nWork through the calculation in the exercise below. The inputs will change for different pairs and stop distances, but the three-step structure never does.',
+      key_points: [
+        'Step 1: Max risk £ = Account × Risk%',
+        'Step 2: Risk per lot = Stop pips × Pip value per lot',
+        'Step 3: Lot size = Max risk £ ÷ Risk per lot',
+        'The formula is identical for every pair — only pip value and stop distance change',
+        'Always size from the stop distance, not from how much you expect to make',
+      ],
+      activity_type: 'calculation',
+      problem: 'Account: £10,000. You risk 1% per trade. You go long GBP/USD at 1.2500 with a stop loss at 1.2450 — 50 pips below entry. Pip value = £10 per pip per standard lot. What is the correct lot size to risk exactly 1% of your account?',
+      correct_answer: '0.20',
+      tolerance: 0.01,
+      unit: 'lots',
+      hint: 'Step 1: calculate your max risk in £. Step 2: calculate £ risked per lot if stopped out. Step 3: divide.',
+      solution_steps: [
+        'Max risk = 1% × £10,000 = £100',
+        'Risk per standard lot = 50 pips × £10/pip = £500',
+        'Lot size = £100 ÷ £500 = 0.20 lots',
+        'Trading 0.20 lots risks exactly £100 — 1% of the account — if the stop is hit.',
+      ],
+      steps: [{ id: '1', label: 'Calculate max risk (£)', completed: false }, { id: '2', label: 'Calculate risk per lot', completed: false }, { id: '3', label: 'Calculate lot size', completed: false }],
+    },
+    'lesson-5': {
+      intro_text: 'The most important mathematical property every trader must understand is the asymmetry of losses. Losing a percentage of your account does not require the same percentage gain to recover — it requires significantly more. This asymmetry gets worse as losses increase, and understanding it is the clearest possible argument for why protecting capital is the trader\'s primary objective.\n\nThe arithmetic is straightforward but counterintuitive. Lose 10%: you need 11.1% to recover. Lose 25%: you need 33.3% to recover. Lose 50%: you need 100% to recover. Lose 75%: you need 300% to recover. The reason is that losses are calculated on a larger base than gains. You lose 50% of £10,000 = £5,000, leaving £5,000. To get back to £10,000 from £5,000 requires doubling — a 100% gain. And achieving a 100% gain is far harder, more time-consuming, and requires much larger risk-taking than preventing the 50% loss in the first place.\n\nThis mathematics is why the best professional traders define their maximum acceptable drawdown before the first trade of the day (or week, or month) — and stop trading if that threshold is reached. If you lose 3% on Monday morning, stop trading for the day and review. If you lose 5% in a week, stop trading for that week. Protecting capital is not timidity — it is the mathematical prerequisite for long-term survival.',
+      key_points: [
+        '10% loss requires 11% gain to recover. 25% loss requires 33%. 50% loss requires 100%',
+        'The asymmetry worsens as losses increase — recovery becomes exponentially harder',
+        'Set a daily drawdown limit (e.g. 3%) and a weekly limit (e.g. 5%) and enforce them',
+        'Stopping after a drawdown limit is reached is not giving up — it is mathematical self-preservation',
+        'Capital protection is the prerequisite for surviving long enough to develop and refine an edge',
+      ],
+      activity_type: 'calculation',
+      problem: 'Your account falls from £10,000 to £6,000 after a losing streak. What percentage gain on your remaining £6,000 is required to return to £10,000?',
+      correct_answer: '66.67',
+      tolerance: 0.5,
+      unit: '%',
+      hint: 'What is the difference between £6,000 and £10,000? Express that difference as a percentage of the starting point for the gain calculation (£6,000).',
+      solution_steps: [
+        'You need to gain £10,000 − £6,000 = £4,000',
+        'That gain must come from a base of £6,000',
+        'Required gain = £4,000 ÷ £6,000 = 0.6667 = 66.67%',
+        'A 40% loss requires a 66.67% gain to recover — not 40%.',
+      ],
+      steps: [{ id: '1', label: 'Calculate the £ needed to recover', completed: false }, { id: '2', label: 'Express as % of remaining capital', completed: false }, { id: '3', label: 'Compare to the original loss %', completed: false }],
+    },
+    'lesson-6': {
+      intro_text: 'Drawdown is the decline in your account from a peak to a subsequent trough, expressed as a percentage. If your account grows to £12,000 and then falls to £9,600, your drawdown is 20% (£2,400 ÷ £12,000). Drawdown is inevitable — every trading strategy, including the most profitable ones used by professional funds, experiences periods of consecutive losses. The question is not whether drawdown will happen; it is whether you have the rules to manage it when it does.\n\nMaximum drawdown (the largest single peak-to-trough decline in an account\'s history) is the most important risk metric for evaluating any strategy. A strategy that makes 50% per year but has a maximum drawdown of 60% is not viable for most traders — the psychological and financial damage of losing 60% would cause most people to abandon the strategy at precisely the wrong time. A strategy that makes 20% per year with a maximum drawdown of 12% is far more tradeable, because a 12% loss is recoverable without existential stress.\n\nThe practical tools for managing drawdown are simple: define a daily loss limit (e.g. stop trading if you lose 3% in a single day), a weekly limit (5%), and a monthly limit (10%). If any of these is hit, stop trading for that period and review. This prevents a bad day from becoming a bad week from becoming a catastrophic month. Professional proprietary trading firms enforce these rules contractually — traders are locked out of their platforms if daily limits are hit. You must enforce the same discipline voluntarily.',
+      key_points: [
+        'Drawdown = peak-to-trough decline in account value, expressed as a percentage',
+        'Maximum drawdown is the most important risk metric for any strategy',
+        'High annual return with high max drawdown is not viable — the psychological pain causes early abandonment',
+        'Set daily (3%), weekly (5%), and monthly (10%) loss limits and stop trading when they are hit',
+        'Stopping after hitting a loss limit prevents bad days from compounding into catastrophic months',
+      ],
+      activity_type: 'multi_choice',
+      question: 'A trading strategy has returned 35% over 18 months, but its maximum drawdown over that period was 45%. A second strategy returned 18% over the same period with a maximum drawdown of 8%. Which should a disciplined retail trader prefer, and why?',
+      options: [
+        'Strategy 1 — higher returns always justify higher drawdown; the 35% return is simply better',
+        'Strategy 2 — a 45% drawdown would require a 82% gain to recover and would psychologically force most traders to exit at the low, turning a temporary loss into a permanent one',
+        'Strategy 1 — professional traders manage large drawdowns routinely so retail traders should too',
+        'Neither — any strategy with a drawdown above 5% is unsuitable for retail trading',
+      ],
+      correct_index: 1,
+      explanation: 'A 45% drawdown requires an 81.8% gain to recover. In practice, the emotional stress of watching a 45% decline causes most traders to abandon the strategy near the bottom — converting a temporary drawdown into a realised catastrophic loss. Strategy 2\'s 8% max drawdown is manageable, recoverable (needs 8.7% gain), and psychologically sustainable. The risk-adjusted return matters more than raw return: a 18% return with 8% drawdown (return/drawdown ratio of 2.25) is far superior to 35% with 45% drawdown (ratio of 0.78).',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-7': {
+      intro_text: 'You have calculated position sizes and understood where stops should go structurally. In this exercise you will place a stop loss on a live trade setup — drawing the line at the correct structural level rather than at an arbitrary pip distance.\n\nThe setup: a long trade has triggered on EUR/USD H1 after a bullish engulfing candle at a support zone. Price has been making higher highs and higher lows on the H4 chart. Your task is to identify where the long trade is structurally invalidated — the price at which buyers clearly failed to defend their position — and draw a horizontal stop loss line there.\n\nThe correct stop is just below the most recent significant swing low on the H1 chart, not at a round number and not at an arbitrary distance. If price breaks below that swing low, the HH/HL structure on H1 is broken, the support zone failed, and the reason for the trade no longer exists. That is the stop. The system will compare your placement to the structural reference and score based on proximity.',
+      key_points: [
+        'Place the stop at the structural invalidation level — not at an arbitrary pip distance',
+        'For a long trade: stop goes below the most recent significant swing low',
+        'If price breaks your stop level, the trade thesis is wrong — not just temporarily uncomfortable',
+        'Always set the stop before calculating position size — stop distance determines lot size',
+      ],
+      activity_type: 'draw_horizontal',
+      ticker: 'EURUSD',
+      timeframe: 'H1',
+      exercise_prompt: 'A long trade setup on EUR/USD H1 has triggered after a bullish engulfing candle at support. Your task is to define the stop loss placement. Using the horizontal tool, draw a line below the most recent swing low — this is the structural level where the trade is invalidated. Your stop sits below this low.',
+      reference_line: { x1: 0, y1: 83, x2: 100, y2: 83 },
+      steps: [{ id: '1', label: 'Identify the key swing low', completed: false }, { id: '2', label: 'Draw your stop loss level', completed: false }, { id: '3', label: 'Review placement', completed: false }],
+    },
+  },
+
+  'paper-trading-and-psychology': {
+    'lesson-1': {
+      intro_text: 'Paper trading is the practice of making trades with simulated money, recording every entry and exit exactly as you would with real capital, but without any actual financial risk. It is the mandatory step between learning strategy theory and trading with live funds. Every professional trader has a version of paper trading in their background — even experienced traders use it when testing a new strategy or adapting to a new market.\n\nWhat paper trading teaches you: mechanical execution of a strategy. You learn where to put your entry orders, how to calculate position sizes, where to place stops, and how to log your results. You learn to identify setups according to your rules and act on them systematically. You discover whether your strategy produces a positive expectancy over a sample of trades. All of this is learnable without financial risk.\n\nWhat paper trading cannot teach you: the emotional experience of real money at risk. When a paper trade goes against you, there is no visceral stress response — no cortisol spike, no impulse to override the stop, no temptation to add to a loser. These psychological pressures only emerge with real money, and they are the reason many traders who perform excellently on paper underperform when they go live. Paper trading builds mechanical skill; real trading tests psychological discipline. Both are necessary, and you must master the mechanical layer before the psychological one is even testable.',
+      key_points: [
+        'Paper trading = simulated trades with fake money; every entry and exit recorded as if real',
+        'Teaches: strategy mechanics, position sizing, stop placement, setup identification',
+        'Cannot teach: the psychological pressure of real capital at risk',
+        'Many traders perform well on paper but poorly live — the emotional gap is real and significant',
+        'Master the mechanical layer first; psychological discipline is the next layer on top',
+      ],
+      activity_type: 'multi_choice',
+      question: 'A trader has paper-traded a breakout strategy for 3 months with 60% win rate and 2:1 reward:risk ratio — strong results. They go live with £5,000 and immediately start losing. After 6 live trades they have a 25% win rate. What is the most likely explanation?',
+      options: [
+        'The strategy was overfitted to the paper trading period and has no real edge',
+        'Paper trading does not replicate the emotional stress of real capital — fear is causing premature exits on winners and hesitation on valid setups, destroying the planned reward:risk ratio',
+        'The broker is trading against them — live execution is fundamentally different from paper',
+        'Six trades is too small a sample to draw any conclusions — they should paper trade for another year',
+      ],
+      correct_index: 1,
+      explanation: 'The emotional gap between paper trading and live trading is the most common cause of this pattern. On paper, the trader had no emotional skin in the game — exits were taken at the planned levels. Live, fear of losing real money causes premature exits on winning trades (cashing out early) and hesitation on new setups (missing entries). The strategy likely still has edge; the trader\'s psychology is interfering with execution. The correct response: shrink live position size until emotional responses normalise, then scale up.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-2': {
+      intro_text: 'Setting up your paper trading environment correctly is not a minor detail — it determines whether the experience will transfer usefully to live trading. The most important principle: use the same capital amount you plan to trade live. If you intend to start live trading with £2,000, paper trade with £2,000. Not £100,000. Not £500. The same number.\n\nWhy does this matter? Because position sizing, risk management, and the psychological experience of individual losses are all scaled to your account size. A £200 loss on a £2,000 paper account (10% loss, extreme) feels very different from a £200 loss on a £100,000 paper account (0.2% loss, trivial). If you paper trade with unrealistically large capital, you will develop bad habits around position sizing and loss tolerance that do not transfer to your real account.\n\nFor platforms: MetaTrader 4 and 5 offer free demo accounts with real-time data, configurable capital, and full order-type support. TradingView\'s paper trading mode works directly in the charting interface. Tradecuity\'s practice mode gives you structure-specific exercises. Use whichever platform you plan to use live — practicing on MT4 when you plan to trade on MT5 introduces unnecessary friction at the execution layer.',
+      key_points: [
+        'Paper trade with the exact same capital amount you plan to use live — not more, not less',
+        'Oversized paper capital creates unrealistic risk tolerance and bad position sizing habits',
+        'Use the same platform you plan to trade live — remove execution friction before you go live',
+        'Platform options: MT4/MT5 demo, TradingView paper trading, Tradecuity practice',
+        'Record every trade in a journal from day one — the log is the point, not just the P&L',
+      ],
+      activity_type: 'multi_choice',
+      question: 'You plan to start live trading with £3,000. Which paper trading setup best prepares you for the transition to live?',
+      options: [
+        '£100,000 paper account — larger capital lets you take more trades and learn faster',
+        '£3,000 paper account on the same platform you plan to use live, recording every trade in a journal',
+        '£10,000 paper account — slightly larger to give you more room to experiment without stress',
+        'No paper account — paper trading builds false confidence; go live with a very small amount immediately',
+      ],
+      correct_index: 1,
+      explanation: 'The £3,000 paper account on the same platform creates the closest possible simulation of your live trading environment. At £3,000, a 1% risk trade means a £30 loss — the same real emotional signal as £30 of real money when you go live. A £100,000 paper account makes that same trade a £1,000 loss — completely disconnected from your live risk tolerance. Platform consistency removes execution learning as a variable when you transition. Recording trades in a journal forces analytical review rather than just watching P&L.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-3': {
+      intro_text: 'The disposition effect is the single most documented behavioral bias in trading research. It was named and quantified by Shefrin and Statman in 1985, using data from Terrance Odean\'s analysis of thousands of brokerage accounts. The finding: retail investors are significantly more likely to sell winning positions than losing ones. They hold losers and cut winners. This is the exact opposite of profitable trading, which requires letting winners run and cutting losers short.\n\nThe theoretical foundation comes from Kahneman and Tversky\'s Prospect Theory (1979). The theory describes how people actually evaluate gains and losses: the pain of a loss is psychologically felt at roughly twice the intensity of the pleasure from an equivalent gain. A £200 loss feels about as bad as a £400 gain feels good. This asymmetry means people will take more risk to avoid realising a loss (holding the loser) than they will to capture a gain (selling the winner early). The result is a systematic tendency to accumulate losing positions while eliminating winning ones — a portfolio that skews toward the worst-performing assets.\n\nThe data from actual brokerage accounts confirms this precisely. Odean\'s 1998 study found that the stocks retail investors sold went on to outperform the stocks they held by an average of 3.4 percentage points over the following year. They sold the winners and held the losers, and the market subsequently validated the winners. The antidote is mechanical: use stop losses that close losing trades automatically, and trailing stops or predetermined targets that prevent premature exits on winners.',
+      key_points: [
+        'Disposition effect: retail traders systematically cut winners short and hold losers long',
+        'Prospect theory explains why: losses feel 2× more painful than equivalent gains feel good',
+        'This asymmetry causes risk-seeking behavior to avoid realising losses (hold the loser)',
+        'Odean (1998): stocks sold by retail traders outperformed the stocks they held by 3.4% annually',
+        'The antidote is mechanical: stop losses force exit on losers; predetermined targets prevent premature winning exits',
+      ],
+      activity_type: 'multi_choice',
+      question: 'A trader has two open positions: Trade A is up £300 (50 pips profit), Trade B is down £300 (50 pips loss). The trader feels strong discomfort about Trade B and mild impatience about Trade A. According to Prospect Theory, which action is the trader most likely to take, and is it the correct one?',
+      options: [
+        'Close Trade A (take the £300 profit) and hold Trade B (avoid realising the loss). This is the disposition effect in action — and it is the wrong response',
+        'Close Trade B (cut the loss) and hold Trade A (let the winner run). This is the correct response and reflects disciplined trading',
+        'Close both — equal treatment of gains and losses avoids bias',
+        'Hold both — letting all trades run maximises expected value across the portfolio',
+      ],
+      correct_index: 0,
+      explanation: 'Prospect Theory predicts the trader will close Trade A (take the certain gain, reduce the emotional discomfort of uncertainty) and hold Trade B (avoid realising the painful loss, hoping it recovers). This is exactly the disposition effect. The correct disciplined response is the opposite: let Trade A run with a trailing stop, and cut Trade B at the predetermined stop level. The disposition effect is so powerful that most traders need mechanical rules — not willpower — to override it.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-4': {
+      intro_text: 'Fear and greed are the two emotional states that most consistently override rational trading decisions. They do not feel like emotions in the moment — they present as logic. "The market is clearly going to keep going up" is greed dressed as analysis. "I need to get out now before I lose more" is fear dressed as risk management. Learning to identify them is the first step to not being controlled by them.\n\nFear in trading manifests as: missing valid entries because you are afraid of another loss after a recent string of losers; exiting winning trades too early because you want to lock in the gain before it disappears; reducing position sizes so far below your plan that winning trades cannot compensate for losing ones; paralysis on setups that would have been automatic a week ago. Fear is most powerful after a losing streak — the exact time when you need to execute your plan most faithfully.\n\nGreed manifests as: FOMO entries — entering a trade that has already moved significantly simply because you fear missing out on further gains; moving take-profit targets further away on an open winner to capture more; revenge trading after a loss (taking a larger position on the next trade to recover faster); overtrading — placing trades that do not meet your criteria because the market feels active. The common thread: greed makes you override your rules in search of more. The antidote to both emotions is the same: a written trading plan that specifies entry criteria, stop placement, and targets in advance, removing real-time emotional decision-making from the process.',
+      key_points: [
+        'Fear: missing entries, early exits, reduced size, paralysis — worst after losing streaks',
+        'Greed: FOMO entries, moving targets, revenge trading, overtrading',
+        'Both emotions present as logic in the moment — the feeling is indistinguishable from analysis',
+        'The antidote is a written plan that specifies all decisions before the trade is taken',
+        'A rule broken once "for good reason" is not a rule — it is a suggestion',
+      ],
+      activity_type: 'multi_choice',
+      question: 'A trader took two losing trades this morning, both valid setups that hit their stops. A third valid setup now appears matching all their criteria. Instead of taking it at the planned position size, they take it with 3× normal size to "recover the morning\'s losses faster." Which emotional driver is this, and what is the correct response?',
+      options: [
+        'Fear — the trader is afraid of missing another opportunity and compensating by sizing up',
+        'Greed (revenge trading) — the impulse to recover losses faster by risking more is an emotional override of the risk management plan; correct response is to take the trade at normal size or not at all',
+        'Neither — adjusting position size based on recent performance is rational risk management',
+        'Greed, but acceptable — experienced traders use variable sizing to recover drawdowns efficiently',
+      ],
+      correct_index: 1,
+      explanation: 'This is revenge trading — a greed-driven attempt to recover losses faster by taking on disproportionate risk. The previous two losses were valid setups that hit stops; there is nothing to revenge. A third valid setup should be taken at the planned size because the risk management plan is based on long-run expectancy, not individual trade outcomes. Tripling size on trade three transforms what should be a disciplined re-entry into a high-risk gamble. The correct response: take it at normal size, or sit out if emotional state is not neutral.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-5': {
+      intro_text: 'This exercise is your first simulated trade entry on a live chart. You have learned setup identification, stop placement, and position sizing — now you bring them together in one decision. The chart shows EUR/USD H4. Price has been making higher highs and higher lows on the H4 timeframe, pulled back to a clear support zone, and a signal candle has formed showing buying interest at that level.\n\nYour tasks: identify the setup (the reason for the trade), draw your entry line at the trigger level (the break of the signal candle\'s high), draw your stop loss below the structural swing low, and estimate the reward distance to the next resistance level. The system will evaluate your entry and stop placement against the reference solution and give you a reward:risk ratio based on your lines.\n\nThink through the trade completely before drawing anything: What is the trend? Where is the key level? Where is the entry trigger? Where is the stop? What is the first target? This sequence — thesis, entry, stop, target — is the structure of every trade you will ever take.',
+      key_points: [
+        'Always define the full trade plan before drawing: entry, stop, target',
+        'Entry trigger: break of the signal candle high (confirms buyers stepped in)',
+        'Stop: below the most recent swing low — where the bullish thesis is invalidated',
+        'Target: next significant resistance level on the same or higher timeframe',
+        'Calculate reward:risk before taking the trade — minimum 2:1 to justify entry',
+      ],
+      activity_type: 'draw_horizontal',
+      ticker: 'EURUSD',
+      timeframe: 'H4',
+      exercise_prompt: 'A potential long setup is developing on EUR/USD H4 — price has bounced from a support zone and is consolidating. Using the horizontal tool, draw your planned entry line at the high of the signal candle (the entry trigger). Aim for at least 2R distance between entry and your mental take profit.',
+      reference_line: { x1: 0, y1: 52, x2: 100, y2: 52 },
+      steps: [{ id: '1', label: 'Identify the setup and thesis', completed: false }, { id: '2', label: 'Draw your entry trigger line', completed: false }, { id: '3', label: 'Draw your stop loss level', completed: false }],
+    },
+    'lesson-6': {
+      intro_text: 'A pre-trade checklist is a set of questions you answer before clicking "buy" or "sell" on any trade. Its purpose is not bureaucracy — it is to remove emotion from the entry decision by replacing "does this feel right?" with "does this meet objective criteria?" Professional traders and proprietary trading firms use checklists for this reason: a checklist is immune to the FOMO, fear, and excitement that degrade real-time decision-making.\n\nA robust pre-trade checklist covers five areas. First: trend — what is the direction on the next higher timeframe? You should only trade in the direction of the dominant structure. Second: location — is price at a key level (support, resistance, trendline, moving average)? Good setups come from meaningful price areas, not from the middle of a range. Third: signal — is there a candle or price action trigger confirming the move? A level alone is not a trade; there must be evidence of participation. Fourth: risk — is your stop loss defined and your position size calculated? If you cannot answer where the trade is wrong before entering, do not enter. Fifth: plan — what is the target, and does the reward:risk justify the trade?\n\nUsing this checklist before every trade does two things: it ensures you only take setups that meet all criteria (filtering out impulse trades), and it creates a psychological buffer between seeing a setup and acting on it — a moment of structured analysis that short-circuits the emotional impulse to act immediately.',
+      key_points: [
+        '1. Trend: what direction does the higher timeframe structure show?',
+        '2. Location: is price at a key level — support, resistance, trendline, or MA?',
+        '3. Signal: is there a candle or price action trigger confirming the move?',
+        '4. Risk: stop loss defined? Position size calculated?',
+        '5. Plan: target set? Reward:risk ≥ 2:1?',
+      ],
+      activity_type: 'multi_choice',
+      question: 'A trader sees a strong bullish candle form on EUR/USD H1 and enters long immediately without checking their checklist. Later they discover that on the H4 chart, price is at a major resistance level in a clear downtrend. Which checklist question would have prevented this trade?',
+      options: [
+        'Signal — the candle pattern was not strong enough to justify entry',
+        'Risk — the position size was too large for the account',
+        'Trend and Location — checking the H4 structure would have revealed bearish bias at resistance, making the H1 long a counter-trend trade at the worst possible price',
+        'Plan — there was no clear take profit level identified before entry',
+      ],
+      correct_index: 2,
+      explanation: 'The Trend question (what does the higher timeframe show?) and Location question (is this a key level?) together would have caught this error. The H4 downtrend means all long trades on H1 are counter-trend — lower probability. The H4 resistance means price is at exactly the level where sellers have historically shown up — the worst possible place to buy. Neither of these required complex analysis; they just required looking at the higher timeframe chart before entering. The checklist creates that two-step pause.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-7': {
+      intro_text: 'Loss aversion — the tendency to feel losses approximately twice as intensely as equivalent gains — is not just a theoretical concept. It has a specific, predictable manifestation in trading: the inability to close a losing trade at the predetermined stop. The losing position is open, the stop level has been hit, but the trader moves the stop further away, or simply does not close the trade, because the pain of realising the loss is greater than the pain of continuing to hold it.\n\nThe psychological mechanism is avoidance. An unrealised loss exists in a state of superposition — it might recover, so the pain is deferred. The moment you close the trade, the loss is crystallised and permanent. Loss aversion creates a powerful drive to stay in the "deferral" state. The same mechanism causes traders to add to losing positions ("averaging down") — each new entry at a lower price reduces the average entry cost and narrows the loss, creating momentary relief. But the position is now larger and more dangerous.\n\nThe structural antidote is removing the decision entirely. If the stop order is set in the platform at the time of entry, there is no decision to make when it is hit — the trade closes automatically. This is why stop losses must be placed in the platform immediately when the trade is entered, not held mentally. A mental stop is a suggestion; a platform stop is a rule. For traders who have struggled with moving stops, some use a separate "stop coach" accountability structure — telling another trader or posting in a journal exactly where their stop is before entering, creating social accountability for keeping it.',
+      key_points: [
+        'Loss aversion causes traders to move stops further away rather than accept a predetermined loss',
+        'An unrealised loss feels smaller than a realised one — avoidance of crystallising the loss',
+        'Averaging down amplifies the position at exactly the wrong time — more risk in a losing trade',
+        'The structural fix: set the stop order in the platform at entry — remove the decision entirely',
+        'A mental stop is a suggestion. A platform stop order is a rule.',
+      ],
+      activity_type: 'multi_choice',
+      question: 'A trader entered long at 1.3200 with a stop at 1.3150. Price hits 1.3151 and the trader moves the stop to 1.3100, thinking "it will bounce from here." Price continues to 1.3100 — they move it again to 1.3050. Which psychological mechanism is driving this behaviour, and what is the correct response?',
+      options: [
+        'Overconfidence — the trader is too confident the trade will recover; reduce position size',
+        'Loss aversion — the trader is deferring the pain of realising the loss by moving the stop; the correct response is to reinstate the original stop, close the trade at the original stop level, and accept the loss',
+        'Risk management — moving the stop gives the trade more room, which is technically sound position management',
+        'Recency bias — the trader is anchored to the entry price; they should close and re-evaluate without a price anchor',
+      ],
+      correct_index: 1,
+      explanation: 'This is textbook loss aversion expressed as stop-moving. Each move defers the pain of crystallising the loss, but each move also increases the potential loss if price continues. By the time a trader has moved a stop twice, the loss is often 2–3× the original planned risk. The correct response at the first move: close the trade at the original stop level immediately. The loss is already greater than planned. Every subsequent moment of holding compounds the violation of the risk management plan.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-8': {
+      intro_text: 'A trading journal is not a nice-to-have — it is the only mechanism that converts trading experience into learning. Without a journal, you trade 100 times and have 100 experiences that evaporate. With a journal, you trade 100 times and accumulate 100 data points that you can analyse, pattern-match, and improve from. Every professional trader keeps some form of trading journal. Most losing traders do not.\n\nThe minimum viable journal entry for each trade: date and time, instrument, direction (long or short), entry price, stop loss price, take profit price, outcome (price hit TP or SL), P&L in % and £, and one sentence on the reason for the trade. Beyond the minimum, the most useful additions are: emotion at entry (rated 1–10 from fear to greed), emotion during the trade (did you want to exit early?), what you would do differently, and a screenshot of the chart at entry.\n\nThe review process is what makes the journal valuable. Weekly: look at all trades taken and ask which setups performed best, which worst. Monthly: calculate win rate, average win, average loss, and expectancy (win rate × avg win − loss rate × avg loss). Identify the one or two trade types you should stop taking (negative expectancy setups) and the one or two you should take more of (highest expectancy setups). The journal makes improvement measurable rather than aspirational.',
+      key_points: [
+        'A journal converts experience into data — without it, 100 trades teach you nothing systematically',
+        'Minimum entry: date, instrument, direction, entry, stop, target, outcome, P&L, reason',
+        'Add emotion rating at entry (1–10 from fear to greed) — reveals psychological patterns',
+        'Weekly review: which setup types worked? Which failed?',
+        'Monthly: calculate win rate, average win, average loss, expectancy — cut the worst, scale the best',
+      ],
+      activity_type: 'multi_choice',
+      question: 'You take a loss on a trade that followed your plan perfectly. Thirty minutes later another valid setup appears. Which response most reflects disciplined trading psychology?',
+      options: [
+        'Enter with double the normal position size to recover the previous loss before the session ends',
+        'Take the setup at normal size — a valid setup per your rules is worth taking regardless of the previous trade outcome',
+        'Skip the next 3 setups as punishment until you feel mentally ready',
+        'Widen your stop on the next trade to give it more room, compensating for the bad luck',
+      ],
+      correct_index: 1,
+      explanation: 'Each trade is statistically independent from the last. A valid setup according to your plan should be executed at plan-specified size regardless of prior outcomes. Doubling size to recover (revenge trading) distorts your risk model and is driven by emotion, not edge. The correct response: take the trade at normal size.',
+      steps: [{ id: '1', label: 'Read the lesson', completed: false }, { id: '2', label: 'Answer the question', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  // ════════════════════════════════════════════════════════
+  // LEVEL 2 — THE OPERATOR
+  // ════════════════════════════════════════════════════════
+
+  'technical-analysis-in-depth': {
+    'lesson-6': {
+      activity_type: 'draw_horizontal',
+      ticker: 'NAS100',
+      timeframe: 'H4',
+      exercise_prompt: 'NAS100 H4 is shown after a significant rally. Price is approaching a major overhead level. Using the horizontal tool, draw a line at the single most significant resistance level — the price zone that has produced the clearest and most repeated price rejection.',
+      reference_line: { x1: 0, y1: 30, x2: 100, y2: 30 },
+      steps: [{ id: '1', label: 'Identify the dominant resistance', completed: false }, { id: '2', label: 'Draw your horizontal level', completed: false }, { id: '3', label: 'Review feedback', completed: false }],
+    },
+    'lesson-8': {
+      activity_type: 'draw_trendline',
+      ticker: 'GBPUSD',
+      timeframe: 'H4',
+      exercise_prompt: 'GBP/USD H4 shows a descending trendline already marked. Price is approaching where this trendline meets a prior support-now-resistance zone — a confluence short area. Using the trendline tool, draw your entry trigger line: a trendline from the most recent swing high down to where price is currently approaching.',
+      reference_line: { x1: 5, y1: 22, x2: 90, y2: 42 },
+      steps: [{ id: '1', label: 'Identify the confluence zone', completed: false }, { id: '2', label: 'Draw your entry trendline', completed: false }, { id: '3', label: 'Review feedback', completed: false }],
+    },
+  },
+
+  'chart-patterns': {
+    'lesson-7': {
+      activity_type: 'multi_choice',
+      question: 'Price rises sharply for 3 sessions, then consolidates for 6 candles forming slightly lower highs and near-flat lows in a tight downward channel. Volume drops during consolidation. Price then breaks above the channel top on expanding volume. What pattern is this?',
+      options: [
+        'Rising wedge — a bearish reversal. Sellers are trapped and a sell-off is coming',
+        'Bull flag — a bullish continuation. The tight pullback pauses the trend without reversing it; the breakout targets a move equal to the flagpole',
+        'Ascending triangle — neutral until the breakout direction confirms',
+        'Head and shoulders — a major top reversal. Price will decline below the consolidation low',
+      ],
+      correct_index: 1,
+      explanation: 'A bull flag is a continuation pattern. The flagpole is the sharp initial move; the flag is the controlled consolidation with slightly declining highs and roughly flat lows. Volume contracts during the flag (healthy) and expands on the breakout (genuine conviction). The measured move target is the flagpole height added from the breakout point.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-9': {
+      activity_type: 'draw_trendline',
+      ticker: 'EURUSD',
+      timeframe: 'D1',
+      exercise_prompt: 'EUR/USD Daily shows a head and shoulders top pattern. The left shoulder, head, and right shoulder peaks are labelled. Using the trendline tool, draw the neckline — the line connecting the two troughs between the shoulders. A daily close below it confirms the pattern.',
+      reference_line: { x1: 15, y1: 62, x2: 82, y2: 58 },
+      steps: [{ id: '1', label: 'Locate the two troughs', completed: false }, { id: '2', label: 'Draw the neckline', completed: false }, { id: '3', label: 'Review accuracy', completed: false }],
+    },
+  },
+
+  'candlestick-patterns': {
+    'lesson-7': {
+      activity_type: 'multi_choice',
+      question: 'After a sustained downtrend, a candle forms at a known monthly support level with a tiny body near the TOP of the range, a lower wick 3× the body length, and almost no upper wick. What is this pattern and what does it signal?',
+      options: [
+        'Shooting star — bearish reversal. The long wick shows sellers dominating',
+        'Hammer — potential bullish reversal. The long lower wick shows sellers initially drove price down hard, but buyers overwhelmed them and closed near the open. At support, this is a high-probability long signal',
+        'Doji — complete indecision. Wait for more confirmation',
+        'Bearish marubozu — strong confirmation of the downtrend',
+      ],
+      correct_index: 1,
+      explanation: 'A hammer: small body at top of range, lower wick at least 2× the body, minimal upper wick. At the bottom of a downtrend at support, it signals buyers rejected lower prices. Context matters: the same shape at resistance in an uptrend is a hanging man — a bearish signal.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-9': {
+      activity_type: 'draw_horizontal',
+      ticker: 'GBPUSD',
+      timeframe: 'D1',
+      exercise_prompt: 'Six months of GBP/USD Daily data is shown. There is one area where a hammer or bullish engulfing candle appeared directly at a key support zone, triggering a significant multi-week rally. Using the horizontal tool, draw a line at this support level.',
+      reference_line: { x1: 0, y1: 73, x2: 100, y2: 73 },
+      steps: [{ id: '1', label: 'Scan for reversal signals at support', completed: false }, { id: '2', label: 'Identify the strongest signal', completed: false }, { id: '3', label: 'Draw the support level', completed: false }],
+    },
+  },
+
+  'indicators-that-work': {
+    'lesson-6': {
+      activity_type: 'multi_choice',
+      question: 'EUR/USD H4 makes higher price highs over 8 weeks. RSI (14) at those same peaks shows declining values: first peak RSI = 71, second = 65, third = 58. What is this and what does it tell you?',
+      options: [
+        'RSI confirmation — the uptrend is healthy. RSI above 50 at all peaks means momentum is intact',
+        'Bearish RSI divergence — price makes higher highs but RSI makes lower highs, signalling weakening momentum. Each new price high is achieved with less buying energy, warning of a potential reversal',
+        'The RSI is broken — when it contradicts price direction it generates false signals',
+        'RSI oversold territory — values below 70 on an uptrend are bullish buy signals',
+      ],
+      correct_index: 1,
+      explanation: 'Bearish divergence: price makes higher highs but RSI makes lower highs. RSI measures the speed and magnitude of price moves. When RSI declines while price still rises, each new high is achieved with diminishing buying energy — the trend is tiring. Most reliable when it spans multiple swing highs over weeks, especially near the 70 overbought zone.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-9': {
+      activity_type: 'draw_horizontal',
+      ticker: 'EURUSD',
+      timeframe: 'H4',
+      exercise_prompt: 'EUR/USD H4 is shown with RSI. The RSI has reached oversold territory (below 35) and a hammer candle has formed exactly at a prior support zone. Using the horizontal tool, draw your entry line at the high of the hammer candle — this is the entry price. Two independent confluences: price action at support + RSI oversold.',
+      reference_line: { x1: 0, y1: 63, x2: 100, y2: 63 },
+      steps: [{ id: '1', label: 'Identify the hammer at support', completed: false }, { id: '2', label: 'Confirm RSI is oversold', completed: false }, { id: '3', label: 'Draw your entry trigger line', completed: false }],
+    },
+  },
+
+  'risk-management-framework': {
+    'lesson-4': {
+      activity_type: 'calculation',
+      problem: 'A strategy over 20 trades: 12 winners averaging +2.0R, 8 losers averaging -1.0R. Using the expectancy formula — (Win Rate × Avg Win R) minus (Loss Rate × Avg Loss R) — what is the expectancy per trade in R?',
+      correct_answer: '0.80',
+      tolerance: 0.05,
+      unit: 'R per trade',
+      hint: 'Win rate = winners ÷ total trades. Loss rate = 1 − win rate. Multiply each by its average outcome, then subtract.',
+      solution_steps: [
+        'Win rate = 12 ÷ 20 = 0.60 (60%)',
+        'Loss rate = 8 ÷ 20 = 0.40 (40%)',
+        'Expected gain = 0.60 × 2.0R = 1.20R',
+        'Expected loss = 0.40 × 1.0R = 0.40R',
+        'Expectancy = 1.20R − 0.40R = +0.80R per trade',
+        'At +0.80R: every 10 trades you expect +8R on average. This strategy has a positive edge.',
+      ],
+      steps: [{ id: '1', label: 'Calculate win/loss rates', completed: false }, { id: '2', label: 'Apply expectancy formula', completed: false }, { id: '3', label: 'Review worked solution', completed: false }],
+    },
+    'lesson-8': {
+      activity_type: 'multi_choice',
+      question: 'You have suffered 3 consecutive losses. Your account is down 2.8% in a single session. Your daily loss limit rule is 3%. What is the correct action?',
+      options: [
+        'Continue trading — you are still technically within your 3% limit and valid setups are visible',
+        'Stop trading for the day — approaching your limit after 3 losses means your decision-making is compromised and further losses are more likely',
+        'Double your position size on the next setup to recover before the session closes',
+        'Switch to a different market where you have not had losses today',
+      ],
+      correct_index: 1,
+      explanation: 'A daily loss limit exists precisely for this moment. After 3 consecutive losses, psychological pressure to recover creates measurable impairment to decision-making. Being 2.8% down with a 3% limit means one more trade could breach it. The professional response: stop, close screens, review objectively in the morning, return with fresh capital.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'volume-analysis': {
+    'lesson-6': {
+      activity_type: 'multi_choice',
+      question: 'EUR/USD breaks above major resistance at 1.1200. The breakout candle closes 25 pips above the level. Volume on that candle is 38% of the 20-day average. What does this indicate?',
+      options: [
+        'Confirmed breakout — price is above the level, which is all that matters',
+        'Low-conviction breakout — below-average volume suggests limited institutional participation. Watch for a failed break and possible reversal below 1.1200 in the next 1–3 sessions',
+        'Strong breakout — low volume means there are no sellers left above 1.1200',
+        'Irrelevant — forex volume data is always unreliable',
+      ],
+      correct_index: 1,
+      explanation: 'Valid breakouts should be accompanied by above-average volume, representing genuine conviction. A breakout on 38% of average volume means very few participants drove the move — potentially a stop-hunt rather than a genuine continuation. Statistically, low-volume breakouts fail significantly more often. Watch for a close back below 1.1200 in the next 1–3 candles.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  // ════════════════════════════════════════════════════════
+  // LEVEL 3 — THE ANALYST
+  // ════════════════════════════════════════════════════════
+
+  'multi-timeframe-analysis': {
+    'lesson-6': {
+      activity_type: 'draw_horizontal',
+      ticker: 'EURUSD',
+      timeframe: 'W1',
+      exercise_prompt: 'EUR/USD Weekly is shown. There is one dominant price level that has acted as both significant support and resistance over the past 18 months. Using the horizontal tool, draw a line at this weekly HTF resistance level. This is your top-down directional anchor.',
+      reference_line: { x1: 0, y1: 28, x2: 100, y2: 28 },
+      steps: [{ id: '1', label: 'Study the weekly structure', completed: false }, { id: '2', label: 'Draw the dominant HTF level', completed: false }, { id: '3', label: 'Review feedback', completed: false }],
+    },
+    'lesson-8': {
+      activity_type: 'draw_trendline',
+      ticker: 'GBPUSD',
+      timeframe: 'D1',
+      exercise_prompt: 'GBP/USD Daily has been making lower highs over 3 months. Using the trendline tool, draw the descending trendline connecting the two most recent significant swing highs. This is your HTF bearish bias line — only look for shorts when price approaches it from below.',
+      reference_line: { x1: 0, y1: 22, x2: 100, y2: 48 },
+      steps: [{ id: '1', label: 'Identify the swing highs', completed: false }, { id: '2', label: 'Draw your descending trendline', completed: false }, { id: '3', label: 'Review accuracy', completed: false }],
+    },
+  },
+
+  'smart-money-concepts': {
+    'lesson-9': {
+      activity_type: 'draw_horizontal',
+      ticker: 'EURUSD',
+      timeframe: 'H4',
+      exercise_prompt: 'EUR/USD H4 shows a sharp impulsive bullish move that originated from a specific 1–3 candle area. This origin zone is where institutional buying entered — the order block. Using the horizontal tool, draw a line at the TOP of that origin zone. A pullback to this area is your SMC long entry trigger.',
+      reference_line: { x1: 0, y1: 55, x2: 100, y2: 55 },
+      steps: [{ id: '1', label: 'Identify the impulse origin', completed: false }, { id: '2', label: 'Draw the order block top', completed: false }, { id: '3', label: 'Review placement', completed: false }],
+    },
+    'lesson-10': {
+      activity_type: 'draw_horizontal',
+      ticker: 'GBPUSD',
+      timeframe: 'D1',
+      exercise_prompt: 'GBP/USD Daily has broken below a significant swing low — a structural Change of Character (CHoCH) signalling bearish intent. The last bullish impulse originated from an order block now above current price. Using the horizontal tool, draw a line at the BOTTOM of that origin zone — where you expect price to retrace before continuing lower.',
+      reference_line: { x1: 0, y1: 40, x2: 100, y2: 40 },
+      steps: [{ id: '1', label: 'Identify the CHoCH level', completed: false }, { id: '2', label: 'Locate the origin order block', completed: false }, { id: '3', label: 'Draw the order block bottom', completed: false }],
+    },
+  },
+
+  'fibonacci-and-elliott-wave': {
+    'lesson-5': {
+      activity_type: 'draw_trendline',
+      ticker: 'EURUSD',
+      timeframe: 'H4',
+      exercise_prompt: 'EUR/USD H4 completed a strong bullish impulse and is now pulling back. The swing low (start) and swing high (end) are marked. Using the trendline tool, draw a line from the swing low to the swing high — this anchors your Fibonacci retracement. The 0.618 level is the prime entry zone.',
+      reference_line: { x1: 5, y1: 80, x2: 92, y2: 20 },
+      steps: [{ id: '1', label: 'Locate the swing low anchor', completed: false }, { id: '2', label: 'Draw from swing low to swing high', completed: false }, { id: '3', label: 'Review 0.618 level accuracy', completed: false }],
+    },
+    'lesson-9': {
+      activity_type: 'multi_choice',
+      question: 'According to Elliott Wave rules, which of the following would immediately invalidate a 5-wave impulse count?',
+      options: [
+        'Wave 3 is the longest of waves 1, 3, and 5',
+        'Wave 4 retraces back into the price territory of Wave 1 (the ranges overlap)',
+        'Wave 2 retraces exactly 61.8% of Wave 1',
+        'Wave 5 ends at a slightly lower high than Wave 3 (a truncated fifth)',
+      ],
+      correct_index: 1,
+      explanation: 'The Wave 1/4 overlap rule is one of three inviolable Elliott Wave rules: Wave 4 cannot close within the price territory of Wave 1. The three hard rules are: (1) Wave 2 cannot retrace more than 100% of Wave 1, (2) Wave 3 cannot be the shortest impulse wave, (3) Wave 4 cannot overlap Wave 1. Truncated fifths and 61.8% Wave 2 retracements are both allowed.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'sector-correlation-analysis': {
+    'lesson-6': {
+      activity_type: 'draw_trendline',
+      ticker: 'EURUSD',
+      timeframe: 'D1',
+      exercise_prompt: 'DXY (US Dollar Index) Daily is shown — it is in a clear uptrend, making higher lows. You want to go long GBP/USD, but GBP/USD has a strong negative correlation with USD (typically -0.80 to -0.90). Using the trendline tool, draw an ascending trendline on the DXY connecting its recent swing lows. This is your intermarket headwind.',
+      reference_line: { x1: 0, y1: 70, x2: 100, y2: 30 },
+      steps: [{ id: '1', label: 'Analyse DXY trend direction', completed: false }, { id: '2', label: 'Draw the DXY ascending trendline', completed: false }, { id: '3', label: 'Review headwind assessment', completed: false }],
+    },
+  },
+
+  'building-your-trading-plan': {
+    'lesson-5': {
+      activity_type: 'draw_horizontal',
+      ticker: 'EURUSD',
+      timeframe: 'H4',
+      exercise_prompt: 'EUR/USD H4 is approaching a key resistance zone. Your plan\'s short setup requires: (1) price reaches resistance, (2) a bearish rejection candle forms. Using the horizontal tool, draw the entry trigger line — the price level the rejection candle must CLOSE BELOW to trigger your short. Position it just beneath the rejection candle\'s body close, not at the resistance itself.',
+      reference_line: { x1: 0, y1: 35, x2: 100, y2: 35 },
+      steps: [{ id: '1', label: 'Identify the resistance zone', completed: false }, { id: '2', label: 'Draw your entry trigger level', completed: false }, { id: '3', label: 'Review placement', completed: false }],
+    },
+    'lesson-8': {
+      activity_type: 'multi_choice',
+      question: 'Your plan specifies: only take long trades when price is above the 200 EMA. EUR/USD is currently 35 pips below the 200 EMA. You identify a textbook hammer candle at support with RSI at 28. What should you do?',
+      options: [
+        'Take the long — the setup quality is exceptional and clearly overrides the EMA filter',
+        'Pass — your plan says no longs below the 200 EMA. Following rules consistently is the only way to test whether your plan has edge',
+        'Enter with half position size as a compromise',
+        'Enter and move your stop immediately if price crosses the EMA as confirmation',
+      ],
+      correct_index: 1,
+      explanation: 'A trading plan\'s value comes entirely from consistent execution. If you override rules whenever a setup appears strong enough, you no longer have a testable plan. The 200 EMA filter prevents you fighting the dominant trend — the same setup below the EMA will fail significantly more often. Every rule you break erodes the statistical foundation your edge is built on.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'trade-journalling': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'After reviewing 30 journal entries, your average losing trade is -1.5R — not -1.0R as your plan specifies. Your plan says: always honour the stop at -1.0R. What does this reveal?',
+      options: [
+        'Acceptable — -1.5R average loss can still be profitable if win rate is high enough',
+        'Your stops are being moved or ignored under pressure, directly violating your plan and destroying your tested edge. Fix stop discipline immediately — use hard stop orders, not mental stops',
+        'Widen your official stop rule to -1.5R to match your actual behaviour',
+        'The strategy naturally needs more room — your original -1.0R stop was too tight',
+      ],
+      correct_index: 1,
+      explanation: 'If your plan says -1.0R but you\'re actually losing -1.5R average, you are moving stops under pressure. A strategy profitable at -1.0R may become unprofitable at -1.5R. The journal caught this precisely because you were tracking systematically. The fix: convert all stops to hard orders placed immediately on entry, physically preventing you from moving them.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-7': {
+      activity_type: 'draw_horizontal',
+      ticker: 'GBPUSD',
+      timeframe: 'H4',
+      exercise_prompt: 'GBP/USD H4 shows a completed trade from your journal: you entered long at a support zone and were stopped out for a loss. Using the horizontal tool, draw a line at your entry price. This is the chart post-mortem — was the support zone genuinely valid at the time of entry? What did price do AFTER your stop was hit?',
+      reference_line: { x1: 0, y1: 57, x2: 100, y2: 57 },
+      steps: [{ id: '1', label: 'Draw your entry level', completed: false }, { id: '2', label: 'Assess whether the level was valid', completed: false }, { id: '3', label: 'Review the post-entry price action', completed: false }],
+    },
+  },
+
+  // ════════════════════════════════════════════════════════
+  // LEVEL 4 — THE ALLOCATOR
+  // ════════════════════════════════════════════════════════
+
+  'backtesting-and-statistics': {
+    'lesson-8': {
+      activity_type: 'draw_horizontal',
+      ticker: 'EURUSD',
+      timeframe: 'D1',
+      exercise_prompt: 'EUR/USD Daily bar-by-bar replay is shown. A bullish engulfing candle has just closed at a key support level — your backtest setup triggered. Your rules: enter on the next candle open, stop below the engulfing candle low, target 2R. Using the horizontal tool, draw a line at your entry price — the open of the candle immediately following the signal candle.',
+      reference_line: { x1: 50, y1: 47, x2: 100, y2: 47 },
+      steps: [{ id: '1', label: 'Identify the signal candle', completed: false }, { id: '2', label: 'Draw the entry price (next open)', completed: false }, { id: '3', label: 'Review backtest accuracy', completed: false }],
+    },
+    'lesson-9': {
+      activity_type: 'multi_choice',
+      question: 'Strategy A: 47% win rate, average +2.1R winner, average -1.0R loser, 100 trades tested. Strategy B: 68% win rate, average +0.7R winner, average -1.0R loser, 40 trades tested. Which would you trade live?',
+      options: [
+        'Strategy B — a 68% win rate is psychologically easier to trade through losing runs',
+        'Strategy A — it has higher expectancy (+0.46R vs +0.14R), a larger and more statistically significant sample, and a superior R:R ratio more forgiving of real-world slippage',
+        'Strategy B — higher win rate strategies require less skill to backtest correctly',
+        'Neither — 100 trades is too small a sample for any strategy',
+      ],
+      correct_index: 1,
+      explanation: 'Strategy A expectancy = (0.47 × 2.1) − (0.53 × 1.0) = 0.987 − 0.53 = +0.457R. Strategy B = (0.68 × 0.7) − (0.32 × 1.0) = 0.476 − 0.32 = +0.156R. Strategy A wins on: (1) expectancy is 3× higher, (2) 100 trades provides far more statistical significance than 40, (3) a 2.1R:1.0R ratio is more robust to slippage. 100 trades is a reasonable minimum.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'algorithmic-thinking': {
+    'lesson-5': {
+      activity_type: 'draw_horizontal',
+      ticker: 'EURUSD',
+      timeframe: 'H4',
+      exercise_prompt: 'EUR/USD H4 is at a key resistance zone. Your decision tree for a short: IF price reaches resistance AND a bearish rejection candle forms, THEN enter short below the candle close. Using the horizontal tool, draw the entry trigger level — the exact price at which the CLOSE BELOW condition is met. This is the leaf node of your decision tree.',
+      reference_line: { x1: 50, y1: 37, x2: 100, y2: 37 },
+      steps: [{ id: '1', label: 'Identify the resistance zone', completed: false }, { id: '2', label: 'Draw the IF-THEN entry trigger', completed: false }, { id: '3', label: 'Review decision tree accuracy', completed: false }],
+    },
+    'lesson-8': {
+      activity_type: 'multi_choice',
+      question: 'You backtest a 20/50 EMA crossover on 5 years of EUR/USD daily data. Default Profit Factor 1.45, Max DD 18%. After optimising to 19/47: PF 1.89, DD 12% in-sample. Running 19/47 on an untouched out-of-sample year: PF 0.88. What does this tell you?',
+      options: [
+        'The 19/47 settings are superior — in-sample PF of 1.89 proves this definitively',
+        'The 19/47 settings are overfit. Superior in-sample performance that collapses out-of-sample is the definition of curve-fitting — parameters tuned to historical noise, not genuine edge',
+        'Out-of-sample testing is unreliable and should be weighted less than in-sample results',
+        'Both settings are overfit because EMA crossovers have no edge',
+      ],
+      correct_index: 1,
+      explanation: 'Overfitting occurs when parameters are tuned to specific historical data characteristics rather than a genuine market inefficiency. The hallmark is in-sample performance that degrades sharply out-of-sample. Use logically-motivated round-number parameters, test multiple out-of-sample windows, and treat major in-sample vs out-of-sample divergence as overfit until proven otherwise.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'options-fundamentals': {
+    'lesson-7': {
+      activity_type: 'multi_choice',
+      question: 'You buy a call option: strike $180, premium $5.00, stock price at expiry $191. What is your profit or loss per share at expiry?',
+      options: [
+        'Loss of $5.00 — the premium is always lost regardless of price movement',
+        'Profit of $6.00 — intrinsic value at expiry ($191 − $180 = $11) minus the $5 premium paid = $6',
+        'Profit of $11.00 — the intrinsic value without accounting for premium cost',
+        'Loss of $14.00 — buying calls above the strike price is always a loss',
+      ],
+      correct_index: 1,
+      explanation: 'At expiry, call intrinsic value = max(Stock Price − Strike, 0) = $191 − $180 = $11. Net P&L = $11 − $5 premium = $6 profit per share. Break-even = Strike + Premium = $185. Maximum loss is always capped at the premium paid ($5) — the defined-risk advantage of buying options.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'trading-economic-events': {
+    'lesson-7': {
+      activity_type: 'draw_horizontal',
+      ticker: 'EURUSD',
+      timeframe: 'H1',
+      exercise_prompt: 'EUR/USD H1 is shown 2 hours before a high-impact NFP release. You hold a long position with a 45-pip profit. Using the horizontal tool, draw the level at which you would take partial or full profit BEFORE the news release — protecting the gain from unpredictable post-NFP volatility. This level should be a sensible technical exit, not a panic close.',
+      reference_line: { x1: 0, y1: 37, x2: 100, y2: 37 },
+      steps: [{ id: '1', label: 'Assess the current profit', completed: false }, { id: '2', label: 'Draw your pre-news profit protection level', completed: false }, { id: '3', label: 'Review risk management decision', completed: false }],
+    },
+    'lesson-9': {
+      activity_type: 'multi_choice',
+      question: 'The Fed delivered a 0.25% rate hike. The market had priced in 0.50%. EUR/USD initially drops 35 pips, then reverses and rallies 110 pips within an hour. What explains this reaction?',
+      options: [
+        'Rate hikes always cause EUR/USD to rally after the initial knee-jerk drop',
+        'The Fed delivered a smaller hike than expected — relative to the 0.50% consensus, a 0.25% hike is a dovish surprise that weakens the dollar. Markets trade the gap between expectations and reality, not the headline number',
+        'The initial drop was correct; the rally was caused by retail traders incorrectly buying the dip',
+        'EUR/USD always reverses after FOMC statements due to liquidity dynamics',
+      ],
+      correct_index: 1,
+      explanation: 'Currency markets price in expectations continuously. If consensus was 0.50% and the Fed delivered 0.25%, the dollar is less hawkish than feared — a relative dovish outcome. This is "buy the rumour, sell the fact" in reverse. Knowing the consensus expectation is as important as knowing the outcome. A "good" number that is below consensus can cause the opposite reaction.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'portfolio-and-advanced-risk': {
+    'lesson-7': {
+      activity_type: 'calculation',
+      problem: 'A trading strategy over 12 months produced monthly returns averaging +3.2% with a standard deviation of 4.1%. The risk-free rate is 5% per year (0.417% per month). Sharpe Ratio = (Average Monthly Return − Monthly Risk-Free Rate) ÷ Standard Deviation. Calculate the monthly Sharpe Ratio to 2 decimal places.',
+      correct_answer: '0.68',
+      tolerance: 0.05,
+      unit: '',
+      hint: 'Excess return = average return minus risk-free rate. Then divide by standard deviation.',
+      solution_steps: [
+        'Monthly risk-free rate = 5% ÷ 12 = 0.417%',
+        'Excess return = 3.2% − 0.417% = 2.783%',
+        'Sharpe Ratio = 2.783 ÷ 4.1 = 0.679 ≈ 0.68',
+        'Benchmarks: below 1.0 = acceptable, above 1.0 = good, above 2.0 = excellent for a trading strategy.',
+      ],
+      steps: [{ id: '1', label: 'Calculate excess return', completed: false }, { id: '2', label: 'Divide by standard deviation', completed: false }, { id: '3', label: 'Review interpretation', completed: false }],
+    },
+    'lesson-8': {
+      activity_type: 'multi_choice',
+      question: 'You have three open positions each sized to 1% account risk: Long GBP/USD, Long EUR/USD, Long AUD/USD. What is your true combined USD exposure risk?',
+      options: [
+        'Exactly 3% — each position is independently sized to 1% risk, so total is 1 + 1 + 1 = 3%',
+        'Effectively much more than 3% — all three are long non-USD currencies versus the dollar. A sudden USD strengthening event hits all three simultaneously, creating correlated losses that can exceed 6–8% in a single dollar move',
+        'Exactly 2% — EUR/USD and GBP/USD are correlated so they count as one 1% position',
+        'Effectively 0% net risk — the positions partially hedge each other',
+      ],
+      correct_index: 1,
+      explanation: 'GBP/USD, EUR/USD, and AUD/USD all carry strong negative correlation with USD strength (typically -0.75 to -0.90). In a strong dollar event, all three positions move against you simultaneously. Your three "independent" 1% risks become a single directional USD bet. Never hold multiple positions with the same directional exposure without acknowledging the real aggregate risk.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'prop-firm-preparation': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'On Day 3 of your prop firm challenge you have made 2.4% profit. A trade immediately hits your maximum daily loss limit. You have 7 days remaining. What is the correct action?',
+      options: [
+        'Trade cautiously for the rest of the day to try to recover some of the daily loss',
+        'Stop trading immediately for the day — prop firm daily loss limits are hard rules with no exceptions. Protect the 2.4% gained and trade fresh tomorrow',
+        'Switch to a smaller position size to continue trading but stay under the limit',
+        'Wait until volatility drops before attempting more trades today',
+      ],
+      correct_index: 1,
+      explanation: 'Prop firm daily loss limits are the single most common reason funded traders lose their accounts. The rule has zero exceptions. With 2.4% profit and 7 days remaining, protecting that gain is far more valuable than trading a compromised session. Once the daily limit is hit: log off, do the post-session review, and return tomorrow with fresh capital.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-8': {
+      activity_type: 'multi_choice',
+      question: 'A prop firm challenge requires: 10% profit target, 5% daily loss limit, 10% max drawdown. You are at 7.5% profit with 3 days remaining. Your next setup risks 3% of the account. Should you take it?',
+      options: [
+        'Yes — you are near the target and this trade could get you there in one move',
+        'No — risking 3% on a single trade when you are 3 days from the finish with 7.5% profit is irrational. Size down to 0.5–1% risk maximum when near the target',
+        'Yes — larger positions reduce the number of trades and therefore cumulative risk',
+        'No — you should never trade in the last 3 days of a challenge regardless of position',
+      ],
+      correct_index: 1,
+      explanation: 'The closer you are to the target, the more you should reduce position size. With 7.5% profit and 2.5% needed to pass, a 3% risk trade could drop you to 4.5% — needing 5.5% recovery in 3 days. The professional approach: when 75%+ through the target, reduce risk to 0.5–1% per trade. Protect the gain. Greed in the final stretch is the #1 way skilled traders fail challenges they should pass.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  // ════════════════════════════════════════════════════════
+  // LEVEL 5 — THE TACTICIAN
+  // ════════════════════════════════════════════════════════
+
+  'order-flow-microstructure': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'NAS100 is testing a major support level for the third time. Each time, the bid side shows a large cluster of orders being absorbed — buyers consuming sell pressure without price falling. Each test produces a 40+ point bounce. What is this behaviour called?',
+      options: [
+        'Distribution — institutional sellers absorbing retail buying before pushing price lower',
+        'Absorption at support — large buyers are defending the level by consuming sell orders. The repeated inability of sellers to push through signals strong institutional demand at this price',
+        'Volume profile point of control — this is simply the most traded price level',
+        'A bear trap — stacked bids are fake liquidity designed to lure buyers before a sharp sell-off',
+      ],
+      correct_index: 1,
+      explanation: 'Absorption occurs when a large participant systematically takes the opposing side of incoming orders to defend a price level. At support, an absorbing buyer takes every sell order that hits the level. Three tests with identical absorption and 40+ point bounces each time indicates genuine institutional interest. Price is held not by absence of sellers, but by active large-scale buying that overwhelms selling pressure.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+    'lesson-8': {
+      activity_type: 'multi_choice',
+      question: 'On a EUR/USD 5-minute footprint chart, delta on three consecutive candles is: −8,400, −9,200, −7,800 (heavily negative — net selling dominating). Yet price rose 15 pips. What does this divergence signal?',
+      options: [
+        'The delta readings are inaccurate — when price rises, delta must be positive by definition',
+        'Bearish divergence — the upward move is being driven by thin offer-side liquidity rather than genuine buying conviction. A reversal is likely when this supply gets absorbed',
+        'Bullish confirmation — rising price always takes precedence over delta',
+        'A technical glitch in the footprint data',
+      ],
+      correct_index: 1,
+      explanation: 'Delta-price divergence: normally rising price accompanies positive delta (net buying). When price rises despite strongly negative delta, a large passive buyer may be absorbing all the selling at the offer. The weak buying pressure driving price up is not backed by genuine conviction. When the passive buyer steps back, sellers who have been accumulating short delta positions can push price down aggressively — a high-precision reversal signal.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'execution-mastery': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'A GBP/USD long setup has triggered at daily support. Entry options: (A) market order now at 1.2720, spread 1.5 pips. (B) Limit order at the exact support level 1.2700. (C) Limit order above the 15-minute candle high at 1.2728 for confirmation. Stop is 40 pips below entry for all three. Which gives the best R:R after entry cost?',
+      options: [
+        'Option A — market order immediately, ensuring you don\'t miss the move. 1.5 pip spread is negligible',
+        'Option B — limit at the level gives the best entry price and widest R:R, though it may not fill if price bounces without touching it',
+        'Option C — the 15-minute confirmation reduces false entries; the 8-pip cost is worthwhile for signal quality',
+        'All three are equivalent — entry method doesn\'t materially affect long-term performance',
+      ],
+      correct_index: 1,
+      explanation: 'Option B (limit at the level) gives the best R:R if filled: you enter at the precise support with zero additional cost above the level. Option A enters 1.5 pips higher, slightly reducing R:R. Option C enters 8 pips above for confirmation — meaningful cost on a 40-pip stop (reduces R:R by roughly 0.2R). Professionals use limit orders at key levels for this reason — better average entry price compounds significantly over hundreds of trades.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'scaling-positions': {
+    'lesson-5': {
+      activity_type: 'draw_horizontal',
+      ticker: 'GBPUSD',
+      timeframe: 'H4',
+      exercise_prompt: 'You entered long GBP/USD H4 at the marked entry level and price has moved 80 pips in your favour. Your original plan was a 120-pip target. Using the horizontal tool, draw your partial profit level — the price where you will take 50% of the position off (securing gains) and move your stop to break-even on the remaining 50%. This converts a full-risk trade into a risk-free runner.',
+      reference_line: { x1: 20, y1: 42, x2: 100, y2: 42 },
+      steps: [{ id: '1', label: 'Identify 50–80% of target distance', completed: false }, { id: '2', label: 'Draw your partial profit level', completed: false }, { id: '3', label: 'Review scaling logic', completed: false }],
+    },
+  },
+
+  // ════════════════════════════════════════════════════════
+  // ADVANCED LEVELS — LEVELS 6–10
+  // ════════════════════════════════════════════════════════
+
+  'session-edge': {
+    'lesson-5': {
+      activity_type: 'draw_horizontal',
+      ticker: 'GBPUSD',
+      timeframe: 'M15',
+      exercise_prompt: 'GBP/USD 15-minute chart shows the pre-London session consolidation range (grey box). The London open has just started. Using the horizontal tool, draw a line at the HIGH of the pre-London range — this is your breakout trigger. A candle closing above this level with expanding volume is your long entry for the London open breakout setup.',
+      reference_line: { x1: 0, y1: 38, x2: 100, y2: 38 },
+      steps: [{ id: '1', label: 'Identify the pre-London range', completed: false }, { id: '2', label: 'Draw the range high breakout trigger', completed: false }, { id: '3', label: 'Review placement', completed: false }],
+    },
+  },
+
+  'advanced-dynamic-risk': {
+    'lesson-5': {
+      activity_type: 'calculation',
+      problem: 'Account: £50,000. You want to risk 1.5% per trade. Your entry uses an ATR-based stop of 120 pips. Pip value for this instrument = £8 per pip per standard lot. What is the correct lot size?',
+      correct_answer: '0.78',
+      tolerance: 0.05,
+      unit: 'lots',
+      hint: 'Max risk = 1.5% × £50,000. Risk per lot = 120 pips × £8. Lot size = Max risk ÷ Risk per lot.',
+      solution_steps: [
+        'Max risk = 1.5% × £50,000 = £750',
+        'Risk per standard lot = 120 pips × £8/pip = £960',
+        'Lot size = £750 ÷ £960 = 0.781 ≈ 0.78 lots',
+        'ATR-based stops automatically adapt to current volatility — wider stops in volatile markets mean smaller lots, maintaining consistent risk in R terms.',
+      ],
+      steps: [{ id: '1', label: 'Calculate max risk (£)', completed: false }, { id: '2', label: 'Calculate risk per lot', completed: false }, { id: '3', label: 'Calculate lot size', completed: false }],
+    },
+  },
+
+  'systematic-strategy-design': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'Which statement best describes the difference between a systematic signal and a discretionary one?',
+      options: [
+        'Systematic signals use indicators; discretionary signals use pure price action',
+        'A systematic signal has a precise, rule-based definition that produces the same decision every time given the same market data — regardless of who is applying it. A discretionary signal relies on human judgment and can produce different decisions from different traders given identical data',
+        'Systematic signals are always automated; discretionary signals require manual entry',
+        'Systematic signals work only on daily and weekly timeframes; discretionary signals work on any timeframe',
+      ],
+      correct_index: 1,
+      explanation: 'The defining characteristic of a systematic signal is objective reproducibility: two traders applying the exact same rules to the same data will make the same trading decision. This is what enables backtesting, forward testing, and statistical validation. Discretionary judgment introduces subjectivity that prevents reliable historical testing and makes it impossible to know whether positive results came from edge or luck.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'data-analysis-for-traders': {
+    'lesson-4': {
+      activity_type: 'multi_choice',
+      question: 'Your trade log analysis shows: breakout setups average +1.8R per trade, while reversal setups average −0.3R per trade over 80 trades. What should you do with this information?',
+      options: [
+        'Ignore it — 80 trades is too small a sample to draw any conclusions',
+        'Double allocation to breakout setups and eliminate reversal setups from your plan entirely — your data shows breakouts have significant edge and reversals are destroying expectancy',
+        'Take more reversal setups to balance the portfolio of setup types',
+        'The data is misleading because different setups have different win rates which must be considered separately',
+      ],
+      correct_index: 1,
+      explanation: 'R-expectancy per setup type is the clearest metric in a trade log — it combines win rate and reward-risk into a single number. A setup averaging +1.8R is highly profitable; a setup averaging −0.3R is actively losing money. At 80 trades, a difference of +2.1R between setup types is statistically significant. Removing negative-expectancy setups and concentrating on positive-expectancy ones is the most direct way to improve performance.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'walk-forward-robustness': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'What is the fundamental purpose of walk-forward testing compared to static backtesting?',
+      options: [
+        'Walk-forward testing uses more historical data than static backtesting and is therefore more accurate',
+        'Walk-forward testing simulates live trading conditions by optimising on a training window, then testing on a subsequent unseen window, then rolling forward. It measures whether a strategy\'s edge holds in out-of-sample conditions — something static backtest optimisation cannot demonstrate',
+        'Walk-forward testing is the same as static backtesting but on intraday data',
+        'Walk-forward testing requires a trading algorithm; discretionary strategies cannot be walk-forward tested',
+      ],
+      correct_index: 1,
+      explanation: 'Static backtesting optimises parameters on historical data and reports results on the same data used to optimise — guaranteeing a good-looking result that may not generalise. Walk-forward testing separates the data used for optimisation from the data used for evaluation, repeatedly rolling the window forward. If the strategy retains edge across multiple out-of-sample windows, the evidence for genuine robustness is substantially stronger.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'market-regimes': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'Which metric is most useful for objectively identifying whether a market is currently in a trending regime vs a ranging regime?',
+      options: [
+        'The current price level relative to the 52-week high',
+        'The Average Directional Index (ADX): readings above 25 indicate a trending regime, below 20 indicate ranging. Combined with the slope of a 200-period moving average, this provides an objective regime classification that can be built into systematic rules',
+        'The number of consecutive green candles in the past 5 sessions',
+        'Whether the price is above or below the 50-period SMA',
+      ],
+      correct_index: 1,
+      explanation: 'ADX measures the strength of a trend without regard to direction — it rises in both strong uptrends and downtrends, and falls during ranging markets. Combining ADX threshold (25+ = trending, below 20 = ranging) with the slope of a long-period moving average (positive slope + ADX > 25 = uptrend regime) creates an objective, rules-based regime filter that can prevent trend-following strategies from trading in the wrong environment.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'statistical-arbitrage-intro': {
+    'lesson-5': {
+      activity_type: 'calculation',
+      problem: 'You are trading a GBP/USD vs EUR/USD pairs spread. The historical average spread (GBP/USD − EUR/USD × 1.1) is 0.0050. Currently: GBP/USD = 1.2710, EUR/USD = 1.1540. The hedge ratio is 1.1 (1 GBP/USD lot per 1.1 EUR/USD lots). Calculate the current spread value. Is it above or below the historical mean, and which direction does the pairs trade go?',
+      correct_answer: '0.0003',
+      tolerance: 0.0005,
+      unit: '(spread)',
+      hint: 'Spread = GBP/USD − (EUR/USD × 1.1). Compare to historical average of 0.0050.',
+      solution_steps: [
+        'Spread = 1.2710 − (1.1540 × 1.1) = 1.2710 − 1.2694 = 0.0016',
+        'Wait — let\'s recalculate: 1.1540 × 1.1 = 1.2694. Spread = 1.2710 − 1.2694 = 0.0016',
+        'Historical mean = 0.0050. Current spread = 0.0016 — well BELOW the mean.',
+        'Mean-reversion trade: buy GBP/USD (long the spread) and short EUR/USD × 1.1 lots.',
+        'The spread should converge back toward 0.0050 as the relationship normalises.',
+      ],
+      steps: [{ id: '1', label: 'Calculate the current spread', completed: false }, { id: '2', label: 'Compare to historical mean', completed: false }, { id: '3', label: 'Determine trade direction', completed: false }],
+    },
+  },
+
+  'building-personal-system': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'Which elements are required to constitute a complete, testable trading system?',
+      options: [
+        'A charting platform and a risk management rule',
+        'Entry criteria, exit criteria (both profit target and stop loss), position sizing rules, universe of markets traded, and a defined timeframe — all written in objective, rule-based language with no ambiguity',
+        'A strategy that has produced profits in the past 3 months of live trading',
+        'A set of indicators and a general directional bias for the current market',
+      ],
+      correct_index: 1,
+      explanation: 'A complete trading system requires all five components: (1) WHAT you trade (market universe), (2) WHEN you enter (entry rules — objective and unambiguous), (3) WHEN you exit with a loss (stop loss rules), (4) WHEN you exit with a profit (target or trailing rules), (5) HOW MUCH you risk (position sizing). Without any one of these, the system cannot be backtested, cannot be consistently executed, and its results cannot be attributed to edge rather than luck.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'global-macro-framework': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'A macro trader wants to build a thesis for going long AUD/USD. Which combination of factors constitutes a complete and rigorous macro trade thesis?',
+      options: [
+        'AUD/USD has been going up for 3 months and the RSI is not overbought',
+        'China PMI data is accelerating (bullish for commodity demand → AUD bullish), iron ore prices are rising, the Fed has shifted to a dovish tone (bearish USD), and the RBA is expected to hike at their next meeting (bullish AUD). The thesis has a catalyst, duration, and two independent confirmation factors',
+        'Australia has strong economic fundamentals and the Australian dollar is historically undervalued',
+        'The AUD/USD chart shows a bullish engulfing candle on the monthly timeframe',
+      ],
+      correct_index: 1,
+      explanation: 'A robust macro thesis requires: a primary catalyst (what is the specific event or trend driving the move), confirmation factors (at least two independent supporting pieces of evidence), an invalidation level (what would prove the thesis wrong), and a timeframe (how long does the thesis take to play out). Option B has a commodity demand driver, a currency supply driver, and a rate differential driver — three independent factors all pointing to AUD strength.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'central-bank-playbooks': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'The ECB has just raised rates by 0.50% — in line with consensus. EUR/USD barely moves after the initial spike. What explains this and what is the highest-probability trade setup?',
+      options: [
+        'EUR/USD will rally strongly — rate hikes are always bullish for a currency',
+        'The market had already priced in the 0.50% hike. Now focus shifts to the press conference — if Lagarde sounds cautious about future hikes (dovish guidance), EUR/USD is likely to sell off despite the rate hike, as traders reprice expectations for the path of rates downward',
+        'EUR/USD is range-bound — rate decisions at consensus never move the market',
+        'Buy EUR/USD immediately — a rate hike always produces a delayed rally in the hours after the announcement',
+      ],
+      correct_index: 1,
+      explanation: 'The market moves on the DELTA between expectation and reality. A consensus hike is worth zero surprise. Value is in the forward guidance: hawkish language (more hikes coming) is EUR-bullish beyond the consensus; dovish language (this could be the last hike) is EUR-bearish despite the headline number. Professional central bank traders position for the press conference language, not the rate number itself.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'currency-wars-rates': {
+    'lesson-5': {
+      activity_type: 'calculation',
+      problem: 'You execute a carry trade: sell USD/JPY (short USD, long JPY). Wait — carry is earned by being LONG the high-yield currency. USD interest rate = 5.25%. JPY interest rate = 0.10%. You go LONG USD/JPY (long USD, short JPY) with a £100,000 notional position. What is your annualised carry income in percentage terms per year?',
+      correct_answer: '5.15',
+      tolerance: 0.10,
+      unit: '% per year',
+      hint: 'Carry = interest rate of the currency you are long minus the interest rate of the currency you are short.',
+      solution_steps: [
+        'You are long USD (earns 5.25% per year) and short JPY (pays 0.10% per year).',
+        'Net carry = 5.25% − 0.10% = 5.15% per year.',
+        'This is collected daily as overnight swap credits on your position.',
+        'Important: carry trades work until they don\'t — a sharp JPY appreciation can wipe months of carry in hours, as seen in August 2024.',
+      ],
+      steps: [{ id: '1', label: 'Identify interest rates for each currency', completed: false }, { id: '2', label: 'Calculate net carry differential', completed: false }, { id: '3', label: 'Review risk/reward context', completed: false }],
+    },
+  },
+
+  'commodity-supercycles': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'Copper prices have risen 28% over the past 6 months, driven by rising Chinese manufacturing PMI readings and strong infrastructure spending data. What is the most useful macro interpretation of this move?',
+      options: [
+        'Copper is purely a commodity play — it has no macro signal value for currency or equity traders',
+        'Rising copper (Dr. Copper) signals accelerating global industrial demand and broad economic expansion. This is typically bullish for commodity-linked currencies (AUD, CAD, CLP) and emerging market equities, while being bearish for safe-haven assets like gold relative to copper and USD relative to AUD',
+        'Rising copper is always caused by supply disruptions and has no demand-side macro implications',
+        'Copper rises are always followed by gold rises — they should always be traded together',
+      ],
+      correct_index: 1,
+      explanation: 'Copper has the nickname "Dr. Copper" because its demand is tied directly to construction, manufacturing, and infrastructure — the backbone of economic activity. A sustained copper rally driven by PMI and infrastructure data is a strong signal of genuine economic expansion, particularly in China. Macro traders use this as a leading indicator: long AUD/USD (Australia is the world\'s largest copper exporter), long cyclical equities, reduce safe-haven positions.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'geopolitical-risk-trading': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'Tensions between two major oil-producing nations escalate significantly over a weekend. Oil prices spike 6% on Monday open. USD/CHF drops sharply. Gold rallies 1.8%. What is the correct interpretation and positioning framework?',
+      options: [
+        'Buy oil stocks and short the broader equity market — geopolitical events always cause prolonged bear markets',
+        'A classic risk-off flight: oil disruption risk → oil spike; geopolitical uncertainty → safe-haven flows into CHF (hence USD/CHF drops) and gold. The key question is duration: geopolitical spikes are often mean-reverting within days if the situation de-escalates. Position with tight stops and defined duration, not as a long-term trend',
+        'Geopolitical events have no predictable market impact and should be ignored',
+        'Buy gold and hold for 6 months minimum — geopolitical tensions never resolve quickly',
+      ],
+      correct_index: 1,
+      explanation: 'Geopolitical risk events produce predictable initial reactions: oil spikes, safe-haven inflows (CHF, JPY, Gold), equity weakness. The trading edge is in reading the secondary moves: (1) the initial spike often overshoots, (2) if the geopolitical situation fails to escalate further, these moves reverse rapidly. Professional approach: trade the initial move with tight stops, and position for the reversal if the situation stabilises. Never assume duration without evidence.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'options-strategies-advanced': {
+    'lesson-5': {
+      activity_type: 'calculation',
+      problem: 'You sell an iron condor on SPX: sell 4500 call (premium received $8.50), buy 4525 call (cost $3.20), sell 4400 put (premium received $7.80), buy 4375 put (cost $2.90). All options expire in 30 days. What is your maximum profit per contract (100 shares)?',
+      correct_answer: '1020',
+      tolerance: 5,
+      unit: '$ per contract',
+      hint: 'Max profit = total net premium received × 100. Net premium = (short call premium + short put premium) − (long call premium + long put premium).',
+      solution_steps: [
+        'Premium received: $8.50 (call) + $7.80 (put) = $16.30',
+        'Premium paid: $3.20 (call) + $2.90 (put) = $6.10',
+        'Net premium = $16.30 − $6.10 = $10.20 per share',
+        'Max profit = $10.20 × 100 shares = $1,020 per contract',
+        'Max loss = ($25 wing width − $10.20 net premium) × 100 = $1,480 per contract',
+        'Break-even prices: 4400 − 10.20 = 4389.80 on the downside; 4500 + 10.20 = 4510.20 on the upside',
+      ],
+      steps: [{ id: '1', label: 'Calculate total premium received', completed: false }, { id: '2', label: 'Calculate total premium paid', completed: false }, { id: '3', label: 'Calculate net premium and max profit', completed: false }],
+    },
+  },
+
+  'implied-vs-realised-vol': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'SPX 30-day implied volatility (VIX) is at 28. The realised 30-day historical volatility over the past month was 18. What does this tell you about the options market and what is the typical trade expression?',
+      options: [
+        'IV > RV means options are cheap — buy volatility immediately',
+        'IV > RV (the volatility risk premium) means the market is pricing in more future volatility than has been realised. Options sellers are typically compensated for this premium. The classic expression: sell volatility (short straddles, short puts, credit spreads) when IV/RV ratio is high, expecting mean reversion of implied vol toward realised vol',
+        'This is normal and has no trading implications — implied and realised vol never converge',
+        'The VIX reading of 28 means the market will fall 28% in the next 30 days',
+      ],
+      correct_index: 1,
+      explanation: 'The volatility risk premium (IV > RV) is one of the most persistent and well-documented anomalies in options markets. Implied volatility systematically overestimates future realised volatility on average — this is why options selling strategies have historically been profitable. The trade: when the IV/RV ratio is elevated, options are "expensive," favouring selling premium. When IV collapses back toward RV, short options positions profit from the decline in option prices (theta + vega decay).',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'volatility-surface': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'SPX options show a steep negative skew: 25-delta puts are trading at 32 implied vol, while 25-delta calls are trading at 19 implied vol. What does this tell you about market sentiment and positioning?',
+      options: [
+        'The options market is broken — puts and calls at the same delta should always have the same implied volatility',
+        'The market is paying a significant premium for downside protection (puts) relative to upside participation (calls). This steep negative skew indicates institutional hedging demand for tail-risk protection and/or market makers requiring premium to sell puts given their negative gamma exposure on rallies',
+        'Calls are cheap — this is a buy signal for upside calls',
+        'Skew only matters for equity index options and has no relevance to macro or forex trading',
+      ],
+      correct_index: 1,
+      explanation: 'Negative skew (puts more expensive than calls at equal delta distance) is a universal feature of equity index options, but the MAGNITUDE of the skew changes with market sentiment. A steep skew signals: (1) heightened fear and institutional demand for crash protection, (2) market makers facing difficulty hedging sold put positions (requiring higher premiums). When skew is extreme, contrarian strategies that sell puts relative to calls (risk reversals) can be attractive if the underlying fundamental outlook is constructive.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'delta-gamma-hedging': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'You sold 10 SPX straddles (short 10 calls and 10 puts at the same strike). Your net delta is currently +250 (the underlying moved up and the calls became more in-the-money). How do you delta-hedge to return to delta-neutral?',
+      options: [
+        'Buy more calls to increase positive delta further',
+        'Sell 250 SPX futures (or equivalent shares) to offset the +250 delta. This returns you to delta-neutral, leaving you exposed only to theta decay (which you want as the seller) while hedging out directional risk',
+        'Buy 250 SPX futures to add positive delta on top of the existing position',
+        'Do nothing — short straddles are meant to have directional exposure',
+      ],
+      correct_index: 1,
+      explanation: 'Delta-neutral hedging: your short straddle has accumulated +250 delta as the market moved up (the short call gained more delta than the short put lost). To neutralise: SELL the equivalent of 250 units of the underlying (futures, ETF, or shares). This removes the directional P&L exposure, leaving you with a position that profits primarily from time decay (theta) and volatility contraction (vega), while being exposed to gamma risk — the position will re-accumulate delta as the market continues to move.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'options-portfolio-protection': {
+    'lesson-5': {
+      activity_type: 'calculation',
+      problem: 'You manage a £500,000 equity portfolio with a beta of 1.0 vs FTSE 100. FTSE 100 is at 8,000. Each FTSE 100 put option controls a £10 notional value per index point. You want to hedge 100% of your downside for the next 3 months using at-the-money puts. ATM puts (8,000 strike, 90 days) cost 180 index points each. How many contracts do you need to buy, and what is the total hedge cost?',
+      correct_answer: '625',
+      tolerance: 5,
+      unit: 'contracts total cost £',
+      hint: 'Number of contracts = Portfolio value ÷ (Index level × Contract size). Total cost = contracts × premium in points × contract size.',
+      solution_steps: [
+        'Contract value = 8,000 × £10 = £80,000 per contract',
+        'Contracts needed = £500,000 ÷ £80,000 = 6.25 → round up to 7 contracts',
+        'Total premium cost = 7 contracts × 180 points × £10 = £12,600',
+        'Hedge cost as % of portfolio = £12,600 ÷ £500,000 = 2.52% for 90 days',
+        'Annualised hedge cost ≈ 10.1% per year — significant. This is why tail hedges are typically sized smaller (25–50% coverage) to reduce cost.',
+      ],
+      steps: [{ id: '1', label: 'Calculate contract value', completed: false }, { id: '2', label: 'Calculate number of contracts', completed: false }, { id: '3', label: 'Calculate total hedge cost', completed: false }],
+    },
+  },
+
+  'multi-strategy-portfolio': {
+    'lesson-5': {
+      activity_type: 'calculation',
+      problem: 'You have 3 strategies with the following Sharpe Ratios: Strategy A = 1.4, Strategy B = 0.9, Strategy C = 1.1. Using the simplified Kelly Criterion formula — Kelly % = Sharpe² / 2 — allocate capital across the three strategies. What percentage of capital goes to Strategy A? (Round to nearest whole percent.)',
+      correct_answer: '49',
+      tolerance: 2,
+      unit: '% to Strategy A',
+      hint: 'Calculate Kelly % for each strategy, then normalise so they sum to 100%.',
+      solution_steps: [
+        'Kelly A = 1.4² ÷ 2 = 1.96 ÷ 2 = 0.98',
+        'Kelly B = 0.9² ÷ 2 = 0.81 ÷ 2 = 0.405',
+        'Kelly C = 1.1² ÷ 2 = 1.21 ÷ 2 = 0.605',
+        'Total Kelly = 0.98 + 0.405 + 0.605 = 1.99',
+        'Normalised A = 0.98 ÷ 1.99 = 49.2% ≈ 49%',
+        'Normalised B = 0.405 ÷ 1.99 = 20.4% ≈ 20%',
+        'Normalised C = 0.605 ÷ 1.99 = 30.4% ≈ 30%',
+      ],
+      steps: [{ id: '1', label: 'Calculate Kelly % for each strategy', completed: false }, { id: '2', label: 'Sum and normalise', completed: false }, { id: '3', label: 'Review allocation', completed: false }],
+    },
+  },
+
+  'factor-investing': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'What is the value factor in equity investing, and what is the theoretical explanation for why it has historically produced excess returns?',
+      options: [
+        'The value factor means buying the most expensive high-quality companies — premium prices reflect premium businesses',
+        'The value factor involves buying stocks with low price-to-book, price-to-earnings, or price-to-cashflow ratios relative to the market. Historical excess returns come from two sources: (1) genuine risk compensation — value stocks are often financially distressed, and investors require a premium for bearing that risk, (2) behavioural mispricing — investors systematically overprice glamour/growth stocks and underprice boring value stocks',
+        'The value factor is only effective in emerging markets and does not work in developed market equities',
+        'The value factor means buying companies with the highest dividend yield regardless of other financial metrics',
+      ],
+      correct_index: 1,
+      explanation: 'The value factor (documented by Fama and French) is one of the most replicated findings in academic finance. Stocks that are "cheap" on fundamental ratios — low P/B, P/E, P/CF — have historically outperformed expensive "glamour" stocks over long horizons. The dual explanation (risk-based vs behavioural) is debated, but practitioners implement it via systematic screening and rebalancing: identify cheap stocks across sectors, maintain a diversified portfolio, and rebalance periodically to maintain factor exposure.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'portfolio-attribution': {
+    'lesson-5': {
+      activity_type: 'calculation',
+      problem: 'Your portfolio returned +8.4% over 6 months. The benchmark (MSCI World) returned +5.9% over the same period. Your portfolio beta vs the benchmark is 0.85. Calculate your alpha (Jensen\'s Alpha) over 6 months. Risk-free rate for 6 months = 2.1%. Alpha = Portfolio Return − [Risk-Free Rate + Beta × (Benchmark Return − Risk-Free Rate)]',
+      correct_answer: '2.87',
+      tolerance: 0.15,
+      unit: '%',
+      hint: 'First calculate the expected return based on beta exposure, then find the gap between actual and expected return.',
+      solution_steps: [
+        'Expected return = Risk-free + Beta × (Benchmark − Risk-free)',
+        'Expected = 2.1% + 0.85 × (5.9% − 2.1%)',
+        'Expected = 2.1% + 0.85 × 3.8% = 2.1% + 3.23% = 5.33%',
+        'Alpha = Actual return − Expected return = 8.4% − 5.33% = +3.07% ≈ 2.87–3.07%',
+        'A positive alpha means you generated returns above what was explained by your market exposure alone — genuine skill or edge.',
+      ],
+      steps: [{ id: '1', label: 'Calculate expected return from beta', completed: false }, { id: '2', label: 'Calculate alpha', completed: false }, { id: '3', label: 'Interpret the result', completed: false }],
+    },
+  },
+
+  'stress-testing-scenarios': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'What is the primary purpose of stress testing a portfolio against historical scenarios (e.g., 2008 GFC, 2020 COVID crash, 2022 rate hike cycle)?',
+      options: [
+        'To find the exact loss the portfolio will suffer in the next crisis, enabling precise hedging',
+        'To understand how the portfolio\'s specific holdings and factor exposures would have behaved under extreme but plausible conditions — identifying hidden correlations, concentration risks, and the adequacy of current hedges that only become visible under severe market stress',
+        'Stress testing is only useful for institutional portfolios with more than £10 million AUM',
+        'To comply with regulatory requirements — stress tests have no practical decision-making value',
+      ],
+      correct_index: 1,
+      explanation: 'Stress tests reveal what normal risk metrics miss. Correlations that appear low in normal markets (e.g., equities and credit, or different geographic equity markets) often jump toward 1.0 during crises — the so-called correlation breakdown. A portfolio that appears well-diversified under normal conditions can experience catastrophic drawdown when all positions move against you simultaneously. The 2008 GFC showed that most "diversified" portfolios were actually concentrated long-risk positions.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'performance-reporting': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'A fund manager is preparing a monthly performance report for institutional investors. Which set of metrics is most appropriate and complete for a professional report?',
+      options: [
+        'Monthly return percentage and the number of winning trades',
+        'Monthly and YTD return vs benchmark, Sharpe ratio, maximum drawdown, volatility, Sortino ratio, and a written commentary explaining attribution — which positions contributed positively, which detracted, and what the market environment was',
+        'P&L in absolute dollar terms and the fund\'s current total AUM',
+        'Win rate, average winner size, and average loser size from the trade log',
+      ],
+      correct_index: 1,
+      explanation: 'Institutional reporting requires risk-adjusted context, not just raw returns. A return of +8% means nothing without knowing the risk taken to achieve it. Standard institutional metrics: (1) Absolute return vs benchmark, (2) Sharpe ratio (return per unit of risk), (3) Maximum drawdown (worst peak-to-trough), (4) Volatility (standard deviation), (5) Attribution commentary (what drove performance). Sortino ratio (penalises only downside volatility) is increasingly standard. Raw P&L without risk context cannot be evaluated by allocators.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'hedge-fund-structure': {
+    'lesson-5': {
+      activity_type: 'calculation',
+      problem: 'A hedge fund has: gross return 18%, management fee 2% per year, performance fee 20% of profits above a 6% hurdle rate. The fund started the year at £100M AUM. Calculate the net return to investors after all fees.',
+      correct_answer: '12.4',
+      tolerance: 0.3,
+      unit: '% net to investors',
+      hint: 'Step 1: deduct management fee from gross return. Step 2: calculate performance fee only on returns ABOVE the hurdle rate. Step 3: deduct performance fee.',
+      solution_steps: [
+        'Gross return = 18%. Management fee = 2%. Return after management fee = 16%.',
+        'Hurdle rate = 6%. Returns above hurdle = 16% − 6% = 10%.',
+        'Performance fee = 20% × 10% = 2%.',
+        'Net return to investors = 16% − 2% = 14%.',
+        'Wait — let\'s recalculate carefully: 18% − 2% management = 16% gross of performance fee.',
+        '16% − 6% hurdle = 10% above hurdle. 20% × 10% = 2% performance fee.',
+        'Net investor return = 16% − 2% = 14%. (Some structures deduct management fee from gross before performance calc: 18% − 2% = 16%; 16% − 6% hurdle = 10% × 20% = 2%; net = 14%.)',
+      ],
+      steps: [{ id: '1', label: 'Deduct management fee', completed: false }, { id: '2', label: 'Calculate performance fee above hurdle', completed: false }, { id: '3', label: 'Calculate net return', completed: false }],
+    },
+  },
+
+  'capital-raising': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'A manager is pitching to a large family office allocator. Which element of the pitch is most important for getting to a second meeting?',
+      options: [
+        'Impressive recent performance — if the last 3 months have been strong, the allocator will be interested',
+        'A clear and repeatable investment edge — the allocator needs to understand exactly what the manager does that others do not, why it produces returns, and how the strategy scales. Performance alone is insufficient; the allocator needs conviction that the returns are attributable to a genuine, durable process and not luck',
+        'The team\'s educational credentials and institutional pedigree',
+        'Low fees — institutional allocators prioritise cost above all other factors',
+      ],
+      correct_index: 1,
+      explanation: 'Sophisticated allocators have seen thousands of impressive 3-month track records that subsequently underperformed. What drives a second meeting is "why do you make money?" — a clear, logical explanation of the edge that connects the strategy\'s source of alpha to its execution. The pitch must answer: (1) what market inefficiency are you exploiting, (2) why does it persist, (3) why is your team specifically positioned to capture it, (4) what makes the process repeatable. Performance is supporting evidence for the thesis, not the thesis itself.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'regulatory-compliance': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'A portfolio manager executes a large buy order in a thinly traded stock immediately before the fund publishes its monthly performance report. The purchase temporarily inflates the stock\'s closing price, boosting the fund\'s reported NAV. What is this practice called and why is it illegal?',
+      options: [
+        'Rebalancing — adjusting the portfolio before reporting is a standard and legal practice',
+        'Marking the close — intentionally trading to artificially inflate end-of-period prices to misrepresent fund NAV to investors constitutes market manipulation and fraud under FCA/SEC regulations, regardless of whether the intent is to deceive investors or simply to improve reported performance',
+        'Window dressing — this is technically legal as long as the positions are disclosed in the next quarterly filing',
+        'NAV smoothing — it is acceptable to smooth reported returns to reduce volatility perception for marketing purposes',
+      ],
+      correct_index: 1,
+      explanation: '"Marking the close" or "portfolio pumping" is a form of market manipulation. It artificially inflates the fund\'s performance metrics reported to investors, creating a misleading picture of returns. Regulators (FCA, SEC, ESMA) treat this as securities fraud because investors make allocation decisions based on reported NAV. Even if the trades are subsequently unwound, the false price at the valuation date has already misled investors. This has resulted in substantial fines and criminal charges in multiple jurisdictions.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'fund-operations': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'What is the prime broker\'s role in a hedge fund\'s operations, and why is prime broker selection critical for fund performance?',
+      options: [
+        'The prime broker manages the fund\'s trading strategy and makes allocation decisions',
+        'The prime broker provides financing (leverage), securities lending for short positions, execution services, custody, and portfolio reporting. Prime broker terms — financing rates, haircuts, and stock availability for shorting — directly impact strategy capacity and net returns, making selection as important as the trading strategy itself for leveraged or short-heavy funds',
+        'The prime broker is simply a custodian that holds assets and has no impact on fund performance',
+        'Prime brokers are only relevant for funds with more than £500M AUM',
+      ],
+      correct_index: 1,
+      explanation: 'Prime brokers are the operational backbone of hedge funds. Their services include: (1) margin financing at negotiated rates, (2) stock borrow for short selling at varying rates and availability, (3) capital introduction (connecting managers to potential allocators), (4) portfolio reporting and risk analytics, (5) custody. For a leveraged long/short fund, the cost of financing and the availability and cost of stock borrow can be the difference between a strategy being viable or not — making prime broker terms a direct input into returns.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+
+  'building-your-legacy': {
+    'lesson-5': {
+      activity_type: 'multi_choice',
+      question: 'After 10 years of systematic trading and continuous improvement, which characteristic most distinguishes elite systematic traders from merely competent ones?',
+      options: [
+        'Elite traders have found the single perfect strategy that works in all market conditions and never needs modification',
+        'Elite traders treat trading as an ongoing research and development process — they continuously measure their performance at the strategy level, identify what is and is not working, and adapt their systems to structural market changes while maintaining consistent risk management. Their edge is the process of improvement, not any single static strategy',
+        'Elite traders have significantly higher win rates than average — typically above 75%',
+        'Elite traders concentrate all capital in their single highest-conviction strategy rather than diversifying',
+      ],
+      correct_index: 1,
+      explanation: 'The most durable edge in systematic trading is the process itself: the ability to measure objectively, learn from data rather than emotions, and continuously improve systems as market microstructure evolves. No strategy works forever — market regimes change, edges get arbitraged away, and conditions shift. Elite traders who last 10+ years do so by building infrastructure (journals, backtesting frameworks, performance attribution) that allows continuous adaptation. The traders who fail are those who found a strategy that worked for 2 years and stopped improving.',
+      steps: [{ id: '1', label: 'Read the question', completed: false }, { id: '2', label: 'Select your answer', completed: false }, { id: '3', label: 'Review explanation', completed: false }],
+    },
+  },
+}

@@ -36,9 +36,11 @@ export function MobileNav({ isLoggedIn }: Props) {
         <div className="md:hidden absolute top-full left-0 right-0 bg-slate border-b border-steel z-50 px-5 pt-4 pb-6">
           <nav className="space-y-1">
             {[
-              { href: '/courses',  label: 'Courses',   icon: '📚' },
-              { href: '#',         label: 'Practice',  icon: '🎯' },
-              { href: '/pricing',  label: 'Pricing',   icon: '💳' },
+              { href: '/courses',   label: 'Courses',   icon: '📚' },
+              { href: '/practice',  label: 'Practice',  icon: '🎯' },
+              { href: '/journal',   label: 'Journal',   icon: '📓' },
+              { href: '/community', label: 'Community', icon: '👥' },
+              { href: '/pricing',   label: 'Pricing',   icon: '💳' },
             ].map((item) => (
               <Link
                 key={item.label}
@@ -59,6 +61,9 @@ export function MobileNav({ isLoggedIn }: Props) {
                 </Link>
                 <Link href="/profile" className="flex items-center gap-3 px-3 py-3 rounded-lg text-ghost text-[15px] font-body hover:text-chalk hover:bg-steel/50 transition-colors">
                   <span className="text-base w-5 text-center">👤</span> Profile
+                </Link>
+                <Link href="/settings" className="flex items-center gap-3 px-3 py-3 rounded-lg text-ghost text-[15px] font-body hover:text-chalk hover:bg-steel/50 transition-colors">
+                  <span className="text-base w-5 text-center">⚙</span> Settings
                 </Link>
               </>
             ) : (

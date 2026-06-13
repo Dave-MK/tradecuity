@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "tasks",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-l", "4321", "."],
+      "port": 4321
+    },
+    {
+      "name": "nextjs",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000,
+      "autoPort": true
+    }
+  ]
+}

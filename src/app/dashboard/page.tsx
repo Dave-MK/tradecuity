@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { TrenduosoWordmark } from '@/components/TrenduosoWordmark'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
@@ -11,9 +12,9 @@ const DAYS = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
 const NAV_ITEMS = [
   { label: 'Dashboard', href: '/dashboard', active: true,  icon: '⬛' },
   { label: 'Courses',   href: '/courses',   active: false, icon: '📚' },
-  { label: 'Practice',  href: '#',          active: false, icon: '🎯' },
-  { label: 'Journal',   href: '#',          active: false, icon: '📓' },
-  { label: 'Settings',  href: '#',          active: false, icon: '⚙' },
+  { label: 'Practice',  href: '/practice',  active: false, icon: '🎯' },
+  { label: 'Journal',   href: '/journal',   active: false, icon: '📓' },
+  { label: 'Settings',  href: '/settings',  active: false, icon: '⚙' },
 ]
 
 const WATCHLIST = [
@@ -130,9 +131,9 @@ export default async function DashboardPage() {
       <aside className="hidden lg:flex w-52 bg-slate border-r border-steel flex-col flex-shrink-0">
         <div className="px-4 py-4 border-b border-steel">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo-colour.webp" width={32} height={32} alt="tradecuity" style={{ width: 32, height: 32 }} />
+            <Image src="/logo-colour.webp" width={44} height={44} alt="Trenduoso" style={{ width: 44, height: 44 }} />
             <span className="font-display font-bold tracking-[-0.03em] text-xl">
-              <span className="text-chalk">trade</span><span className="text-acuity-blue">cuity</span>
+              <TrenduosoWordmark />
             </span>
           </Link>
         </div>
@@ -365,7 +366,7 @@ export default async function DashboardPage() {
         {[
           { label: 'Dashboard', href: '/dashboard', icon: '⬛', active: true },
           { label: 'Courses',   href: '/courses',   icon: '📚', active: false },
-          { label: 'Practice',  href: '#',          icon: '🎯', active: false },
+          { label: 'Practice',  href: '/practice',  icon: '🎯', active: false },
           { label: 'Profile',   href: '/profile',   icon: '👤', active: false },
         ].map((item) => (
           <Link
@@ -382,3 +383,4 @@ export default async function DashboardPage() {
     </div>
   )
 }
+

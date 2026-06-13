@@ -1,8 +1,8 @@
-import { Navbar } from '@/components/nav/Navbar'
+﻿import { Navbar } from '@/components/nav/Navbar'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Privacy Policy — tradecuity',
+  title: 'Privacy Policy — Trenduoso',
 }
 
 export default function PrivacyPage() {
@@ -20,8 +20,8 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="font-display font-semibold text-chalk text-base mb-3">1. Who we are</h2>
-            <p>tradecuity is the data controller for personal data collected through this platform. If you have questions about how we handle your data, contact us at <span className="text-acuity-blue">privacy@tradecuity.com</span>.</p>
-            <p className="mt-3">This policy applies to all users of tradecuity and explains what personal data we collect, why we collect it, and your rights under the UK General Data Protection Regulation (UK GDPR) and the Data Protection Act 2018.</p>
+            <p>Trenduoso is the data controller for personal data collected through this platform. If you have questions about how we handle your data, contact us at <span className="text-acuity-blue">privacy@trenduoso.com</span>.</p>
+            <p className="mt-3">This policy applies to all users of Trenduoso and explains what personal data we collect, why we collect it, and your rights under the UK General Data Protection Regulation (UK GDPR) and the Data Protection Act 2018.</p>
           </section>
 
           <section>
@@ -142,12 +142,12 @@ export default function PrivacyPage() {
               <li><span className="text-chalk">Restrict</span> processing in certain circumstances</li>
               <li><span className="text-chalk">Withdraw consent</span> at any time where processing is based on consent</li>
             </ul>
-            <p className="mt-3">To exercise any of these rights, email <span className="text-acuity-blue">privacy@tradecuity.com</span>. We will respond within 30 days. You also have the right to lodge a complaint with the <a href="https://ico.org.uk" className="text-acuity-blue hover:underline" target="_blank" rel="noopener noreferrer">Information Commissioner&apos;s Office (ICO)</a>.</p>
+            <p className="mt-3">To exercise any of these rights, email <span className="text-acuity-blue">privacy@trenduoso.com</span>. We will respond within 30 days. You also have the right to lodge a complaint with the <a href="https://ico.org.uk" className="text-acuity-blue hover:underline" target="_blank" rel="noopener noreferrer">Information Commissioner&apos;s Office (ICO)</a>.</p>
           </section>
 
           <section>
             <h2 className="font-display font-semibold text-chalk text-base mb-3">8. Children</h2>
-            <p>tradecuity is not directed at anyone under 18. We do not knowingly collect data from minors. If you believe a minor has registered, please contact us and we will delete the account.</p>
+            <p>Trenduoso is not directed at anyone under 18. We do not knowingly collect data from minors. If you believe a minor has registered, please contact us and we will delete the account.</p>
           </section>
 
           <section>
@@ -157,7 +157,7 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="font-display font-semibold text-chalk text-base mb-3">10. Contact</h2>
-            <p>For any privacy-related questions or data requests: <span className="text-acuity-blue">privacy@tradecuity.com</span></p>
+            <p>For any privacy-related questions or data requests: <span className="text-acuity-blue">privacy@trenduoso.com</span></p>
           </section>
 
         </div>

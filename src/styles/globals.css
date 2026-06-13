@@ -3,16 +3,47 @@
 @tailwind utilities;
 
 :root {
-  --color-bg:           #0B1219;
-  --color-surface:      #111820;
-  --color-border:       #1A2330;
-  --color-accent-blue:  #00C4DC;
-  --color-accent-teal:  #00A090;
-  --color-accent-deep:  #007888;
-  --color-text:         #E8EDF4;
-  --color-text-muted:   #8B95A4;
-  --color-bull:         #00A090;
+  /* Trenduoso brand tokens */
+  --trenduoso-obsidian:      #020816;
+  --trenduoso-obsidian-soft: #061226;
+  --trenduoso-navy-surface:  #081A35;
+  --trenduoso-acuity-cyan:   #21E8F2;
+  --trenduoso-acuity-blue:   #1197FF;
+  --trenduoso-electric-blue: #0058E8;
+  --trenduoso-deep-blue:     #062B78;
+  --trenduoso-white:         #F7FBFF;
+  --trenduoso-muted-text:    #A9BED6;
+  --trenduoso-wordmark-gradient: linear-gradient(90deg, #1197FF 0%, #21E8F2 55%, #0058E8 100%);
+
+  /* Legacy aliases (used by Tailwind utilities) */
+  --color-bg:           #020816;
+  --color-surface:      #061226;
+  --color-border:       #081A35;
+  --color-accent-blue:  #1197FF;
+  --color-accent-teal:  #21E8F2;
+  --color-accent-deep:  #0058E8;
+  --color-text:         #F7FBFF;
+  --color-text-muted:   #A9BED6;
+  --color-bull:         #21E8F2;
   --color-bear:         #FF5A5A;
+}
+
+/* Wordmark */
+.trenduoso-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  letter-spacing: -0.055em;
+  font-weight: 800;
+  line-height: 0.95;
+}
+.trenduoso-wordmark__trend {
+  color: var(--trenduoso-white);
+}
+.trenduoso-wordmark__uoso {
+  background: var(--trenduoso-wordmark-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 * {
